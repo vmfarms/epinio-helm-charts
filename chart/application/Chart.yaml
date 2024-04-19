@@ -1,10 +1,10 @@
 apiVersion: v2
-name: epinio-application
+name: custom-application
 description: The helm chart for epinio applications to be deployed by
 icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
 home: https://github.com/epinio/epinio
 type: application
-version: 0.1.26
+version: 0.0.1
 keywords:
 - epinio
 - paas
