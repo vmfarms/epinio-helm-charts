@@ -72,6 +72,3 @@ tolerations: []
 affinity: {}
 
 userConfig: {}
-
-ingress:
-  annotations: {}
