@@ -26,6 +26,9 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
+    {{- range $key, $value := $.Values.ingress.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
     {{- include "epinio-application.annotations" $ | nindent 4 }}
   labels:
     {{- include "epinio-application.labels" $ | nindent 4 }}
