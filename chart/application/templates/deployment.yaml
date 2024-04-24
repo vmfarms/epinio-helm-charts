@@ -27,7 +27,7 @@ spec:
     spec:
       serviceAccount: {{ .Release.Namespace }}
       serviceAccountName: {{ .Release.Namespace }}
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       {{- with .Values.epinio.configurations }}
       volumes:
       {{- range . }}
@@ -59,10 +59,13 @@ spec:
         {{- end}}
         image: {{ .Values.epinio.imageURL }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        {{- with .Values.resources }}
         resources:
-          {{- toYaml . | nindent 10 }}
-        {{- end}}
+          limits:
+            cpu: {{ default "100m" .Values.userConfig.cpu }}
+            memory: {{ default "128Mi" .Values.userConfig.memory }}
+          requests:
+            cpu: {{ default "100m" .Values.userConfig.cpu }}
+            memory: {{ default "128Mi" .Values.userConfig.memory }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
