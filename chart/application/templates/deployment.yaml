@@ -42,7 +42,7 @@ spec:
     spec:
       serviceAccount: {{ .Release.Namespace }}
       serviceAccountName: {{ .Release.Namespace }}
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       {{- with .Values.epinio.configurations }}
       volumes:
       {{- range . }}
