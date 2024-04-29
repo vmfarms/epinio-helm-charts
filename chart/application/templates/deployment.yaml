@@ -20,6 +20,21 @@ spec:
         {{- with .Values.epinio.start }}
         epinio.io/start: {{ . | quote }}
         {{- end }}
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: {{ printf "%s-%s" .Release.Namespace .Release.Name  | quote }}
+        vault.hashicorp.com/tls-skip-verify: 'true'
+        {{- with .Values.epinio.configurations }}
+        {{- range . }}
+        {{- if (contains "vault" .) }}
+        vault.hashicorp.com/agent-inject-template-foo: |
+          {{`{{- with secret `}} {{ printf "kvv2/data/%s/%s" $.Release.Namespace . | quote }} {{` }}
+          {{- range $k, $v := .Data.data }}
+          {{ $k }}="{{ $v }}"
+          {{- end }}
+          {{- end }}`}}
+        {{- end }}
+        {{- end }}
+        {{- end }}
       labels:
         {{- include "epinio-application.labels" . | nindent 8 }}
         epinio.io/stage-id: {{ .Values.epinio.stageID | quote }}
