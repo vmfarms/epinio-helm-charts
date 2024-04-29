@@ -23,3 +23,26 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "vault.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+
+{{/*
+Common labels
+*/}}
+{{- define "vault.labels" -}}
+helm.sh/chart: {{ include "vault.chart" . }}
+app.kubernetes.io/name: {{ .Chart.Name }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.epinio }}
+epinio.io/configuration: "true"
+epinio.io/configuration-origin: {{ .Values.epinio.serviceName }}
+epinio.io/configuration-type: service
+{{- end }}
+{{- end }}
