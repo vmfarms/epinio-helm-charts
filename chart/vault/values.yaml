@@ -1,3 +1,2 @@
-vault:
-  provider: "-"
-  mount: "-"
+vaultConfig: |
+  vault: {}
