@@ -1,0 +1,21 @@
+apiVersion: v1
+entries: 
+  vault:
+  - apiVersion: v2
+    created: "2024-04-29T09:07:51.492218876Z"
+    description: The helm chart for epinio vault to be deployed by
+    name: vault
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/vault/vault-0.0.1.tgz
+    version: 0.0.1
+  postgresql:
+  - apiVersion: v2
+    created: "2024-05-01T17:34:26.343933719-03:00"
+    description: A Helm chart for deploying postgresql Databases using Epinio
+    name: postgresql
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/postgresql-0.0.1.tgz
+    version: 0.1.0
+generated: "2024-05-01T17:30:48.034997928-03:00"
