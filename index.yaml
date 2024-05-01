@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  vault:
+  - apiVersion: v2
+    created: "2024-04-29T09:07:51.492218876Z"
+    description: The helm chart for epinio vault to be deployed by
+    name: vault
+    type: application
+    urls:
+    - https://github.com/JeferCatarina/epinio-helm-charts/raw/main/chart/vault/vault-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-04-29T09:07:51.492218876Z"
