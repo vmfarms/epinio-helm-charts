@@ -1,0 +1,5 @@
+apiVersion: v2
+name: postgresql
+description: A Helm chart for deploying postgresql Databases using Epinio
+type: application
+version: 0.1.0

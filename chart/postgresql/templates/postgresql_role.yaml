@@ -1,0 +1,23 @@
+apiVersion: postgresql.sql.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: {{ include "postgresql.fullname" . }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  deletionPolicy: {{ .Values.crossplanePostgresql.deletionPolicy | default "Delete" }}
+  forProvider:
+    connectionLimit: 10
+    privileges:
+      login: true
+  writeConnectionSecretToRef:
+    name: "{{ include "postgresql.fullname" . }}-role"
+    namespace: {{ .Release.Namespace }}
+  providerConfigRef:
+    name: {{ .Values.providerConfigRef | default "default" }}
+{{- end }}

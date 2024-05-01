@@ -1,0 +1,26 @@
+apiVersion: postgresql.sql.crossplane.io/v1alpha1
+kind: Grant
+metadata:
+  name: {{ include "postgresql.fullname" . }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  deletionPolicy: {{ .Values.deletionPolicy | default "Delete" }}
+  forProvider:
+    privileges:
+      - CONNECT
+      - CREATE
+      - TEMPORARY
+    withOption: GRANT
+    roleRef:
+      name: {{ include "postgresql.fullname" . }}
+    databaseRef:
+      name: {{ include "postgresql.fullname" . }}
+  providerConfigRef:
+    name: {{ .Values.providerConfigRef | default "default" }}
+{{- end }}

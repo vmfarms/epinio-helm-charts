@@ -1,0 +1,16 @@
+apiVersion: postgresql.sql.crossplane.io/v1alpha1
+kind: Database
+metadata:
+  name: {{ include "postgresql.fullname" . }}
+  annotations:
+    {{- toYaml .Values.crossplanePostgresql.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  deletionPolicy: {{ .Values.deletionPolicy | default "Delete" }}
+  forProvider: {}
+  providerConfigRef:
+    name: {{ .Values.providerConfigRef | default "default" }}
