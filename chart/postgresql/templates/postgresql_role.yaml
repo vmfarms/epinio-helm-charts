@@ -1,7 +1,7 @@
 apiVersion: postgresql.sql.crossplane.io/v1alpha1
 kind: Role
 metadata:
-  name: {{ include "postgresql.fullname" . }}
+  name: {{ include "epinio.ServiceName" . }}
   annotations:
     {{- toYaml .Values.crossplanePostgresql.annotations | nindent 4 }}
   labels:
@@ -16,7 +16,7 @@ spec:
     privileges:
       login: true
   writeConnectionSecretToRef:
-    name: {{ include "postgresql.fullname" . }}-connection
+    name: {{ include "epinio.ServiceName" . }}-psql-conn
     namespace: {{ .Release.Namespace }}
   providerConfigRef:
     name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}

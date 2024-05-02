@@ -1,7 +1,7 @@
 apiVersion: postgresql.sql.crossplane.io/v1alpha1
 kind: Database
 metadata:
-  name: {{ include "postgresql.fullname" . }}
+  name: {{ include "epinio.ServiceName" . }}
   annotations:
     {{- toYaml .Values.crossplanePostgresql.annotations | nindent 4 }}
   labels:

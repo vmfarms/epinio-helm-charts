@@ -1,7 +1,7 @@
 apiVersion: postgresql.sql.crossplane.io/v1alpha1
 kind: Grant
 metadata:
-  name: {{ include "postgresql.fullname" . }}
+  name: {{ include "epinio.ServiceName" . }}
   annotations:
     {{- toYaml .Values.annotations | nindent 4 }}
   labels:
@@ -18,8 +18,8 @@ spec:
       - TEMPORARY
     withOption: GRANT
     roleRef:
-      name: {{ include "postgresql.fullname" . }}
+      name: {{ include "epinio.ServiceName" . }}
     databaseRef:
-      name: {{ include "postgresql.fullname" . }}
+      name: {{ include "epinio.ServiceName" . }}
   providerConfigRef:
     name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}

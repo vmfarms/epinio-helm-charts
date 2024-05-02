@@ -50,3 +50,14 @@ app.kubernetes.io/name: {{ include "postgresql.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
+
+{{/*
+Epinio Service Name
+*/}}
+{{- define "epinio.ServiceName" -}}
+{{- if .Values.epinio.serviceName }}
+{{- .Values.epinio.serviceName | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
