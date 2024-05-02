@@ -23,4 +23,3 @@ spec:
       name: {{ include "postgresql.fullname" . }}
   providerConfigRef:
     name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
-{{- end }}

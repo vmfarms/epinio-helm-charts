@@ -20,4 +20,3 @@ spec:
     namespace: {{ .Release.Namespace }}
   providerConfigRef:
     name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
-{{- end }}
