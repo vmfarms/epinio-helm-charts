@@ -16,7 +16,8 @@ spec:
     privileges:
       login: true
   writeConnectionSecretToRef:
-    name: "{{ include "postgresql.fullname" . }}-role"
+    name: {{ include "postgresql.fullname" . }}-connection
     namespace: {{ .Release.Namespace }}
   providerConfigRef:
     name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
+

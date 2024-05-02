@@ -1,3 +1,5 @@
 crossplanePostgresql:
   providerConfigRef: ""
   deletionPolicy: "Delete"
+
+epinio: {}
