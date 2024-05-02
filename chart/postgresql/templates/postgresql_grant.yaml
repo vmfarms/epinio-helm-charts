@@ -10,7 +10,7 @@ metadata:
     {{- end }}
     {{- include "postgresql.labels" . | nindent 4 }}
 spec:
-  deletionPolicy: {{ .Values.deletionPolicy | default "Delete" }}
+  deletionPolicy: {{ .Values.crossplanePostgresql.deletionPolicy | default "Delete" }}
   forProvider:
     privileges:
       - CONNECT
@@ -22,5 +22,5 @@ spec:
     databaseRef:
       name: {{ include "postgresql.fullname" . }}
   providerConfigRef:
-    name: {{ .Values.providerConfigRef | default "default" }}
+    name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
 {{- end }}

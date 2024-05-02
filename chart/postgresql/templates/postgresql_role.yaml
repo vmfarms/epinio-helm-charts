@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: {{ include "postgresql.fullname" . }}
   annotations:
-    {{- toYaml .Values.annotations | nindent 4 }}
+    {{- toYaml .Values.crossplanePostgresql.annotations | nindent 4 }}
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
@@ -19,5 +19,5 @@ spec:
     name: "{{ include "postgresql.fullname" . }}-role"
     namespace: {{ .Release.Namespace }}
   providerConfigRef:
-    name: {{ .Values.providerConfigRef | default "default" }}
+    name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
 {{- end }}

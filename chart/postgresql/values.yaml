@@ -1,0 +1,3 @@
+crossplanePostgresql:
+  providerConfigRef: ""
+  deletionPolicy: "Delete"
