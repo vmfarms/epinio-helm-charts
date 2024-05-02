@@ -9,11 +9,11 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/vault/vault-0.0.1.tgz
     version: 0.0.1
-  postgresql:
+  crossplane-postgresql:
   - apiVersion: v2
     created: "2024-05-01T17:34:26.343933719-03:00"
     description: A Helm chart for deploying postgresql Databases using Epinio
-    name: postgresql
+    name: crossplane-postgresql
     type: application
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.1.0.tgz
