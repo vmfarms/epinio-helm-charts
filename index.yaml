@@ -46,7 +46,7 @@ entries:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.4.0.tgz
     version: 0.4.0
   custom-application:
-    apiVersion: v2
+  - apiVersion: v2
     created: "2024-05-02T15:48:49.037439068-03:00"
     description: The helm chart for epinio applications to be deployed by
     digest: f542258d60cd9a25efbf70eebd9021513d395bea695f8209e8cfbfeb756fdb50
