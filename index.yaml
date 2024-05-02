@@ -16,6 +16,6 @@ entries:
     name: postgresql
     type: application
     urls:
-    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/postgresql-0.1.0.tgz
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.1.0.tgz
     version: 0.1.0
 generated: "2024-05-01T17:30:48.034997928-03:00"
