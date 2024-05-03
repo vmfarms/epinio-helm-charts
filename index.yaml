@@ -117,4 +117,18 @@ entries:
     urls:
     - custom-application-0.0.10.tgz
     version: 0.0.10
+  - apiVersion: v2
+    created: "2024-05-03T16:37:01.86576388-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: de040e18277d7f910111368e7ba634a0db744917ef2d1352d05b6caa8cf5946b
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - custom-application-0.0.11.tgz
+    version: 0.0.11
 generated: "2024-05-02T15:48:49.031377668-03:00"

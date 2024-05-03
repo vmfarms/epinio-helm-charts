@@ -75,26 +75,28 @@ spec:
         {{- with .Values.epinio.configurations }}
         {{- range . }}
         {{- if (contains "psql-conn" .)  }}
-        - name: PSQL_CONNECTION_HOST
+        - name: PSQL_HOSTNAME
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: endpoint
-        - name: PSQL_CONNECTION_USER
+        - name: PSQL_USERNAME
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: username
-        - name: PSQL_CONNECTION_PORT
+        - name: PSQL_PORT
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: port
-        - name: PSQL_CONNECTION_PASSWORD
+        - name: PSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: password
+        - name: PSQL_DB_NAME
+          value: {{ trimSuffix "-psql-conn" . }}
         {{- end }}
         {{- end }}
         {{- end }}
