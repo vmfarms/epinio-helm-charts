@@ -74,7 +74,7 @@ spec:
         {{- end }}
         {{- with .Values.epinio.configpaths }}
         {{- range . }}
-        {{- if contains("psql-conn") . }}
+        {{- if (contains "psql-conn" .)  }}
         - name: PSQL_CONNECTION_HOST
           valueFrom:
             secretKeyRef:
