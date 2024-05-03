@@ -72,4 +72,17 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.8.tgz
     version: 0.0.8
+  - apiVersion: v2
+    created: "2024-05-02T22:35:54.694980605-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 770287bf6202898795eb625687d023e5a229877e4101f85b037bf12d699fae80
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - custom-application-0.0.9.tgz
+    version: 0.0.9
 generated: "2024-05-02T15:48:49.031377668-03:00"
