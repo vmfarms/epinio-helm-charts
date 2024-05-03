@@ -45,6 +45,15 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.4.0.tgz
     version: 0.4.0
+  - apiVersion: v2
+    created: "2024-05-02T22:57:21.215371491-03:00"
+    description: A Helm chart for deploying postgresql Databases using Epinio
+    digest: fb812ceb0c6dbb4a5febd801bcae32171c48dc69a88a76f6e3a9136693fd3966
+    name: crossplane-postgresql
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.5.0.tgz
+    version: 0.5.0
   custom-application:
   - apiVersion: v2
     created: "2024-05-02T15:48:49.037439068-03:00"
