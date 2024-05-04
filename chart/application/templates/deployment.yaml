@@ -71,7 +71,35 @@ spec:
         {{- range .Values.epinio.env }}
         - name: {{ .name | quote }}
           value: {{ .value | quote }}
-        {{- end}}
+        {{- end }}
+        {{- with .Values.epinio.configurations }}
+        {{- range . }}
+        {{- if (contains "psql-conn" .)  }}
+        - name: PSQL_HOSTNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: endpoint
+        - name: PSQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: username
+        - name: PSQL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: port
+        - name: PSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: password
+        - name: PSQL_DB_NAME
+          value: {{ trimSuffix "-psql-conn" . }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
         image: {{ .Values.epinio.imageURL }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:

@@ -1,0 +1,25 @@
+apiVersion: postgresql.sql.crossplane.io/v1alpha1
+kind: Grant
+metadata:
+  name: {{ include "epinio.ServiceName" . }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  deletionPolicy: {{ .Values.crossplanePostgresql.deletionPolicy | default "Delete" }}
+  forProvider:
+    privileges:
+      - CONNECT
+      - CREATE
+      - TEMPORARY
+    withOption: GRANT
+    roleRef:
+      name: {{ include "epinio.ServiceName" . }}
+    databaseRef:
+      name: {{ include "epinio.ServiceName" . }}
+  providerConfigRef:
+    name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}

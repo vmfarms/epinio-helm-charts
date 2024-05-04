@@ -1,0 +1,16 @@
+apiVersion: postgresql.sql.crossplane.io/v1alpha1
+kind: Database
+metadata:
+  name: {{ include "epinio.ServiceName" . }}
+  annotations:
+    {{- toYaml .Values.crossplanePostgresql.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "postgresql.labels" . | nindent 4 }}
+spec:
+  deletionPolicy: {{ .Values.crossplanePostgresql.deletionPolicy | default "Delete" }}
+  forProvider: {}
+  providerConfigRef:
+    name: {{ .Values.crossplanePostgresql.providerConfigRef | default "default" }}
