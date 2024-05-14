@@ -97,6 +97,8 @@ spec:
               key: password
         - name: PSQL_DB_NAME
           value: {{ trimSuffix "-psql-conn" . }}
+        - name: DATABASE_URL
+          value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
         {{- end }}
         {{- end }}
