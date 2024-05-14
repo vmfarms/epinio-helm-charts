@@ -72,10 +72,6 @@ spec:
         env:
         - name: PORT
           value: {{ include "epinio-app-listening-port" . | quote }}
-        {{- range .Values.epinio.env }}
-        - name: {{ .name | quote }}
-          value: {{ .value | quote }}
-        {{- end }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
         {{- if (contains "psql-conn" .)  }}
@@ -103,6 +99,10 @@ spec:
           value: {{ trimSuffix "-psql-conn" . }}
         {{- end }}
         {{- end }}
+        {{- end }}
+        {{- range .Values.epinio.env }}
+        - name: {{ .name | quote }}
+          value: {{ .value | quote }}
         {{- end }}
         image: {{ .Values.epinio.imageURL }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
