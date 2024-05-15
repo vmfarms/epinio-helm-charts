@@ -1,3 +1,5 @@
+{{- $releaseName := (.Release.Name) -}}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -107,7 +109,7 @@ spec:
               name: {{ . }}
               key: mongodb-passwords
         - name: MONGODB_URI
-          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}:27017/default"
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ $releaseName }}:27017/default"
         {{- end }}
         {{- end }}
         {{- end }}
