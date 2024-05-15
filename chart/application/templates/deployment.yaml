@@ -105,9 +105,9 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ . }}
-              key: mongodb-root-password
+              key: mongodb-passwords
         - name: MONGODB_URI
-          value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}:27017"
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}:27017/default"
         {{- end }}
         {{- end }}
         {{- end }}
