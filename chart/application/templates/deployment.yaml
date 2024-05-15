@@ -100,6 +100,15 @@ spec:
         - name: DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
+        {{- if (contains "mongodb" .)  }}
+        - name: MONGODB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: mongodb-passwords
+        - name: MONGODB_URI
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}:27017/default"
+        {{- end }}
         {{- end }}
         {{- end }}
         {{- range .Values.epinio.env }}
