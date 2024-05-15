@@ -109,7 +109,7 @@ spec:
               name: {{ . }}
               key: mongodb-passwords
         - name: MONGODB_URI
-          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ $releaseName }}:27017/default"
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
         {{- end }}
         {{- end }}
         {{- end }}
