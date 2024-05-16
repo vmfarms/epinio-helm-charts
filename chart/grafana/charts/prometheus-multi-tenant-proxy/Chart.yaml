@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: v1.11.0
+description: K8Spin - Prometheus multi-tenant proxy
+name: prometheus-multi-tenant-proxy
+type: application
+version: 1.11.0

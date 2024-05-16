@@ -1,0 +1,22 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: "{{ include "grafana.fullname" . }}-loki"
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  instanceSelector:
+    matchLabels:
+      {{- include "grafana.labels" . | nindent 6 }}
+  datasource:
+    name: loki
+    type: loki
+    uid: loki
+    editable: false
+    access: proxy
+    url: {{ .Values.global.loki.url }}
+    isDefault: false
+    jsonData:
+      httpHeaderName1: 'X-Scope-OrgID'
+    secureJsonData:
+      httpHeaderValue1: '{{ .Release.Namespace }}'
