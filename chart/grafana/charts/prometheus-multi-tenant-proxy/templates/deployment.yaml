@@ -74,7 +74,7 @@ spec:
           secret:
             secretName: "{{ printf "%s-grafana-prometheus-proxy" .Release.Name }}"
             items:
-              - key: authn.yaml
+              - key: authn
                 path: authn.yaml
 {{- end }}
       {{- with .Values.nodeSelector }}
