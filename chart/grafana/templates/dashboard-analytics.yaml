@@ -2,6 +2,8 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: "{{ include "grafana.fullname" . }}-analytics"
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
 spec:
   folder: "Default"
   instanceSelector:
