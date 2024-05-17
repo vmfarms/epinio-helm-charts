@@ -76,7 +76,7 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
-        {{- if (contains "psql-conn" .)  }}
+        {{- if (hasSuffix "psql-conn" .)  }}
         - name: PSQL_HOSTNAME
           valueFrom:
             secretKeyRef:
@@ -102,7 +102,7 @@ spec:
         - name: DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
-        {{- if (contains "-mongodb" .)  }}
+        {{- if (hasSuffix "-mongodb" .)  }}
         - name: MONGODB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -111,7 +111,7 @@ spec:
         - name: MONGODB_URI
           value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
         {{- end }}
-        {{- if (contains "-redis" .)  }}
+        {{- if (hasSuffix "-redis" .)  }}
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -121,6 +121,19 @@ spec:
           value: "{{ . }}-headless"
         - name: REDIS_PORT
           value: "6379"
+        {{- end }}
+        {{- if (hasSuffix "-rabbitmq" .)  }}
+        - name: RABBITMQ_USERNAME
+          value: user
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: rabbitmq-password
+        - name: RABBITMQ_HOSTNAME
+          value: "{{ . }}-headless"
+        - name: RABBITMQ_PORT
+          value: "5672"
         {{- end }}
         {{- end }}
         {{- end }}
