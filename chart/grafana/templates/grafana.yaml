@@ -49,8 +49,14 @@ spec:
       disable_login_form: "false"
   deployment:
     spec:
+      {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+      strategy:
+        type: Recreate
+      {{- end }}
       template:
         spec:
+          securityContext:
+            fsGroup: 472
           containers:
             - name: grafana
               image: grafana/grafana:10.3.3
