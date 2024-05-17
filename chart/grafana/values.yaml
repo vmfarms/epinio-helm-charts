@@ -2,6 +2,8 @@ epinio: {}
 
 grafana:
   domain: domain.tld
+  persistentVolumeClaim:
+    enabled: true
   ingress:
     ingressClassName: nginx
     annotations: {}
