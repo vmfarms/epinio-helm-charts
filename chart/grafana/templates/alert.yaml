@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
 spec:
+  resyncPeriod: 1m
   folderUID: c8e90c20-8d27-46f3-97b0-9599d3bf3d5c
   instanceSelector:
     matchLabels:
