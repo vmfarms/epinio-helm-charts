@@ -1,0 +1,21 @@
+epinio: {}
+
+grafana:
+  domain: domain.tld
+  persistentVolumeClaim:
+    enabled: true
+  ingress:
+    ingressClassName: nginx
+    annotations: {}
+
+global:
+  prometheus:
+    url: http://prometheus.domain.tld
+  loki:
+    url: http://loki.domain.tld
+
+prometheus-multi-tenant-proxy:
+  proxy:
+    extraEnv:
+    - name: PROM_PROXY_PROTECTED_ENDPOINTS
+      value: ""

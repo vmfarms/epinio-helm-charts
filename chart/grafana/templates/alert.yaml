@@ -1,0 +1,98 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaAlertRuleGroup
+metadata:
+  name: "{{ include "grafana.fullname" . }}"
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  resyncPeriod: 1m
+  folderUID: c8e90c20-8d27-46f3-97b0-9599d3bf3d5c
+  instanceSelector:
+    matchLabels:
+      {{- include "grafana.labels" . | nindent 6 }}
+  interval: 5m
+  rules:
+    - uid: fde594cd-b372-4268-8fd6-c1ee198b0901
+      title: App status
+      condition: C
+      data:
+        - refId: A
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: prometheus
+          model:
+            editorMode: code
+            expr: sum(probe_http_status_code{app_name!=""}) by(app_name)
+            instant: true
+            intervalMs: 1000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: false
+            refId: A
+        - refId: B
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: __expr__
+          model:
+            conditions:
+                - evaluator:
+                    params: []
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                        - B
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+            datasource:
+                type: __expr__
+                uid: __expr__
+            expression: A
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: B
+            settings:
+                mode: replaceNN
+                replaceWithValue: 0
+            type: reduce
+        - refId: C
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: __expr__
+          model:
+            conditions:
+                - evaluator:
+                    params:
+                        - 200
+                        - 299
+                    type: outside_range
+                  operator:
+                    type: and
+                  query:
+                    params:
+                        - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+            datasource:
+                type: __expr__
+                uid: __expr__
+            expression: B
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: C
+            type: threshold
+      noDataState: Alerting
+      execErrState: Error
+      for: 5m
+      annotations: {}
+      labels: {}
+      isPaused: false

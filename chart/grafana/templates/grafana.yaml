@@ -1,0 +1,81 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: {{ include "grafana.fullname" . }}
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+  persistentVolumeClaim:
+    spec:
+      {{- with .Values.grafana.persistentVolumeClaim.storageClassName }}
+      storageClassName: {{ . }}
+      {{- end }}
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+    {{- end }}
+  preferences:
+    homeDashboardUid: "-7mPcYniz"
+  ingress:
+    metadata:
+      {{- with .Values.grafana.ingress.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      ingressClassName: {{ .Values.grafana.ingress.ingressClassName }}
+      rules:
+      - host: {{ printf "%s.%s.%s" (include "grafana.fullname" .) .Release.Namespace  .Values.grafana.domain }}
+        http:
+          paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ include "grafana.fullname" . }}-service"
+                port:
+                  number: 3000
+      tls:
+      - hosts: 
+        - {{ printf "%s.%s.%s" (include "grafana.fullname" .) .Release.Namespace  .Values.grafana.domain }}
+        secretName: "{{ printf "%s.%s.%s" (include "grafana.fullname" .) .Release.Namespace  .Values.grafana.domain }}-tls"
+  config:
+    log:
+      mode: "console"
+    auth:
+      disable_login_form: "false"
+  deployment:
+    spec:
+      {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+      strategy:
+        type: Recreate
+      {{- end }}
+      template:
+        spec:
+          securityContext:
+            fsGroup: 472
+          containers:
+            - name: grafana
+              image: grafana/grafana:10.3.3
+              readinessProbe:
+                failureThreshold: 3
+              env:
+                - name: GF_SECURITY_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "grafana.fullname" . }}
+                      key: username
+                - name: GF_SECURITY_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "grafana.fullname" . }}
+                      key: password
+          {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+          volumes:
+            - name: grafana-data
+              persistentVolumeClaim:
+                claimName: "{{ include "grafana.fullname" . }}-pvc"
+          {{- end }}

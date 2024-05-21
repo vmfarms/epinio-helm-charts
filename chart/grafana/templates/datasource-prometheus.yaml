@@ -1,0 +1,27 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: "{{ include "grafana.fullname" . }}-prometheus"
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  valuesFrom:
+  - targetPath: secureJsonData.password
+    valueFrom:
+      secretKeyRef:
+        name: "{{ printf "%s-grafana-prometheus-proxy" .Release.Name }}"
+        key: PROMETHEUS_PASSWORD
+  instanceSelector:
+    matchLabels:
+      {{- include "grafana.labels" . | nindent 6 }}
+  datasource:
+    name: prometheus
+    type: prometheus
+    uid: prometheus
+    user: "{{ printf "%s-grafana-prometheus-proxy" .Release.Name }}"
+    secureJsonData:
+      "password": "${PROMETHEUS_PASSWORD}"
+    editable: false
+    access: proxy
+    url: "http://{{ printf "%s-prometheus-multi-tenant-proxy.%s.svc" .Release.Name .Release.Namespace }}"
+    isDefault: true

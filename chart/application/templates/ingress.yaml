@@ -27,6 +27,8 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
+    blackbox.io/enabled: "true"
+    blackbox.io/path: {{ default "/" $.Values.userConfig.monitoringPath | quote }}
     {{- range $key, $value := $ingressConfig.annotations }}
     {{ $key }}: {{ $value }}
     {{- end }}

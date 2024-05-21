@@ -4,7 +4,11 @@ description: The helm chart for epinio applications to be deployed by
 icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
 home: https://github.com/epinio/epinio
 type: application
+<<<<<<< HEAD
 version: 0.0.20
+=======
+version: 0.0.16
+>>>>>>> 2203c0939def7c5e94364e47cdcb151ed9bc7d29
 keywords:
 - epinio
 - paas
