@@ -135,6 +135,23 @@ spec:
         - name: RABBITMQ_PORT
           value: "5672"
         {{- end }}
+        {{- if (hasSuffix "-mysql" .)  }}
+        - name: MYSQL_USERNAME
+          value: root
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: mysql-root-password
+        - name: MYSQL_HOSTNAME
+          value: "{{ . }}-headless"
+        - name: MYSQL_DB_NAME
+          value: my_database
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE_URI
+          value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
+        {{- end }}
         {{- end }}
         {{- end }}
         {{- range .Values.epinio.env }}
