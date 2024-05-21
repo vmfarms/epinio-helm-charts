@@ -1,7 +1,7 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaAlertRuleGroup
 metadata:
-  name: "{{ include "grafana.fullname" . }}-loki"
+  name: "{{ include "grafana.fullname" . }}"
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
 spec:
