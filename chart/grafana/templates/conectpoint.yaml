@@ -12,7 +12,8 @@ data:
         - orgId: 1
           name: slack
           receivers:
-            - type: slack
+            - uid: slack_uid
+              type: slack
               settings:
                 {{- with .Values.slackMentionChannel }}
                 mentionChannel: here
