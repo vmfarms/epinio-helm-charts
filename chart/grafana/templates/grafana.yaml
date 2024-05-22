@@ -47,6 +47,8 @@ spec:
       mode: "console"
     auth:
       disable_login_form: "false"
+    server:
+      root_url: {{ printf "https://%s.%s.%s/" (include "grafana.fullname" .) .Release.Namespace  .Values.grafana.domain | quote }}
   deployment:
     spec:
       {{- if .Values.grafana.persistentVolumeClaim.enabled }}
