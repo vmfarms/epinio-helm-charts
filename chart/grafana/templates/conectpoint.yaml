@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
 data:
-  provisioning.yaml: |
+  000-contact-point.yaml: |
     apiVersion: 1
     contactPoints:
         - orgId: 1
@@ -20,7 +20,7 @@ data:
                 {{- end }}
                 url: {{ .Values.slackUrl }}
               disableResolveMessage: false
-    ---
+  100-notification-policy.yaml: |
     apiVersion: 1
     policies:
       - orgId: 1
