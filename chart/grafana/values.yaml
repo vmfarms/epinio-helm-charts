@@ -21,4 +21,5 @@ prometheus-multi-tenant-proxy:
       value: ""
 
 slack:
+  url: ""
   mentionChannel: false 
