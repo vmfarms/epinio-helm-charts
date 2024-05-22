@@ -60,7 +60,7 @@ spec:
           containers:
             - name: grafana
               image: grafana/grafana:10.3.3
-              {{- if .Values.slack.url }}
+              {{- with .Values.slack.url }}
               volumeMounts:
               - mountPath: /etc/grafana/provisioning/alerting
                 name: notification-policies
