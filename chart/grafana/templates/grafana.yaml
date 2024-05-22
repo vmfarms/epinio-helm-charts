@@ -60,6 +60,11 @@ spec:
           containers:
             - name: grafana
               image: grafana/grafana:10.3.3
+              {{- if .Values.slack.url }}
+              volumeMounts:
+              - mountPath: /etc/grafana/provisioning/alerting
+                name: notification-policies
+              {{- end }}
               readinessProbe:
                 failureThreshold: 3
               env:
@@ -73,9 +78,16 @@ spec:
                     secretKeyRef:
                       name: {{ include "grafana.fullname" . }}
                       key: password
-          {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+          {{- if or (.Values.grafana.persistentVolumeClaim.enabled) (.Values.slack.url) }}
           volumes:
+            {{- if .Values.grafana.persistentVolumeClaim.enabled }}
             - name: grafana-data
               persistentVolumeClaim:
                 claimName: "{{ include "grafana.fullname" . }}-pvc"
+            {{- end }}
+            {{- if .Values.slack.url }}
+            - configMap:
+                name: "{{ include "grafana.fullname" . }}-provisioning-alerting"
+              name: notification-policies
+            {{- end }}
           {{- end }}
