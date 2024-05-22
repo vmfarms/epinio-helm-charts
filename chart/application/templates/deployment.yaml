@@ -1,3 +1,5 @@
+{{- $releaseName := (.Release.Name) -}}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -74,7 +76,7 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
-        {{- if (contains "psql-conn" .)  }}
+        {{- if (hasSuffix "psql-conn" .)  }}
         - name: PSQL_HOSTNAME
           valueFrom:
             secretKeyRef:
@@ -100,14 +102,55 @@ spec:
         - name: DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
-        {{- if (contains "mongodb" .)  }}
+        {{- if (hasSuffix "-mongodb" .)  }}
         - name: MONGODB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: mongodb-passwords
         - name: MONGODB_URI
-          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}:27017/default"
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
+        {{- end }}
+        {{- if (hasSuffix "-redis" .)  }}
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: redis-password
+        - name: REDIS_HOSTNAME
+          value: "{{ . }}-headless"
+        - name: REDIS_PORT
+          value: "6379"
+        {{- end }}
+        {{- if (hasSuffix "-rabbitmq" .)  }}
+        - name: RABBITMQ_USERNAME
+          value: user
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: rabbitmq-password
+        - name: RABBITMQ_HOSTNAME
+          value: "{{ . }}-headless"
+        - name: RABBITMQ_PORT
+          value: "5672"
+        {{- end }}
+        {{- if (hasSuffix "-mysql" .)  }}
+        - name: MYSQL_USERNAME
+          value: root
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: mysql-root-password
+        - name: MYSQL_HOSTNAME
+          value: "{{ . }}-headless"
+        - name: MYSQL_DB_NAME
+          value: my_database
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE_URI
+          value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- end }}
         {{- end }}
