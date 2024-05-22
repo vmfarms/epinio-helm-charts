@@ -1,4 +1,4 @@
-{{- if .Values.slack.url }}
+{{- if .Values.slackUrl }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -28,8 +28,8 @@ spec:
       {{- include "grafana.labels" . | nindent 6 }}
   type: slack
   settings:
-    {{- with .Values.slack.mentionChannel }}
+    {{- with .Values.slackMentionChannel }}
     mentionChannel: here
     {{- end }}
-    url: {{ .Values.slack.url }}
+    url: {{ .Values.slackUrl }}
 {{- end }}

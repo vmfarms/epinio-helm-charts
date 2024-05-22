@@ -19,7 +19,3 @@ prometheus-multi-tenant-proxy:
     extraEnv:
     - name: PROM_PROXY_PROTECTED_ENDPOINTS
       value: ""
-
-slack:
-  url: ""
-  mentionChannel: false 
