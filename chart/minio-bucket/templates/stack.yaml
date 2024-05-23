@@ -1,0 +1,56 @@
+---
+apiVersion: pulumi.com/v1
+kind: Stack
+metadata:
+  name: {{ include "pulumi-stack.serviceName" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  backend: 's3://pulumi-backend?endpoint=https://shared-clients-001-api.minio.stack.io&s3ForcePathStyle=true'
+  envRefs:
+    PULUMI_CONFIG_PASSPHRASE:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: PULUMI_CONFIG_PASSPHRASE
+    AWS_ACCESS_KEY_ID:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: AWS_SECRET_ACCESS_KEY
+    AWS_DEFAULT_REGION:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: AWS_DEFAULT_REGION
+    MINIO_USER:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: MINIO_ACCESS_KEY
+    MINIO_PASSWORD:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: MINIO_SECRET_KEY
+    MINIO_ENDPOINT:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: MINIO_ENDPOINT
+    MINIO_ENABLE_HTTPS:
+      type: Secret
+      secret:
+        name: pulumi-secrets
+        key: MINIO_ENABLE_HTTPS
+  stack: "{{ .Release.Namespace }}.{{ include "pulumi-stack.serviceName" . }}.minio.bucket.stack"
+  projectRepo: https://github.com/falpires/pulumi-minio-stack
+  branch: main
+  config:
+    aws:region: us-east-1
+    name: {{ include "pulumi-stack.serviceName" . }}
+    namespace: {{ .Release.Namespace }}
