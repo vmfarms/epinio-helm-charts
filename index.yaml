@@ -32,7 +32,7 @@ entries:
     name: minio-bucket
     type: application
     urls:
-    - minio-bucket-0.1.2.tgz
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/minio-bucket/minio-bucket-0.1.2.tgz
     version: 0.1.2
   vault:
   - apiVersion: v2
