@@ -34,6 +34,17 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/minio-bucket/minio-bucket-0.1.2.tgz
     version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-05-23T18:14:28.500112125-03:00"
+    description: A Helm chart for creating a minio bucket, user and serviceAccount
+      using pulumi
+    digest: 5caaba27e1d77490eecb58b63793147abdc33c9e2605db7f9aa33849ea7cccdc
+    name: minio-bucket
+    type: application
+    urls:
+    - minio-bucket-0.1.3.tgz
+    version: 0.1.3
   vault:
   - apiVersion: v2
     created: "2024-04-29T09:07:51.492218876Z"
