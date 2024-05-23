@@ -53,5 +53,5 @@ spec:
   branch: main
   config:
     aws:region: us-east-1
-    name: {{ include "pulumi-stack.serviceName" . }}
-    namespace: {{ .Release.Namespace }}
+    pulumi-s3-python:name: {{ include "pulumi-stack.serviceName" . }}
+    pulumi-s3-python:namespace: {{ .Release.Namespace }}
