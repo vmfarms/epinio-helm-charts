@@ -1,8 +1,9 @@
+{{- $serviceName := include "pulumi-stack.serviceName" .}}
 ---
 apiVersion: pulumi.com/v1
 kind: Stack
 metadata:
-  name: {{ include "pulumi-stack.serviceName" . }}
+  name: {{ printf "%s-%s" .Release.Namespace $serviceName | trunc 63 | trimSuffix "-" }}  
   namespace: pulumi-operator
 spec:
   backend: 's3://pulumi-backend?endpoint=https://shared-clients-001-api.minio.stack.io&s3ForcePathStyle=true'
