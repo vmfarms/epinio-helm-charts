@@ -3,7 +3,7 @@ apiVersion: pulumi.com/v1
 kind: Stack
 metadata:
   name: {{ include "pulumi-stack.serviceName" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: pulumi-operator
 spec:
   backend: 's3://pulumi-backend?endpoint=https://shared-clients-001-api.minio.stack.io&s3ForcePathStyle=true'
   envRefs:
