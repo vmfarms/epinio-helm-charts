@@ -30,9 +30,10 @@ spec:
         vault.hashicorp.com/agent-inject-template-{{ .path }}: |
           {{`{{- with secret `}} {{ printf "kvv2/data/%s/%s" $.Release.Namespace .path | quote }} {{` }}
           {{- range $k, $v := .Data.data }}
-          {{ $k }}="{{ $v }}"
+          export {{ $k | uppercase }}="{{ $v }}"
           {{- end }}
           {{- end }}`}}
+        vault.hashicorp.com/agent-inject-command-{{ .path }}: "/bin/bash -c . /vault/secrets/{{ .path }}"
         {{- end }}
         {{- end }}
         {{- end }}
