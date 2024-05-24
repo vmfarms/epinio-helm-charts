@@ -7,7 +7,7 @@ metadata:
   namespace: epinio
 spec:
   chart: minio-bucket
-  chartVersion: 0.1.5
+  chartVersion: 1.0.0
   description: |
     This service is going to deploy a minio bucket and serviceAccount with needed keys and create a secret.
     It is not meant for production, and the minio tenant it uses is not production-ready.
