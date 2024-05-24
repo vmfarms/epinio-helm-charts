@@ -168,7 +168,7 @@ spec:
         - name: AWS_ENDPOINT_URL_S3
           value: https://shared-clients-001-api.minio.stack.io
         - name: S3_BUCKET_NAME
-          value: {{ .Release.Namespace }}-{{ trimSuffix "-minio" . }}
+          value: "{{ $.Release.Namespace }}-{{ trimSuffix "-minio" . }}"
         {{- end }}
         {{- end }}
         {{- end }}
