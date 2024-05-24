@@ -24,11 +24,11 @@ spec:
       containers:
       - name: post-install-job
         image: bitnami/kubectl
-        command: ["/bin/sh","-c"]
+        command: ["/bin/bash","-c"]
         args:
         - |
           i="null"
-          while [ $i != "succeeded" ]
+          while [[ $i != "succeeded" ]]
           do
             i=`kubectl get stacks.pulumi.com -n pulumi-operator {{ printf "%s-%s" .Release.Namespace $serviceName | trunc 63 | trimSuffix "-" }} -o jsonpath='{.status.lastUpdate.state}'`
             echo $i
