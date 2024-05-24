@@ -16,19 +16,20 @@ spec:
       namespace: pulumi-operator
       labels:
         {{- include "pulumi-stack.labels" . | nindent 8 }}
-      spec:
+    spec:
+      restartPolicy: Never
+      serviceAccountName: "{{ include "pulumi-stack.fullname" . }}-wait-stack"
+      containers:
+      - name: post-install-job
+        image: rancher/kubectl:v1.27.13
         restartPolicy: Never
-        serviceAccountName: "{{ include "pulumi-stack.fullname" . }}-wait-stack"
-        containers:
-        - name: post-install-job
-          image: rancher/kubectl:v1.27.13
-          command: ["/bin/sh","-c"]
-          args:
-          - |
-            i="null"
-            while [ $i != "succeeded" ]
-            do
-              i=`kubectl get stacks.pulumi.com -n pulumi-operator workspace-miniooo -o jsonpath='{.status.lastUpdate.state}'`
-              echo $i
-              sleep 5
-            done
+        command: ["/bin/sh","-c"]
+        args:
+        - |
+          i="null"
+          while [ $i != "succeeded" ]
+          do
+            i=`kubectl get stacks.pulumi.com -n pulumi-operator workspace-miniooo -o jsonpath='{.status.lastUpdate.state}'`
+            echo $i
+            sleep 5
+          done
