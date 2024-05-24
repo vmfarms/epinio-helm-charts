@@ -30,6 +30,15 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+
+{{/*
+Selector labels
+*/}}
+{{- define "pulumi-stack.selectorLabels" -}}
+app.kubernetes.io/name: {{ .Values.epinio.appName | quote }}
+app.kubernetes.io/component: application
+{{- end }}
+
 {{/*
 Common labels
 */}}
