@@ -3,7 +3,18 @@ entries:
   minio-bucket:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.702328878-03:00"
+    created: "2024-05-24T16:27:02.380473837-03:00"
+    description: A Helm chart for creating a minio bucket, user and serviceAccount
+      using pulumi
+    digest: bea3ed8c4c52a2a6c8c9e28b4917b47eef3f1d840c2f3f8d83f29b1de789c20e
+    name: minio-bucket
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/minio-bucket/minio-bucket-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-05-24T16:27:02.38034644-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 1cb24cd075e03215c858bb09446148237aeb43461101bfbe55ee77a9c6abadb8
@@ -14,7 +25,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.702158683-03:00"
+    created: "2024-05-24T16:27:02.380199543-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 45f231f5f5ed4825120702ed26dc179af13dbacd701a92218e8047371d4095a0
@@ -25,7 +36,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701948889-03:00"
+    created: "2024-05-24T16:27:02.380053746-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 7b3a2210a2fb0fd0d83f145f8bf0c1a8cf590fcb025cc2ae8afb4a9fb5015fb6
@@ -36,7 +47,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701752894-03:00"
+    created: "2024-05-24T16:27:02.379924648-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: c55688895ac54f465ebac2d54eb4c4d7998af641018d86834108c5e609255444
@@ -47,7 +58,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701576799-03:00"
+    created: "2024-05-24T16:27:02.37982125-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 2a72121e99c532f7fccb040f1004e89902fe8ccb8fab3f775d0c16e115ba2f02
@@ -58,7 +69,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701435803-03:00"
+    created: "2024-05-24T16:27:02.379698753-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 5caaba27e1d77490eecb58b63793147abdc33c9e2605db7f9aa33849ea7cccdc
@@ -69,7 +80,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701312107-03:00"
+    created: "2024-05-24T16:27:02.379595555-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 51b33cbc6dd965625d70609a145be26c3ad05a537a187f1444b790781c9186b2
@@ -80,7 +91,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.70117841-03:00"
+    created: "2024-05-24T16:27:02.379483357-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 3ec98e93d5e1a229b1f125188a9e2e2c70ec17a0e9cebbb0014641d32b271798
@@ -91,7 +102,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T16:15:08.701023415-03:00"
+    created: "2024-05-24T16:27:02.379362359-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 3da49527538748d7e5a42398ea2f9784622906469a43d187d1fe80a8dd5695ee
@@ -100,4 +111,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/minio-bucket/minio-bucket-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-24T16:15:08.700665825-03:00"
+generated: "2024-05-24T16:27:02.379119564-03:00"

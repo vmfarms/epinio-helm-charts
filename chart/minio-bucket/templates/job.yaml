@@ -1,3 +1,5 @@
+{{- $serviceName := include "pulumi-stack.serviceName" .}}
+---
 apiVersion: batch/v1
 kind: Job
 metadata: 
@@ -28,7 +30,7 @@ spec:
           i="null"
           while [ $i != "succeeded" ]
           do
-            i=`kubectl get stacks.pulumi.com -n pulumi-operator workspace-miniooo -o jsonpath='{.status.lastUpdate.state}'`
+            i=`kubectl get stacks.pulumi.com -n pulumi-operator {{ printf "%s-%s" .Release.Namespace $serviceName | trunc 63 | trimSuffix "-" }} -o jsonpath='{.status.lastUpdate.state}'`
             echo $i
             sleep 5
           done
