@@ -23,7 +23,7 @@ spec:
       serviceAccountName: "{{ include "pulumi-stack.fullname" . }}-wait-stack"
       containers:
       - name: post-install-job
-        image: rancher/shell:v0.1.24-amd64
+        image: bitnami/kubectl
         command: ["/bin/sh","-c"]
         args:
         - |
