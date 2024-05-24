@@ -1,0 +1,31 @@
+{{- if .Values.slackUrl }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include "grafana.fullname" . }}-provisioning-alerting"
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+data:
+  000-contact-point.yaml: |
+    apiVersion: 1
+    contactPoints:
+        - orgId: 1
+          name: slack
+          receivers:
+            - uid: slack_uid
+              type: slack
+              settings:
+                {{- with .Values.slackMentionChannel }}
+                mentionChannel: here
+                {{- end }}
+                url: {{ .Values.slackUrl }}
+              disableResolveMessage: false
+  100-notification-policy.yaml: |
+    apiVersion: 1
+    policies:
+      - orgId: 1
+        receiver: slack
+        group_by:
+          - grafana_folder
+          - alertname
+{{- end }}

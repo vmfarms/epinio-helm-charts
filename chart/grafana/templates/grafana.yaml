@@ -47,6 +47,8 @@ spec:
       mode: "console"
     auth:
       disable_login_form: "false"
+    server:
+      root_url: {{ printf "https://%s.%s.%s/" (include "grafana.fullname" .) .Release.Namespace  .Values.grafana.domain | quote }}
   deployment:
     spec:
       {{- if .Values.grafana.persistentVolumeClaim.enabled }}
@@ -60,6 +62,11 @@ spec:
           containers:
             - name: grafana
               image: grafana/grafana:10.3.3
+              {{- if .Values.slackUrl }}
+              volumeMounts:
+              - mountPath: /etc/grafana/provisioning/alerting
+                name: notification-policies
+              {{- end }}
               readinessProbe:
                 failureThreshold: 3
               env:
@@ -73,9 +80,16 @@ spec:
                     secretKeyRef:
                       name: {{ include "grafana.fullname" . }}
                       key: password
-          {{- if .Values.grafana.persistentVolumeClaim.enabled }}
+          {{- if or (.Values.grafana.persistentVolumeClaim.enabled) (.Values.slackUrl) }}
           volumes:
+            {{- if .Values.grafana.persistentVolumeClaim.enabled }}
             - name: grafana-data
               persistentVolumeClaim:
                 claimName: "{{ include "grafana.fullname" . }}-pvc"
+            {{- end }}
+            {{- if .Values.slackUrl }}
+            - configMap:
+                name: "{{ include "grafana.fullname" . }}-provisioning-alerting"
+              name: notification-policies
+            {{- end }}
           {{- end }}
