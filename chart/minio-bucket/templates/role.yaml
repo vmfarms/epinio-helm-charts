@@ -1,0 +1,21 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: "{{ include "pulumi-stack.fullname" . }}-wait-stack"
+  namespace: pulumi-operator
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed,before-hook-creation
+  labels:
+    {{- include "pulumi-stack.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - "pulumi.com"
+    resources:
+      - stacks
+    verbs:
+      - get
+      - watch
+      - list
