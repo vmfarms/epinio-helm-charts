@@ -1,0 +1,18 @@
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  annotations:
+    application.epinio.io/catalog-service-secret-types: Opaque
+  name: minio-bucket-dev
+  namespace: epinio
+spec:
+  chart: minio-bucket
+  chartVersion: 1.0.5
+  description: |
+    This service is going to deploy a minio bucket and serviceAccount with needed keys and create a secret.
+    It is not meant for production, and the minio tenant it uses is not production-ready.
+  helmRepo:
+    name: falpires
+    url: https://falpires.github.io/epinio-helm-charts/
+  name: minio-bucket-dev
+  

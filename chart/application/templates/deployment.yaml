@@ -153,6 +153,24 @@ spec:
         - name: MYSQL_DATABASE_URI
           value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
+        {{- if (hasSuffix "-minio" .)  }}
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: ACCESS_KEY
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ . }}
+              key: SECRET_KEY
+        - name: AWS_REGION ## This is here just for AWS SDK
+          value: us-east-1
+        - name: AWS_ENDPOINT_URL_S3
+          value: https://shared-clients-001-api.minio.stack.io
+        - name: S3_BUCKET_NAME
+          value: "{{ $.Release.Namespace }}-{{ trimSuffix "-minio" . }}"
+        {{- end }}
         {{- end }}
         {{- end }}
         {{- range .Values.epinio.env }}
