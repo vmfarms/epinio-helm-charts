@@ -162,7 +162,7 @@ spec:
         {{- range . }}
         {{- if (contains "vault" .name) }}
         - secretRef:
-            name: {{ printf "%s-external-secret" . | quote }}
+            name: {{ printf "%s-external-secret" .name | quote }}
             optional: true
         {{- end }}
         {{- end }}
