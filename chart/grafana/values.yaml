@@ -7,6 +7,12 @@ grafana:
   ingress:
     ingressClassName: nginx
     annotations: {}
+  keycloak:
+    enabled: true
+    endpoint: http://localhost
+    realm: realm_name
+    client_id: client_id
+    client_secret: client_secret
 
 global:
   prometheus:
