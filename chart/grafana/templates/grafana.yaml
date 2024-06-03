@@ -87,6 +87,17 @@ spec:
               {{- end }}
               readinessProbe:
                 failureThreshold: 3
+              env:
+                - name: GF_SECURITY_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: "{{ include "grafana.fullname" . }}-grafana-operator-auth"
+                      key: username
+                - name: GF_SECURITY_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: "{{ include "grafana.fullname" . }}-grafana-operator-auth"
+                      key: password
           {{- if or (.Values.grafana.persistentVolumeClaim.enabled) (.Values.slackUrl) }}
           volumes:
             {{- if .Values.grafana.persistentVolumeClaim.enabled }}
