@@ -91,12 +91,12 @@ spec:
                 - name: GF_SECURITY_ADMIN_USER
                   valueFrom:
                     secretKeyRef:
-                      name: "{{ include "grafana.fullname" . }}-grafana-operator-auth"
+                      name: "{{ include "grafana.fullname" . }}-operator-auth"
                       key: username
                 - name: GF_SECURITY_ADMIN_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: "{{ include "grafana.fullname" . }}-grafana-operator-auth"
+                      name: "{{ include "grafana.fullname" . }}-operator-auth"
                       key: password
           {{- if or (.Values.grafana.persistentVolumeClaim.enabled) (.Values.slackUrl) }}
           volumes:
