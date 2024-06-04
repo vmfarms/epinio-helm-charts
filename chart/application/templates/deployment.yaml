@@ -99,7 +99,7 @@ spec:
               key: password
         - name: PSQL_DB_NAME
           value: {{ trimSuffix "-psql-conn" . }}
-        - name: DATABASE_URL
+        - name: PSQL_DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-mongodb" .)  }}
@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               name: {{ . }}
               key: mongodb-passwords
-        - name: MONGODB_URI
+        - name: MONGODB_URL
           value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
         {{- end }}
         {{- if (hasSuffix "-redis" .)  }}
@@ -149,7 +149,7 @@ spec:
           value: my_database
         - name: MYSQL_PORT
           value: "3306"
-        - name: MYSQL_DATABASE_URI
+        - name: MYSQL_DATABASE_URL
           value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-minio" .)  }}
