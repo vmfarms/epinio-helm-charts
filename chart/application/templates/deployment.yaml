@@ -62,12 +62,12 @@ spec:
           value: "{{ . }}-hl"
         - name: PSQL_USERNAME
           value: postgres
-        - name: PSQL_PORT
-          value: 5432
+        - name: "PSQL_PORT"
+          value: "5432"
         - name: PSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ . }}
+              name: {{ . | quote }}
               key: postgres-password
         - name: PSQL_DB_NAME
           value: {{ trimSuffix "-postgresql" . }}
