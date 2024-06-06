@@ -1,0 +1,13 @@
+{{- if .Values.userConfig.enableScaleToZero }}
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    {{- include "epinio-application.annotations" . | nindent 4 }}
+  labels:
+    {{- include "epinio-application.labels" . | nindent 4 }}
+  name: "{{ include "epinio-truncate" .Values.epinio.appName }}-proxy"
+spec:
+  type: ExternalName
+  externalName: {{ default "keda-add-ons-http-interceptor-proxy.keda" .Values.kedaProxyAddress }}
+{{- end }}

@@ -1,4 +1,4 @@
-{{- if .Values.userConfig.enableAutoscaling }}
+{{- if and (.Values.userConfig.enableAutoscaling) (ne .Values.userConfig.enableScaleToZero true) }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

@@ -1,0 +1,27 @@
+{{- if .Values.userConfig.enableScaleToZero }}
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+  annotations:
+    {{- include "epinio-application.annotations" . | nindent 4 }}
+  labels:
+    {{- include "epinio-application.labels" . | nindent 4 }}
+  name: "{{ include "epinio-truncate" .Values.epinio.appName }}"
+spec:
+    hosts:
+      {{- range .Values.epinio.routes }}
+      - {{ . }}
+      {{- end }}
+    scalingMetric:
+      concurrency:
+        targetValue: 10
+    scaleTargetRef:
+        name: {{ include "epinio-truncate" .Values.epinio.appName }}
+        kind: Deployment
+        apiVersion: apps/v1
+        service: {{ include "epinio-truncate" .Values.epinio.appName }}
+        port: 8080
+    replicas:
+        min: 0
+        max: 5
+{{- end }}
