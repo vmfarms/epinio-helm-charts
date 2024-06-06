@@ -1,4 +1,4 @@
-{{- if .Values.userConfig.enableScaleToZero }}
+{{- if and .Values.userConfig.enableScaleToZero .Values.epinio.routes }}
 kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
@@ -10,7 +10,11 @@ metadata:
 spec:
     hosts:
       {{- range .Values.epinio.routes }}
-      - {{ . }}
+      - {{ .domain }}
+      {{- end }}
+    pathPrefixes:
+      {{- range .Values.epinio.routes }}
+      - {{ .path }}
       {{- end }}
     scalingMetric:
       concurrency:
