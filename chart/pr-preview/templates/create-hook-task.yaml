@@ -1,7 +1,14 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-webhook
+  name: create-webhook-{{ .Release.Name }}
+  annotations:
+    {{- toYaml .Values.annotations | nindent 4 }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
 spec:
   params:
   - name: ExternalDomain

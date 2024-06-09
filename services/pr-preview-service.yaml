@@ -1,0 +1,27 @@
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  name: pr-preview
+  namespace: epinio
+spec:
+  chart: pr-preview
+  chartVersion: 0.0.1
+  description: |
+    This service is going to deploy a PostgreSQL instance managed by Crossplane.
+    It uses the elo-rating-psql-database-config providerConfigRef.
+    It is not meant for production, and the database instance it uses is not production-ready.
+  helmRepo:
+    name: falpires
+    url: https://falpires.github.io/epinio-helm-charts/
+  name: pr-preview
+  serviceIcon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
+  settings:
+    GithubReadToken:
+      type: string
+    GithubWebhookToken:
+      type: string
+    GithubOrganization:
+      type: string
+    GithubRepo:
+      type: string
+  shortDescription: A Service to enable PR Preview
