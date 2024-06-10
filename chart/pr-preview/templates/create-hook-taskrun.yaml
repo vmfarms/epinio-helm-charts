@@ -21,11 +21,9 @@ spec:
   - name: GithubOrg
     value: {{ .Values.GithubOrganization }}
   {{- else }}
-  - name: GithubOrg
-    value: {{ .Values.GithubOrganization }}
-  {{- end }}
   - name: GithubUser
     value: {{ .Values.GithubUsername }}
+  {{- end }}
   - name: GitHubAccessToken
     value: {{ .Values.GithubWebhookToken }}
   - name: ExternalDomain
