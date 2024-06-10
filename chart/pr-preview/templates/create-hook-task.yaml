@@ -3,7 +3,7 @@ kind: Task
 metadata:
   name: create-webhook-{{ .Release.Name }}
   annotations:
-    {{- toYaml .Values.annotations | nindent 4 }}
+    "helm.sh/hook": "pre-install"
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
@@ -26,7 +26,7 @@ spec:
     default: "github.com"
   - name: WebhookEvents
     description: "List of events the webhook will send notifications for"
-    default: '[\"push\",\"pull_request\"]'
+    default: '[\"pull_request\"]'
   steps:
   - name: create-webhook
     image: curlimages/curl:latest
