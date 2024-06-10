@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: {{ .Release.name }}-cr-whook
+  name: {{ .Release.Name }}-cr-whook
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
