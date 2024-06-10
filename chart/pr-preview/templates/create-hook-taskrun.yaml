@@ -11,19 +11,12 @@ spec:
   taskRef:
     name: create-webhook-{{ .Release.Name }}
   params:
-  - name: GitHubOrg
-    value: {{ .Values.GithubOrganization }}
-  - name: GitHubUser
-    value: "iancoffey"
   - name: GitHubRepo
     value: {{ .Values.GithubRepo }}
-  {{- if .Values.GithubOrganization  }}
   - name: GithubOrg
     value: {{ .Values.GithubOrganization }}
-  {{- else }}
   - name: GithubUser
     value: {{ .Values.GithubUsername }}
-  {{- end }}
   - name: GitHubAccessToken
     value: {{ .Values.GithubWebhookToken }}
   - name: ExternalDomain
