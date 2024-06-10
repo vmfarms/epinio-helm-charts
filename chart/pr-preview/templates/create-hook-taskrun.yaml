@@ -13,9 +13,9 @@ spec:
   params:
   - name: GitHubRepo
     value: {{ .Values.GithubRepo }}
-  - name: GithubOrg
+  - name: GitHubOrg
     value: {{ .Values.GithubOrganization }}
-  - name: GithubUser
+  - name: GitHubUser
     value: {{ .Values.GithubUsername }}
   - name: GitHubAccessToken
     value: {{ .Values.GithubWebhookToken }}
