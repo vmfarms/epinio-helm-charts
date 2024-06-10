@@ -191,7 +191,17 @@ entries:
   pr-preview:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-10T08:23:32.893961793-03:00"
+    created: "2024-06-10T08:41:15.281789669-03:00"
+    description: A Helm chart for Kubernetes
+    digest: 051afef41ed810beb2920b91ee9a077e71cc32b9e2be22bb865d0fa668bd8afa
+    name: pr-preview
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview/pr-preview-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-06-10T08:41:15.281594369-03:00"
     description: A Helm chart for Kubernetes
     digest: 8c2e04b6f6fd7e28f8788af3ba5044954ac1fa169ac9b87519e88e208186a0ee
     name: pr-preview
@@ -201,7 +211,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-10T08:23:32.893045393-03:00"
+    created: "2024-06-10T08:41:15.281449569-03:00"
     description: A Helm chart for Kubernetes
     digest: d5a773639b8c040a1a68a3a44d9a1b06a290531c972c0bf64881b8e76f1d747a
     name: pr-preview
@@ -211,7 +221,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-10T08:23:32.892898793-03:00"
+    created: "2024-06-10T08:41:15.281302069-03:00"
     description: A Helm chart for Kubernetes
     digest: faec4808124f772f95e19df6cf6dee420eba70a4399612eb30fc21f7101d5c4d
     name: pr-preview
@@ -221,7 +231,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-10T08:23:32.892656093-03:00"
+    created: "2024-06-10T08:41:15.281052069-03:00"
     description: A Helm chart for Kubernetes
     digest: faa920d28b38d6be8e1810d0136e11cbf5a783b5a33d584e3a569951b7d6eba9
     name: pr-preview
@@ -231,7 +241,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-10T08:23:32.892347893-03:00"
+    created: "2024-06-10T08:41:15.280723069-03:00"
     description: A Helm chart for Kubernetes
     digest: 563a355d5f1391d2cb1c1db40bb5a921e4ab990e0d6c5743a4ba9f265ebe98b2
     name: pr-preview
@@ -239,4 +249,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview/pr-preview-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-10T08:23:32.891386893-03:00"
+generated: "2024-06-10T08:41:15.280189769-03:00"

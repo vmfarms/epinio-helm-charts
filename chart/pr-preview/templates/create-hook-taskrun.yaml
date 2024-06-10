@@ -22,4 +22,4 @@ spec:
   - name: ExternalDomain
     value: {{ .Release.Name }}.{{ .Release.Namespace }}.demo.stack.io
   timeout: 1000s
-  serviceAccountName: tekton-triggers-createwebhook
+  serviceAccountName: {{ .Release.Name }}-createwebhook
