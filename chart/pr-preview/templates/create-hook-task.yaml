@@ -42,3 +42,4 @@ spec:
       else
         curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $(params.GitHubUser):$(params.GitHubAccessToken) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       fi
+      

@@ -9,13 +9,12 @@ metadata:
     {{- include "pr-preview.labels" . | nindent 4 }}
 spec:
   description: Read and display README file.
+  workspaces:
+    - name: source
   steps:
     - computeResources: {}
       image: alpine:latest
       name: read
       script: |
         #!/usr/bin/env sh
-        cat $(workspaces.source.path)/README.md
-        
-  workspaces:
-    - name: source
+        cat $(workspaces.source.path)/README.md    

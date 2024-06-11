@@ -1,3 +1,10 @@
 nameOverride: ""
 fullnameOverride: ""
 annotations: ""
+
+
+GithubReadToken: ""
+GithubWebhookToken: ""
+GithubOrganization: ""
+GithubRepo: ""
+GithubUsername: ""
