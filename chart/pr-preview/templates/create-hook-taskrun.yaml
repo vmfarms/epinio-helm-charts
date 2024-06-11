@@ -20,7 +20,6 @@ spec:
   - name: GitHubAccessToken
     value: {{ .Values.GithubWebhookToken }}
   - name: ExternalDomain
-    value: {{ .Release.Name }}.{{ .Release.Namespace }}.demo.stack.io
+    value: {{ .Release.Name }}.epinio.demo.stack.io
   timeout: 1000s
   serviceAccountName: {{ .Release.Name }}-createwebhook
-  
