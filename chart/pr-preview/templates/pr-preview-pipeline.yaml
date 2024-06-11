@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-pipeline
+spec:
+  description: |
+    This pipeline clones a git repo, then echoes the README file to the stdout.
+    
+  params:
+    - description: The git repo URL to clone from.
+      name: repo-url
+      type: string
+  tasks:
+    - name: fetch-source
+      params:
+        - name: url
+          value: $(params.repo-url)
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials
+    - name: show-readme
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-show-readme
+      workspaces:
+        - name: source
+          workspace: shared-data
+  workspaces:
+    - description: |
+        This workspace contains the cloned repo files, so they can be read by the
+        next task.
+      name: shared-data
+    - description: My git credentials
+      name: git-credentials

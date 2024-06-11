@@ -1,0 +1,46 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: {{ .Release.Name }}-pr-el
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
+spec:
+  resources:
+    kubernetesResource:
+      spec:
+        template:
+          spec:
+            serviceAccountName: {{ .Release.Name }}-tt-sa
+            containers:
+              - resources:
+                  requests:
+                    memory: "64Mi"
+                    cpu: "250m"
+                  limits:
+                    memory: "128Mi"
+                    cpu: "500m"
+  triggers:
+    - name: github-listener
+      interceptors:
+        - ref:
+            name: github
+          params:
+            - name: secretRef
+              value:
+                secretName: {{ .Release.Name }}-whook-secret
+                secretKey: secret
+            - name: eventTypes
+              value: ["pull_request"]
+        - name: "Only when pushes to tekton-testing branch"
+          ref:
+            name: "cel"
+          params:
+            - name: filter
+              value: body.pull_request.base.ref == 'main' && header.match('X-GitHub-Event','pull_request')
+      bindings:
+        - ref: {{ .Release.Name }}-tb
+      template:
+        ref: {{ .Release.Name }}-tt

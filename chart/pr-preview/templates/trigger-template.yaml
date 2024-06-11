@@ -1,0 +1,46 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: {{ .Release.Name }}-tt
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: master
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: git-branch
+      description: Branch of git that it is running on
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: pr-preview-{{ .Release.Name }}-
+      spec:
+        pipelineRef:
+          name: build-push
+        podTemplate:
+          securityContext:
+            fsGroup: 65532
+        params:
+        - name: gitrevision
+          value: $(tt.params.gitrevision)
+        - name: repo-url
+          value: $(tt.params.gitrepositoryurl)
+        workspaces:
+        - name: shared-data
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+        - name: git-credentials
+          secret:
+            secretName: {{ .Release.Name }}-git-cred
