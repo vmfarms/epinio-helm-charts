@@ -21,6 +21,9 @@ spec:
     - description: The PR Action (Opened, updated, merged, closed)
       name: pr-action
       type: string
+    - description: git revision
+      name: git-revision
+      type: string
   tasks:
     - name: fetch-source
       when:
@@ -28,6 +31,8 @@ spec:
       params:
         - name: url
           value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-revision)
       taskRef:
         kind: Task
         name: git-clone
