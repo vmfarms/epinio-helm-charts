@@ -23,7 +23,7 @@ spec:
         generateName: pr-preview-{{ .Release.Name }}-
       spec:
         pipelineRef:
-          name: build-push
+          name: {{ .Release.Name }}-pipeline
         podTemplate:
           securityContext:
             fsGroup: 65532
@@ -32,6 +32,10 @@ spec:
           value: $(tt.params.gitrevision)
         - name: repo-url
           value: $(tt.params.gitrepositoryurl)
+        - name: pr-number
+          value: $(tt.params.pr-number)
+        - name: pr-action
+          value: $(tt.params.pr-action)
         workspaces:
         - name: shared-data
           volumeClaimTemplate:

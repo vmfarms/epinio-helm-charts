@@ -15,6 +15,12 @@ spec:
     - description: The git repo URL to clone from.
       name: repo-url
       type: string
+    - description: The PR Number
+      name: pr-number
+      type: string
+    - description: The PR Action (Opened, updated, merged, closed)
+      name: pr-action
+      type: string
   tasks:
     - name: fetch-source
       params:
@@ -37,6 +43,18 @@ spec:
       workspaces:
         - name: source
           workspace: shared-data
+    - name: epinio
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          values: $(params.pr-number)
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the

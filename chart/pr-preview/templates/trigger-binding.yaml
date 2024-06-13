@@ -17,4 +17,7 @@ spec:
       value: $(body.pull_request.head.ref)
     - name: git-event
       value: $(header.X-Github-Event)
-      
+    - name: pr-number
+      value: $(body.number)
+    - name: pr-action
+      value: $(body.action)
