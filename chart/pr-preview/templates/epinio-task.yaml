@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: {{ .Release.Name }}-show-readme
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
+spec:
+  description: Read and display README file.
+  workspaces:
+    - name: source
+  params:
+    - name: pr-number
+      type: string
+  steps:
+    - computeResources: {}
+      image: ghcr.io/epinio/epinio-server:v1.11.0
+      env:
+      - name: EPINIO_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            key: password
+            name: epinio-auth
+      name: epinio
+      script: |
+        login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && epinio target {{ .Release.Namespace }} && epinio push --path=$(workspaces.source.path) --name pr-preview-$(params.pr-number)
