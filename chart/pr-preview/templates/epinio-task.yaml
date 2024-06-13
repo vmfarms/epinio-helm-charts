@@ -16,7 +16,7 @@ spec:
       type: string
   steps:
     - computeResources: {}
-      image: ghcr.io/epinio/epinio-server:v1.11.0
+      image: harbor.stack.io/apps/epinio-tekton:v1.11.0
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
@@ -25,4 +25,8 @@ spec:
             name: epinio-auth
       name: epinio
       script: |
-        login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && epinio target {{ .Release.Namespace }} && epinio push --path=$(workspaces.source.path) --name pr-preview-$(params.pr-number)
+        #!/usr/bin/env sh
+        
+        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio target {{ .Release.Namespace }} && \
+        epinio push --path=$(workspaces.source.path) --name pr-preview-$(params.pr-number)
