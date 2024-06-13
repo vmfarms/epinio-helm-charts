@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1
 kind: Task
 metadata:
-  name: {{ .Release.Name }}-epinio-push
+  name: {{ .Release.Name }}-epinio-del
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
@@ -25,4 +25,4 @@ spec:
             name: epinio-auth
       name: epinio
       script: |
-        login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && epinio target {{ .Release.Namespace }} && epinio push --path=$(workspaces.source.path) --name pr-preview-$(params.pr-number)
+        login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && epinio target {{ .Release.Namespace }} && epinio app delete pr-preview-$(params.pr-number)
