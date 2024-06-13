@@ -54,7 +54,7 @@ spec:
           workspace: shared-data
       params:
         - name: pr-number
-          values: $(params.pr-number)
+          value: $(params.pr-number)
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the

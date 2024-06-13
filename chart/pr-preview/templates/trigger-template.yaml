@@ -16,6 +16,10 @@ spec:
       description: The git repository url
     - name: git-branch
       description: Branch of git that it is running on
+    - name: pr-number
+      description: number of the pr
+    - name: pr-action
+      description: action of the pr
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
