@@ -9,7 +9,7 @@ metadata:
     {{- include "pr-preview.labels" . | nindent 4 }}
 spec:
   params:
-    - name: gitrevision
+    - name: git-revision
       description: The git revision
       default: master
     - name: gitrepositoryurl
@@ -32,8 +32,8 @@ spec:
           securityContext:
             fsGroup: 65532
         params:
-        - name: gitrevision
-          value: $(tt.params.gitrevision)
+        - name: git-revision
+          value: $(tt.params.git-revision)
         - name: repo-url
           value: $(tt.params.gitrepositoryurl)
         - name: pr-number

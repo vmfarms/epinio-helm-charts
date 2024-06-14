@@ -17,9 +17,6 @@ spec:
   steps:
     - computeResources: {}
       image: harbor.stack.io/apps/epinio-tekton:v1.11.0
-      volumeMounts:
-      - name: epinio-auth
-        mountPath: /var/secret
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
@@ -30,6 +27,6 @@ spec:
       script: |
         #!/usr/bin/env sh
 
-        epinio login https://epinio.epinio.demo.stack.io --user admin --password $(cat /var/secret/password) && \
+        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
         epinio push --path=$(workspaces.source.path) --name {{ .Values.epinio.serviceName }}-pr-$(params.pr-number)

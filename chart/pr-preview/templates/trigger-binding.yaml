@@ -9,7 +9,7 @@ metadata:
     {{- include "pr-preview.labels" . | nindent 4 }}
 spec:
   params:
-    - name: gitrevision
+    - name: git-revision
       value: $(body.pull_request.head.sha)
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name).git"
