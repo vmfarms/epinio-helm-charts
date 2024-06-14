@@ -131,7 +131,7 @@ spec:
     value: {{ .Values.GithubOrganization }}
   {{- else }}
   - name: GitHubOrg
-    value: {{ .Values.GithubOrganization }}
+    value: {{ .Values.GithubUsername }}
   {{- end }}
   - name: GitHubUser
     value: {{ .Values.GithubUsername }}
