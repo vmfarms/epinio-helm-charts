@@ -126,8 +126,13 @@ spec:
   params:
   - name: GitHubRepo
     value: {{ .Values.GithubRepo }}
+  {{-if eq .Values.GithubOrganization "" }}
   - name: GitHubOrg
     value: {{ .Values.GithubOrganization }}
+  {{- else }}
+  - name: GitHubOrg
+    value: {{ .Values.GithubOrganization }}
+  {{- end }}
   - name: GitHubUser
     value: {{ .Values.GithubUsername }}
   - name: GitHubAccessToken
