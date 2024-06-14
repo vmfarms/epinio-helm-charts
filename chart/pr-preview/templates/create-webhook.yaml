@@ -126,7 +126,7 @@ spec:
   params:
   - name: GitHubRepo
     value: {{ .Values.GithubRepo }}
-  {{- if eq .Values.GithubOrganization "" }}
+  {{- if .Values.GithubOrganization }}
   - name: GitHubOrg
     value: {{ .Values.GithubOrganization }}
   {{- else }}
