@@ -32,4 +32,4 @@ spec:
 
         epinio login https://epinio.epinio.demo.stack.io --user admin --password $(cat /var/secret/password) && \
         epinio target {{ .Release.Namespace }} && \
-        epinio push --path=$(workspaces.source.path) --name {{ .Values.epinio.serviceName }}-$(params.pr-number)
+        epinio push --path=$(workspaces.source.path) --name {{ .Values.epinio.serviceName }}-pr-$(params.pr-number)
