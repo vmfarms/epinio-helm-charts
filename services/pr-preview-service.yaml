@@ -36,7 +36,7 @@ metadata:
   namespace: epinio
 spec:
   chart: pr-preview-bind
-  chartVersion: 0.0.1
+  chartVersion: 0.0.2
   description: |
     This service is going to deploy a PostgreSQL instance managed by Crossplane.
     It uses the elo-rating-psql-database-config providerConfigRef.

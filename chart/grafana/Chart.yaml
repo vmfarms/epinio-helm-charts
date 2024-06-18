@@ -2,7 +2,7 @@ apiVersion: v2
 name: grafana
 description: A Helm chart for deploying Grafana using Epinio
 type: application
-version: 0.1.6
+version: 0.1.9
 dependencies:
 - name: prometheus-multi-tenant-proxy
   repository: file://charts/prometheus-multi-tenant-proxy

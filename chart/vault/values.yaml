@@ -2,4 +2,9 @@ vault:
   provider: "-"
   mount: "-"
 
+externalSecrets:
+  name: backend-name
+  kind: ClusterSecretStore
+  refreshInterval: 15s 
+
 epinio: {}

@@ -10,7 +10,7 @@ spec:
   instanceSelector:
     matchLabels:
       {{- include "grafana.labels" . | nindent 6 }}
-  interval: 5m
+  interval: 1m
   rules:
     - uid: fde594cd-b372-4268-8fd6-c1ee198b0901
       title: App status
@@ -92,7 +92,7 @@ spec:
             type: threshold
       noDataState: Alerting
       execErrState: Error
-      for: 5m
+      for: 1m
       annotations: {}
       labels: {}
       isPaused: false

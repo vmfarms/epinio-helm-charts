@@ -45,7 +45,11 @@ spec:
         paths:
           - backend:
               service:
+                {{- if $.Values.userConfig.enableScaleToZero }}
+                name: "{{ include "epinio-truncate" $.Values.epinio.appName }}-proxy"
+                {{- else }}
                 name: {{ include "epinio-truncate" $.Values.epinio.appName }}
+                {{- end }}
                 port:
                   number: 8080
             path: {{ .path | quote }}
