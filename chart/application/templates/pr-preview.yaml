@@ -3,24 +3,27 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: {{ .Release.Name }}-cr-whook
+  name: {{ $.Release.Name }}-cr-whook
   labels:
-    {{- range $key, $value := .Values.labels }}
+    {{- range $key, $value := $.Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    {{- include "application.labels" . | nindent 4 }}
+    app.kubernetes.io/managed-by: epinio
+    app.kubernetes.io/part-of: {{ $.Release.Namespace | quote }}
+    app.kubernetes.io/name: {{ $.Values.epinio.appName | quote }}
+    app.kubernetes.io/component: application
 spec:
   taskRef:
-    name: create-webhook-{{ trimSuffix "-info" . }}
+    name: create-webhook-{{ trimSuffix "-prp-info" . }}
   params:
   - name: GitHubRepo
-    value: {{ .Values.epinio.appName }}
+    value: {{ $.Values.epinio.appName }}
   - name: GitHubInfoSecretName
     value: {{ . }}
   - name: ExternalDomain
-    value: {{ trimSuffix "-info" . }}.epinio.demo.stack.io
+    value: {{ trimSuffix "-prp-info" . }}.epinio.demo.stack.io
   timeout: 1000s
-  serviceAccountName: {{ trimSuffix "-info" . }}-createwebhook
+  serviceAccountName: {{ trimSuffix "-prp-info" . }}-createwebhook
 ---
 {{- end }}
 {{- end }}
