@@ -1,0 +1,26 @@
+{{- range .Values.epinio.configurations }}
+{{- if (hasSuffix "-info" .) }}
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: {{ .Release.Name }}-cr-whook
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "application.labels" . | nindent 4 }}
+spec:
+  taskRef:
+    name: create-webhook-{{ trimSuffix "-info" . }}
+  params:
+  - name: GitHubRepo
+    value: {{ .Values.epinio.appName }}
+  - name: GitHubInfoSecretName
+    value: {{ . }}
+  - name: ExternalDomain
+    value: {{ trimSuffix "-info" . }}.epinio.demo.stack.io
+  timeout: 1000s
+  serviceAccountName: {{ trimSuffix "-info" . }}-createwebhook
+---
+{{- end }}
+{{- end }}
