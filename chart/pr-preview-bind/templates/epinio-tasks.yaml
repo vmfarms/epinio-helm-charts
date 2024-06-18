@@ -1,0 +1,70 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: {{ .Release.Name }}-epinio-push
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  description: Read and display README file.
+  workspaces:
+    - name: source
+  params:
+    - name: pr-number
+      type: string
+    - name: app-name
+      type: string
+  steps:
+    - computeResources: {}
+      image: harbor.stack.io/apps/epinio-tekton:v1.11.0
+      env:
+      - name: EPINIO_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            key: password
+            name: epinio-auth
+      name: epinio
+      script: |
+        #!/usr/bin/env sh
+
+        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio target {{ .Release.Namespace }} && \
+        epinio push --path=$(workspaces.source.path) --name $(params.app-name)-pr-$(params.pr-number)
+
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: {{ .Release.Name }}-epinio-del
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  description: Read and display README file.
+  workspaces:
+    - name: source
+  params:
+    - name: pr-number
+      type: string
+    - name: app-name
+      type: string
+  steps:
+    - computeResources: {}
+      image: harbor.stack.io/apps/epinio-tekton:v1.11.0
+      env:
+      - name: EPINIO_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            key: password
+            name: epinio-auth
+      name: epinio
+      script: |
+        #!/usr/bin/env sh
+
+        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio target {{ .Release.Namespace }} && \
+        epinio app delete $(params.app-name)-pr-$(params.pr-number)

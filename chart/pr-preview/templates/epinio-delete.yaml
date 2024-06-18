@@ -29,4 +29,4 @@ spec:
 
         epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
-        epinio app delete pr-preview-$(params.pr-number)
+        epinio app delete {{ .Values.epinio.serviceName }}-pr-$(params.pr-number)

@@ -1,0 +1,84 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-pipeline
+spec:
+  description: |
+    This pipeline clones a git repo, then echoes the README file to the stdout.
+    
+  params:
+    - description: The git repo URL to clone from.
+      name: repo-url
+      type: string
+    - description: The PR Number
+      name: pr-number
+      type: string
+    - description: The PR Action (Opened, updated, merged, closed)
+      name: pr-action
+      type: string
+    - description: git revision
+      name: git-revision
+      type: string
+    - description: application name on eipnio
+      name: app-name
+      type: string
+  tasks:
+    - name: fetch-source
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'']'
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-revision)
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials
+    - name: epinio-push
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'']'
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-push
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
+        - name: app-name
+          value: $(params.app-name)
+    - name: epinio-delete
+      when:
+      - cel: '''$(params.pr-action)'' in [''closed'']'
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-del
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
+        - name: app-name
+          value: $(params.app-name)
+  workspaces:
+    - description: |
+        This workspace contains the cloned repo files, so they can be read by the
+        next task.
+      name: shared-data
+    - description: My git credentials
+      name: git-credentials
+      
