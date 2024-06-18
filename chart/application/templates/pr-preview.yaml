@@ -1,5 +1,5 @@
 {{- range .Values.epinio.configurations }}
-{{- if (hasSuffix "-info" .) }}
+{{- if (hasSuffix "-prp-info" .) }}
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
