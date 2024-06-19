@@ -35,7 +35,7 @@ spec:
       when:
       - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       params:
-        - name: GithubInfoSecretName
+        - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
           value: "The pr-preview proccess is starting for PR #$(params.pr-number)"
@@ -80,7 +80,7 @@ spec:
       runAfter:
         - epinio-push
       params:
-        - name: GithubInfoSecretName
+        - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
           value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name).epinio.demo.stack.io"
@@ -107,7 +107,7 @@ spec:
       runAfter:
         - epinio-delete
       params:
-        - name: GithubInfoSecretName
+        - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
           value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name).epinio.demo.stack.io"
