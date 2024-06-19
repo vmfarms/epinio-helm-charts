@@ -6,7 +6,7 @@ metadata:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    {{- include "pr-preview.labels" . | nindent 4 }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
 spec:
   params:
     - name: git-revision

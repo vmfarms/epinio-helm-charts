@@ -381,8 +381,19 @@ entries:
     version: 0.0.1
   pr-preview-bind:
   - apiVersion: v2
+    appVersion: 0.0.6
+    created: "2024-06-19T09:30:34.335180037-03:00"
+    description: A Helm chart for Kubernetes
+    digest: 65602c466cf6f3013a339535adbee2b391fc0f1e7a73f417bdac6bf447a0316f
+    icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
+    name: pr-preview-bind
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
     appVersion: 0.0.5
-    created: "2024-06-18T21:28:49.660284012-03:00"
+    created: "2024-06-19T09:30:34.334970837-03:00"
     description: A Helm chart for Kubernetes
     digest: da9492de39dae0c6bf7835464a609356211549f6978b522047b44c7d9663d850
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -393,7 +404,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
-    created: "2024-06-18T21:28:49.660019712-03:00"
+    created: "2024-06-19T09:30:34.334764937-03:00"
     description: A Helm chart for Kubernetes
     digest: d52291240e957c13a08e0b3e18f740270377d81887875f07d795b55c1b4ac4e2
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -404,7 +415,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2024-06-18T21:28:49.659473912-03:00"
+    created: "2024-06-19T09:30:34.334229537-03:00"
     description: A Helm chart for Kubernetes
     digest: 76fb12f51513886377453c73f373efaa5d6959d654551ae50d39c0fb0db7193b
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -415,7 +426,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2024-06-18T21:28:49.658949412-03:00"
+    created: "2024-06-19T09:30:34.333746037-03:00"
     description: A Helm chart for Kubernetes
     digest: 91319762de48476ba8211f6818c65777eeccb3e0a35e22f709098057755cbd68
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -426,7 +437,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-18T21:28:49.658294012-03:00"
+    created: "2024-06-19T09:30:34.333189637-03:00"
     description: A Helm chart for Kubernetes
     digest: 982a9268a3020524e1115979d76333f09b2e8fa263a7d94bf1eb2050fefd4103
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -435,4 +446,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-18T21:28:49.657300412-03:00"
+generated: "2024-06-19T09:30:34.332165336-03:00"
