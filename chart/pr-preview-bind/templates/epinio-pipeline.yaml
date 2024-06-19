@@ -29,6 +29,9 @@ spec:
       type: string
   tasks:
     - name: start-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
       when:
       - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       params:
@@ -69,6 +72,9 @@ spec:
         - name: app-name
           value: $(params.app-name)
     - name: end-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
       when:
       - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       runAfter:
@@ -93,6 +99,9 @@ spec:
         - name: app-name
           value: $(params.app-name)
     - name: del-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
       when:
       - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       runAfter:
