@@ -38,7 +38,7 @@ spec:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
-          value: "The pr-preview proccess is starting for PR #$(params.pr-number)"
+          value: "The pr-preview proccess is starting for PR #$(params.pr-number) in $(params.app-name) app!"
     - name: fetch-source
       when:
       - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
@@ -83,7 +83,7 @@ spec:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
-          value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name).epinio.demo.stack.io"
+          value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name)-pr-$(params.pr-number).epinio.demo.stack.io"
     - name: epinio-delete
       when:
       - cel: '''$(params.pr-action)'' in [''closed'']'
@@ -103,14 +103,14 @@ spec:
         kind: Task
         name: slack-{{ .Release.Name }}
       when:
-      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      - cel: '''$(params.pr-action)'' in [''closed'']'
       runAfter:
         - epinio-delete
       params:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-prp-info"
         - name: Message
-          value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name).epinio.demo.stack.io"
+          value: "The pr-preview app is deleted as the Pull Request #$(params.pr-number) is closed!"
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the
