@@ -24,4 +24,6 @@ spec:
       type: string
     GithubUsername:
       type: string
+    SlackWebhookURL:
+      type: string
   shortDescription: A Service to enable PR Preview

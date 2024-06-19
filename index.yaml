@@ -381,8 +381,19 @@ entries:
     version: 0.0.1
   pr-preview-bind:
   - apiVersion: v2
+    appVersion: 0.0.8
+    created: "2024-06-19T14:46:30.620703688-03:00"
+    description: A Helm chart for Kubernetes
+    digest: ee376352dac9047eae9b9230dc150a280ef77e509844624255466289760c319a
+    icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
+    name: pr-preview-bind
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v2
     appVersion: 0.0.7
-    created: "2024-06-19T11:51:58.165253969-03:00"
+    created: "2024-06-19T14:46:30.620468988-03:00"
     description: A Helm chart for Kubernetes
     digest: c801bc93edbfcb14c75cf843b4d5b181d7ab6e2d27421e8a65e1a3e5ab7f5c40
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -393,7 +404,7 @@ entries:
     version: 0.0.7
   - apiVersion: v2
     appVersion: 0.0.6
-    created: "2024-06-19T11:51:58.164968069-03:00"
+    created: "2024-06-19T14:46:30.620251588-03:00"
     description: A Helm chart for Kubernetes
     digest: 25e1f31b588b92fec32bc055fdfc6efeb516eb31295264ffec127424eb19ed09
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -404,7 +415,7 @@ entries:
     version: 0.0.6
   - apiVersion: v2
     appVersion: 0.0.5
-    created: "2024-06-19T11:51:58.164681869-03:00"
+    created: "2024-06-19T14:46:30.620029388-03:00"
     description: A Helm chart for Kubernetes
     digest: da9492de39dae0c6bf7835464a609356211549f6978b522047b44c7d9663d850
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -415,7 +426,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
-    created: "2024-06-19T11:51:58.164416769-03:00"
+    created: "2024-06-19T14:46:30.619807488-03:00"
     description: A Helm chart for Kubernetes
     digest: d52291240e957c13a08e0b3e18f740270377d81887875f07d795b55c1b4ac4e2
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -426,7 +437,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2024-06-19T11:51:58.163989769-03:00"
+    created: "2024-06-19T14:46:30.619576088-03:00"
     description: A Helm chart for Kubernetes
     digest: 76fb12f51513886377453c73f373efaa5d6959d654551ae50d39c0fb0db7193b
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -437,7 +448,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2024-06-19T11:51:58.163229969-03:00"
+    created: "2024-06-19T14:46:30.619329888-03:00"
     description: A Helm chart for Kubernetes
     digest: 91319762de48476ba8211f6818c65777eeccb3e0a35e22f709098057755cbd68
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -448,7 +459,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-19T11:51:58.162952369-03:00"
+    created: "2024-06-19T14:46:30.619048388-03:00"
     description: A Helm chart for Kubernetes
     digest: 982a9268a3020524e1115979d76333f09b2e8fa263a7d94bf1eb2050fefd4103
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -457,4 +468,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-19T11:51:58.162612069-03:00"
+generated: "2024-06-19T14:46:30.618547188-03:00"

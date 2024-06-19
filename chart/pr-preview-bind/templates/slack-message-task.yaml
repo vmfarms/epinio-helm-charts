@@ -1,0 +1,38 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: slack-{{ .Release.Name }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  volumes:
+  - name: github-info
+    secret:
+      secretName: $(params.GitHubInfoSecretName)
+  params:
+  - name: Message
+    description: "The message to send to slack"
+  - name: GitHubInfoSecretName
+    description: "The GitHub user"
+  steps:
+  - name: slack
+    volumeMounts:
+    - name: github-info
+      mountpath: /var/secret
+    env:
+    - name: MESSAGE
+      value: $(params.message)
+    image: docker.io/curlimages/curl:7.70.0@sha256:031df77a11e5edded840bc761a845eab6e3c2edee22669fb8ad6d59484b6a1c4 #tag: 7.70.0
+    command:
+    - sh
+    args:
+    - -ce
+    - |
+      MESSAGE=$(echo "${MESSAGE}" | sed -e 's/\"/\\\\"/g')
+      BOTNAME='Stackio Bot'
+      JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
+      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "$(cat /var/secret/slackWebhookURL)"
+  
