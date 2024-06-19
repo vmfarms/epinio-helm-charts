@@ -125,7 +125,7 @@ spec:
             name: "cel"
           params:
             - name: filter
-              value: header.match('X-GitHub-Event','pull_request') && 'pr-preview' in body.pull_request.labels
+              value: header.match('X-GitHub-Event','pull_request') && body.pull_request.labels.exists(v, v.name=="pr-preview")
       bindings:
         - ref: {{ .Release.Name }}-tb
       template:
