@@ -30,7 +30,7 @@ spec:
   tasks:
     - name: fetch-source
       when:
-      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'']'
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       params:
         - name: url
           value: $(params.repo-url)
@@ -46,7 +46,7 @@ spec:
           workspace: git-credentials
     - name: epinio-push
       when:
-      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'']'
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       runAfter:
         - fetch-source
       taskRef:

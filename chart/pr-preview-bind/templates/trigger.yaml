@@ -6,7 +6,7 @@ metadata:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+    {{- include "pr-preview.labels" . | nindent 4 }}
 spec:
   params:
     - name: git-revision
@@ -125,7 +125,7 @@ spec:
             name: "cel"
           params:
             - name: filter
-              value: body.pull_request.base.ref == 'main' && header.match('X-GitHub-Event','pull_request') 
+              value: header.match('X-GitHub-Event','pull_request') && 'pr-preview' in body.pull_request.labels
       bindings:
         - ref: {{ .Release.Name }}-tb
       template:
