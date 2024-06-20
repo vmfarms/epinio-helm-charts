@@ -33,6 +33,7 @@ spec:
         podTemplate:
           securityContext:
             fsGroup: 65532
+        serviceAccountName: {{ .Release.Name }}-createwebhook
         params:
         - name: git-revision
           value: $(tt.params.git-revision)

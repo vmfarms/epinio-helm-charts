@@ -29,7 +29,7 @@ spec:
       script: |
         #!/usr/bin/env sh
 
-        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio login https://epinio.epinio.beta.stack.io --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
         epinio push --path=$(workspaces.source.path) --name $(params.app-name)-pr-$(params.pr-number)
 
@@ -65,6 +65,6 @@ spec:
       script: |
         #!/usr/bin/env sh
 
-        epinio login https://epinio.epinio.demo.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio login https://epinio.epinio.beta.stack.io --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
         epinio app delete $(params.app-name)-pr-$(params.pr-number)
