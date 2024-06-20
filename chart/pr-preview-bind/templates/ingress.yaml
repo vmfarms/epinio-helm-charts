@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-el-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/target: lb-01.shared-clients-001.mtl02.stack.io
+     external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
     acme.cert-manager.io/http01-edit-in-place: "true"
-    cert-manager.io/cluster-issuer: nginx-letsencrypt-prod
+    cert-manager.io/cluster-issuer: dns-prod-beta-stack-io
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
@@ -14,7 +14,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Release.Name }}.epinio.demo.stack.io
+  - host: {{ .Release.Name }}.epinio.beta.stack.io
     http:
       paths:
       - backend:
@@ -26,6 +26,6 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - {{ .Release.Name }}.epinio.demo.stack.io
-    secretName: {{ .Release.Name }}.epinio.demo.stack.io
+    - {{ .Release.Name }}.epinio.beta.stack.io
+    secretName: {{ .Release.Name }}.epinio.beta.stack.io
     

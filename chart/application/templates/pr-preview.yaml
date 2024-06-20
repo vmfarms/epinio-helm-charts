@@ -21,7 +21,7 @@ spec:
   - name: GitHubInfoSecretName
     value: {{ . }}
   - name: ExternalDomain
-    value: {{ trimSuffix "-prp-info" . }}.epinio.demo.stack.io
+    value: {{ trimSuffix "-prp-info" . }}.epinio.beta.stack.io
   timeout: 1000s
   serviceAccountName: {{ trimSuffix "-prp-info" . }}-createwebhook
 ---
