@@ -138,7 +138,7 @@ spec:
         - name: AWS_REGION ## This is here just for AWS SDK
           value: us-east-1
         - name: AWS_ENDPOINT_URL_S3
-          value: https://shared-clients-001-api.minio.stack.io
+          value: https://shared-clients-api.minio.beta.stack.io
         - name: S3_BUCKET_NAME
           value: "{{ $.Release.Namespace }}-{{ trimSuffix "-minio" . }}"
         {{- end }}
