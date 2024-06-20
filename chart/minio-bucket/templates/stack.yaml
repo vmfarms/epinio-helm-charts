@@ -8,7 +8,7 @@ metadata:
   labels:
     {{- include "pulumi-stack.labels" . | nindent 4 }}
 spec:
-  backend: 's3://pulumi-backend?endpoint=https://shared-clients-001-api.minio.stack.io&s3ForcePathStyle=true'
+  backend: 's3://pulumi-backend?endpoint=https://shared-clients-api.minio.beta.stack.io&s3ForcePathStyle=true'
   envRefs:
     PULUMI_CONFIG_PASSPHRASE:
       type: Secret

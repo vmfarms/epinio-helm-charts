@@ -57,8 +57,19 @@ entries:
     version: 0.1.0
   minio-bucket:
   - apiVersion: v2
+    appVersion: 1.0.6
+    created: "2024-06-20T16:57:31.890107295-03:00"
+    description: A Helm chart for creating a minio bucket, user and serviceAccount
+      using pulumi
+    digest: ed7fdcaa5e48754e677bbc796d93d2865a3a524420c90219da3d542b840d741c
+    name: minio-bucket
+    type: application
+    urls:
+    - https://github.com/falpires/epinio-helm-charts/raw/main/chart/minio-bucket/minio-bucket-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.741622337-03:00"
+    created: "2024-06-20T16:57:31.889769731-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 2dbc88130a80ddd854627577d2b4821e517146b6e19f90505c4fc88a4f98ef74
@@ -69,7 +80,7 @@ entries:
     version: 1.0.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.74146494-03:00"
+    created: "2024-06-20T16:57:31.888913724-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 2231a07e6837d95ac01decab3aabe0b31f5821aeb1f7188c529c3c78d3d26374
@@ -80,7 +91,7 @@ entries:
     version: 1.0.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.741332042-03:00"
+    created: "2024-06-20T16:57:31.888337787-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: bea3ed8c4c52a2a6c8c9e28b4917b47eef3f1d840c2f3f8d83f29b1de789c20e
@@ -91,7 +102,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.741168144-03:00"
+    created: "2024-06-20T16:57:31.887730053-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 1cb24cd075e03215c858bb09446148237aeb43461101bfbe55ee77a9c6abadb8
@@ -102,7 +113,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740973948-03:00"
+    created: "2024-06-20T16:57:31.887277002-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 45f231f5f5ed4825120702ed26dc179af13dbacd701a92218e8047371d4095a0
@@ -113,7 +124,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.74082665-03:00"
+    created: "2024-06-20T16:57:31.886753559-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 7b3a2210a2fb0fd0d83f145f8bf0c1a8cf590fcb025cc2ae8afb4a9fb5015fb6
@@ -124,7 +135,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740690952-03:00"
+    created: "2024-06-20T16:57:31.886153225-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: c55688895ac54f465ebac2d54eb4c4d7998af641018d86834108c5e609255444
@@ -135,7 +146,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740584554-03:00"
+    created: "2024-06-20T16:57:31.885668677-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 2a72121e99c532f7fccb040f1004e89902fe8ccb8fab3f775d0c16e115ba2f02
@@ -146,7 +157,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740471956-03:00"
+    created: "2024-06-20T16:57:31.885056044-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 5caaba27e1d77490eecb58b63793147abdc33c9e2605db7f9aa33849ea7cccdc
@@ -157,7 +168,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740358358-03:00"
+    created: "2024-06-20T16:57:31.884585695-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 51b33cbc6dd965625d70609a145be26c3ad05a537a187f1444b790781c9186b2
@@ -168,7 +179,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.74021046-03:00"
+    created: "2024-06-20T16:57:31.884177639-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 3ec98e93d5e1a229b1f125188a9e2e2c70ec17a0e9cebbb0014641d32b271798
@@ -179,7 +190,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-05-24T17:03:19.740080862-03:00"
+    created: "2024-06-20T16:57:31.883741087-03:00"
     description: A Helm chart for creating a minio bucket, user and serviceAccount
       using pulumi
     digest: 3da49527538748d7e5a42398ea2f9784622906469a43d187d1fe80a8dd5695ee
@@ -490,4 +501,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-19T16:19:44.451984571-03:00"
+generated: "2024-06-20T16:57:31.882998168-03:00"

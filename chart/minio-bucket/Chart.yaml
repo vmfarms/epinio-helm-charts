@@ -2,5 +2,5 @@ apiVersion: v2
 name: minio-bucket
 description: A Helm chart for creating a minio bucket, user and serviceAccount using pulumi
 type: application
-version: 1.0.5
-appVersion: "0.1.0"
+version: 1.0.6
+appVersion: "1.0.6"
