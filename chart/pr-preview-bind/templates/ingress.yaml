@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-el-ingress
   annotations:
-     external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
+    external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
     acme.cert-manager.io/http01-edit-in-place: "true"
     cert-manager.io/cluster-issuer: dns-prod-beta-stack-io
   labels:
