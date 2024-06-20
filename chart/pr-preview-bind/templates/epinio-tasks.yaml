@@ -18,7 +18,7 @@ spec:
       type: string
   steps:
     - computeResources: {}
-      image: harbor.stack.io/apps/epinio-tekton:v1.11.0
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.11.0
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
@@ -54,7 +54,7 @@ spec:
       type: string
   steps:
     - computeResources: {}
-      image: harbor.stack.io/apps/epinio-tekton:v1.11.0
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.11.0
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
