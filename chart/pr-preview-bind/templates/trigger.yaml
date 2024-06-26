@@ -1,0 +1,133 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: {{ .Release.Name }}-tt
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  params:
+    - name: git-revision
+      description: The git revision
+      default: master
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: git-branch
+      description: Branch of git that it is running on
+    - name: pr-number
+      description: number of the pr
+    - name: pr-action
+      description: action of the pr
+    - name: app-name
+      description: name of the app
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: pr-preview-{{ .Release.Name }}-
+      spec:
+        pipelineRef:
+          name: {{ .Release.Name }}-pipeline
+        podTemplate:
+          securityContext:
+            fsGroup: 65532
+        serviceAccountName: {{ .Release.Name }}-createwebhook
+        params:
+        - name: git-revision
+          value: $(tt.params.git-revision)
+        - name: repo-url
+          value: $(tt.params.gitrepositoryurl)
+        - name: pr-number
+          value: $(tt.params.pr-number)
+        - name: pr-action
+          value: $(tt.params.pr-action)
+        - name: app-name
+          value: $(tt.params.app-name)
+        workspaces:
+        - name: shared-data
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+        - name: git-credentials
+          secret:
+            secretName: {{ .Release.Name }}-git-cred
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: {{ .Release.Name }}-tb
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  params:
+    - name: git-revision
+      value: $(body.pull_request.head.sha)
+    - name: gitrepositoryurl
+      value: "https://github.com/$(body.repository.full_name).git"
+    - name: git-branch
+      value: $(body.pull_request.head.ref)
+    - name: git-event
+      value: $(header.X-Github-Event)
+    - name: pr-number
+      value: $(body.number)
+    - name: pr-action
+      value: $(body.action)
+    - name: app-name
+      value: $(body.repository.name)
+
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: {{ .Release.Name }}-pr-el
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  resources:
+    kubernetesResource:
+      spec:
+        template:
+          spec:
+            serviceAccountName: {{ .Release.Name }}-tt-sa
+            containers:
+              - resources:
+                  requests:
+                    memory: "64Mi"
+                    cpu: "250m"
+                  limits:
+                    memory: "128Mi"
+                    cpu: "500m"
+  triggers:
+    - name: github-listener
+      interceptors:
+        - ref:
+            name: github
+          params:
+            - name: secretRef
+              value:
+                secretName: {{ .Release.Name }}-whook-secret
+                secretKey: secret
+            - name: eventTypes
+              value: ["pull_request"]
+        - name: "Only when pushes to tekton-testing branch"
+          ref:
+            name: "cel"
+          params:
+            - name: filter
+              value: header.match('X-GitHub-Event','pull_request') && body.pull_request.labels.exists(v, v.name=="pr-preview")
+      bindings:
+        - ref: {{ .Release.Name }}-tb
+      template:
+        ref: {{ .Release.Name }}-tt

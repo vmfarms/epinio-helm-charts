@@ -80,7 +80,7 @@ spec:
             secretKeyRef:
               name: {{ . }}
               key: mongodb-passwords
-        - name: MONGODB_URI
+        - name: MONGODB_URL
           value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
         {{- end }}
         {{- if (hasSuffix "-redis" .)  }}
@@ -121,7 +121,7 @@ spec:
           value: my_database
         - name: MYSQL_PORT
           value: "3306"
-        - name: MYSQL_DATABASE_URI
+        - name: MYSQL_DATABASE_URL
           value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-minio" .)  }}
@@ -138,7 +138,7 @@ spec:
         - name: AWS_REGION ## This is here just for AWS SDK
           value: us-east-1
         - name: AWS_ENDPOINT_URL_S3
-          value: https://shared-clients-001-api.minio.stack.io
+          value: https://shared-clients-api.minio.beta.stack.io
         - name: S3_BUCKET_NAME
           value: "{{ $.Release.Namespace }}-{{ trimSuffix "-minio" . }}"
         {{- end }}
