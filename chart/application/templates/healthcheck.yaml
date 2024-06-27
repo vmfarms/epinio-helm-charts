@@ -1,0 +1,41 @@
+{{- range .Values.epinio.configurations }}
+{{- if (hasSuffix "-canary-checker" .) }}
+apiVersion: canaries.flanksource.com/v1
+kind: Canary
+metadata:
+  name: http-check
+spec:
+  interval: 30
+  http:
+    - name: basic-check
+      url: https://httpbin.demo.aws.flanksource.com/status/200
+---
+apiVersion: canaries.flanksource.com/v1
+kind: Canary
+metadata:
+  name: postgres-check
+spec:
+  interval: 30
+  postgres:
+    - name: postgres schemas check
+      url: "postgres://$(username):$(password)@$(host):$(port)/postgres?sslmode=disable"
+      username:
+        value: "postgres"
+      host: 
+        value: "x7ee2e4f76d7e916c8a3559413486-postgresql"
+      port:
+        value: 5432
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: {{ . | quote }}
+            key: postgres-password
+      query: SELECT current_schemas(true)
+      display:
+        template: |
+          {{- range $r := .results.rows }}
+          {{- $r.current_schemas}}
+          {{- end}}
+      results: 1
+{{- end }}
+{{- end }}

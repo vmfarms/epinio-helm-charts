@@ -1,0 +1,20 @@
+{{- if eq .Values.serviceMonitor true }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "canary-checker.name" . }}-monitor
+  labels:
+    {{- include "canary-checker.labels" . | nindent 4 }}
+spec:
+  jobLabel: {{ include "canary-checker.name" . }}
+  endpoints:
+    - port: http
+      interval: 30s
+      honorLabels: true
+      metricRelabelings:
+      - action: labeldrop
+        regex: (pod|instance)
+  selector:
+    matchLabels:
+      {{- include "canary-checker.selectorLabels" . | nindent 6 }}
+{{- end }}
