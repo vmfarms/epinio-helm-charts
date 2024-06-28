@@ -7,7 +7,7 @@ entries:
     dependencies:
     - condition: flanksource-ui.enabled
       name: flanksource-ui
-      repository: https://shared-clients-api.minio.beta.stack.io/charts
+      repository: https://shared-clients-api.minio.beta.stack.io/charts/canary-checker
       version: 1.0.651
     description: Kubernetes native, multi-tenant synthetic monitoring system
     digest: f0c7054cf87c07258c7e833093e7c66f28599de86bd33e03db0d23e1cb7291f9
