@@ -6,8 +6,9 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "canary-checker.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
+    external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -16,13 +17,13 @@ spec:
     {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
-        - {{ . | quote }}
+        - {{ printf "%s.%s" .Release.Name . }}
         {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.host | quote }}
+    - host: {{ printf "%s.%s" .Release.Name .Values.ingress.host }}
       http:
         paths:
           - path: /

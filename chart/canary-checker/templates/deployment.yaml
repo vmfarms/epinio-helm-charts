@@ -138,9 +138,7 @@ spec:
             - --db-migrations={{ .Values.db.runMigrations }}
             - --cache-timeout={{ .Values.data.cacheTimeoutDays }}
             - --default-window={{ .Values.data.defaultSearchWindow }}
-            {{- if ne .Values.canaryNamespace "" }}
-            - --namespace={{ .Values.canaryNamespace }}
-            {{- end }}
+            - --namespace={{ .Release.Namespace }}
             {{- if gt (int .Values.replicas) 1 }}
             - --enable-leader-election=true
             {{- end }}

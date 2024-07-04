@@ -43,6 +43,10 @@ service:
   type: ClusterIP
   port: 80
 
+ui:
+  ingress: 
+    host: local.host
+
 ingress:
   enabled: false
   className: ""

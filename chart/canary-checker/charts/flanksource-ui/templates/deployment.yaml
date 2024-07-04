@@ -36,9 +36,9 @@ spec:
           - name: HOSTNAME
             value: "0.0.0.0"
           - name: ORY_KRATOS_URL
-            value: {{ tpl .Values.oryKratosURL . }}
+            value: "http://canary-checker:8080"
           - name: BACKEND_URL
-            value: {{ .Values.backendURL | quote}}
+            value: "http://canary-checker:8080"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
