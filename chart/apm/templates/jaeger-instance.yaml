@@ -17,6 +17,8 @@ spec:
         ephemeral: false
         directory-key: "/badger/key"
         directory-value: "/badger/data"
+  securityContext:
+    fsGroup: 10001
   volumeMounts:
   - name: data
     mountPath: /badger

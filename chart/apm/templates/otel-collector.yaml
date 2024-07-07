@@ -1,4 +1,4 @@
-apiVersion: opentelemetry.io/v1alpha1
+apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: "{{ include "apm.fullname" . }}-otel"
@@ -8,7 +8,7 @@ metadata:
     {{- toYaml .Values.commonLabels | nindent 4 }}
     {{- end }}
 spec:
-  config: |-
+  config:
     receivers: 
       otlp:
         protocols:
@@ -17,7 +17,6 @@ spec:
     processors:
       resourcedetection:
         detectors: [env, system]
-      cumulativetodelta:
       batch:
         send_batch_size: 10000
         timeout: 10s
@@ -37,7 +36,7 @@ spec:
     valueFrom:
       fieldRef:
         fieldPath: spec.nodeName
-  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:sha256-e07e325e303e86f4a87a617491e921b579a92da6d404007394757ac910bf9587.sig
+  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
   ingress:
     route: {}
   managementState: managed
@@ -52,5 +51,3 @@ spec:
     prometheusCR:
       scrapeInterval: 30s
     resources: {}
-  updateStrategy: {}
-  upgradeStrategy: automatic
