@@ -1,0 +1,11 @@
+ingress:
+  class: nginx
+  domain: domain.tld
+  annotations: {}
+keycloak:
+  host: my.keycloak.com
+  realm: my-realm
+  clientId: my-client-id
+  clientSecret: my-client-secret
+  cookieSecret: my-cookie-secret
+epinio: {}
