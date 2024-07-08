@@ -30,10 +30,11 @@ spec:
       - args:
         - --provider=keycloak-oidc
         - --email-domain="*"
-        - --redirect-url="{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}/oauth2/callback"
+        - --redirect-url=https://{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}/oauth2/callback
         - --oidc-issuer-url=https://{{ .Values.keycloak.host }}/realms/{{ .Values.keycloak.realm }}
         - --allowed-group="/{{ .Release.Namespace }}"
         - --code-challenge-method=S256
+        - --http-address=0.0.0.0:4180
         envFrom:
         - secretRef:
             name: "{{ include "apm.fullname" . }}-oauth2"
