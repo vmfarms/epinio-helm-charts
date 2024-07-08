@@ -1,0 +1,28 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: "{{ include "apm.fullname" . }}-jaeger"
+  labels:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+spec:
+  ingress:
+    enabled: false
+  storage:
+    type: badger
+    options:
+      badger:
+        ephemeral: false
+        directory-key: "/badger/key"
+        directory-value: "/badger/data"
+  securityContext:
+    fsGroup: 10001
+  volumeMounts:
+  - name: data
+    mountPath: /badger
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: "data-{{ include "apm.fullname" . }}-jaeger"
