@@ -1,0 +1,60 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-webhook-{{ .Release.Name }}
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+spec:
+  volumes:
+  - name: github-info
+    secret:
+      secretName: $(params.GitHubInfoSecretName)
+  params:
+  - name: ExternalDomain
+    description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
+  - name: GitHubInfoSecretName
+    description: "The GitHub user"
+  - name: GitHubRepo
+    description: "The GitHub repo where the webhook will be created"
+  - name: GitHubDomain
+    description: "The GitHub domain. Override for GitHub Enterprise"
+    default: "github.com"
+  - name: WebhookEvents
+    description: "List of events the webhook will send notifications for"
+    default: '[\"pull_request\"]'
+  steps:
+  - name: create-webhook
+    volumeMounts:
+    - name: github-info
+      mountpath: /var/secret
+    image: docker.io/curlimages/curl:7.70.0@sha256:031df77a11e5edded840bc761a845eab6e3c2edee22669fb8ad6d59484b6a1c4 #tag: 7.70.0
+    command:
+    - sh
+    args:
+    - -ce
+    - |
+      set -e
+      echo "Create Webhook"
+      if [ $(params.GitHubDomain) = "github.com" ];then
+        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $(cat /var/secret/githubUserName):$(cat /var/secret/githubWebhookToken) -L https://api.github.com/repos/$(cat /var/secret/githubOrganization)/$(params.GitHubRepo)/hooks
+      else
+        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $(cat /var/secret/githubUserName):$(cat /var/secret/githubWebhookToken) -L https://$(params.GitHubDomain)/api/v3/repos/$(cat /var/secret/githubOrganization)/$(params.GitHubRepo)/hooks
+      fi
+  - name: send-slack
+    volumeMounts:
+    - name: github-info
+      mountpath: /var/secret
+    image: docker.io/curlimages/curl:7.70.0@sha256:031df77a11e5edded840bc761a845eab6e3c2edee22669fb8ad6d59484b6a1c4 #tag: 7.70.0
+    command:
+    - sh
+    args:
+    - -ce
+    - |
+      MESSAGE='Your webhook is set up correctly!'
+      BOTNAME='Stackio Bot'
+      JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
+      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "$(cat /var/secret/slackWebhookURL)"
+---

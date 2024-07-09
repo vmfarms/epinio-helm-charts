@@ -1,0 +1,121 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-pipeline
+spec:
+  description: |
+    This pipeline clones a git repo, then echoes the README file to the stdout.
+    
+  params:
+    - description: The git repo URL to clone from.
+      name: repo-url
+      type: string
+    - description: The PR Number
+      name: pr-number
+      type: string
+    - description: The PR Action (Opened, updated, merged, closed)
+      name: pr-action
+      type: string
+    - description: git revision
+      name: git-revision
+      type: string
+    - description: application name on epinio
+      name: app-name
+      type: string
+  tasks:
+    - name: start-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-prp-info"
+        - name: Message
+          value: "The pr-preview proccess is starting for PR #$(params.pr-number) in $(params.app-name) app!"
+    - name: fetch-source
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-revision)
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials  
+    - name: epinio-push
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-push
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
+        - name: app-name
+          value: $(params.app-name)
+    - name: end-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
+      when:
+      - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      runAfter:
+        - epinio-push
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-prp-info"
+        - name: Message
+          value: "The pr-preview proccess is finished for PR #$(params.pr-number). Here is your app url: https://$(params.app-name)-pr-$(params.pr-number).epinio.beta.stack.io"
+    - name: epinio-delete
+      when:
+      - cel: '''$(params.pr-action)'' in [''closed'']'
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-del
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
+        - name: app-name
+          value: $(params.app-name)
+    - name: del-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
+      when:
+      - cel: '''$(params.pr-action)'' in [''closed'']'
+      runAfter:
+        - epinio-delete
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-prp-info"
+        - name: Message
+          value: "The pr-preview app is deleted as the Pull Request #$(params.pr-number) is closed!"
+  workspaces:
+    - description: |
+        This workspace contains the cloned repo files, so they can be read by the
+        next task.
+      name: shared-data
+    - description: My git credentials
+      name: git-credentials
+      
