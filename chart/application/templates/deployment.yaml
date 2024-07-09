@@ -22,7 +22,7 @@ spec:
         {{- with .Values.epinio.start }}
         epinio.io/start: {{ . | quote }}
         {{- end }}
-        {{- if .Values.userConfig.apmAutoinstrument }}
+        {{- if and .Values.userConfig.apmAutoinstrument .Values.userConfig.apmAutoinstrumentEnabled }}
         instrumentation.opentelemetry.io/inject-{{ .Values.userConfig.apmAutoinstrument }}: "true"
         {{- end }}
       labels:
