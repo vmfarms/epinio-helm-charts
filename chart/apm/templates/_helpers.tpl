@@ -40,6 +40,12 @@ helm.sh/chart: {{ include "apm.chart" . }}
 app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Epinio labels
+*/}}
+{{- define "apm.epinioLabels" -}}
 {{- if .Values.epinio }}
 epinio.io/configuration: "true"
 epinio.io/configuration-origin: {{ .Values.epinio.serviceName }}

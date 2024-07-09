@@ -32,6 +32,7 @@ metadata:
   name: "{{ include "apm.fullname" . }}-oauth2"
   labels:
     {{- include "apm.labels" . | nindent 4 }}
+    {{- include "apm.epinioLabels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
     {{- toYaml .Values.commonLabels | nindent 4 }}
     {{- end }}
