@@ -1,0 +1,55 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: "{{ include "apm.fullname" . }}-otel"
+  labels:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+spec:
+  config:
+    receivers: 
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    processors:
+      resourcedetection:
+        detectors: [env, system]
+      batch:
+        send_batch_size: 10000
+        timeout: 10s
+    exporters:
+      otlp/jaeger:
+        endpoint: "{{ include "apm.fullname" . }}-jaeger-collector:4317"
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp/jaeger]
+  env:
+  - name: K8S_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
+  ingress:
+    route: {}
+  managementState: managed
+  mode: statefulset
+  observability:
+    metrics: {}
+  podDisruptionBudget:
+    maxUnavailable: 1
+  replicas: 1
+  resources: {}
+  targetAllocator:
+    prometheusCR:
+      scrapeInterval: 30s
+    resources: {}
