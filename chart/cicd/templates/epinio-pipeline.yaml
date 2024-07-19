@@ -1,0 +1,80 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "cicd-bind.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-pipeline
+spec:
+  description: |
+    This pipeline clones a git repo, then echoes the README file to the stdout.
+    
+  params:
+    - description: The git repo URL to clone from.
+      name: repo-url
+      type: string
+    - description: The branch to observe
+      name: repo-branch
+      type: string
+    - description: git revision
+      name: git-revision
+      type: string
+    - description: application name on epinio
+      name: app-name
+      type: string
+  tasks:
+    - name: start-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-prp-info"
+        - name: Message
+          value: "The ci-cd pipeline is starting for #$(params.app-name) in branch $(params.repo-branch)!"
+    - name: fetch-source
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-revision)
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials  
+    - name: epinio-push
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-push
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: app-name
+          value: $(params.app-name)
+    - name: end-feedback
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}
+      runAfter:
+        - epinio-push
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-prp-info"
+        - name: Message
+          value: "The cicd proccess is finished for PR #$(params.app-name). Here is your app url: https://$(params.app-name).epinio.beta.stack.io"
+  workspaces:
+    - description: |
+        This workspace contains the cloned repo files, so they can be read by the next task.
+      name: shared-data
+    - description: My git credentials
+      name: git-credentials
+      

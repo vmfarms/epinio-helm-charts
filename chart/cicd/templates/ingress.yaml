@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-el-ingress-cicd
+  annotations:
+    external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: dns-prod-beta-stack-io
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "cicd-bind.labels" . | nindent 4 }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Release.Name }}.epinio.beta.stack.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: el-{{ .Release.Name }}-el-ci-cd
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - {{ .Release.Name }}.epinio.beta.stack.io
+    secretName: {{ .Release.Name }}.epinio.beta.stack.io
