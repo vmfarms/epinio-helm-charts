@@ -1,0 +1,89 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "cicd-bind.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-pipeline-cicd
+spec:
+  description: |
+    This pipeline clones a git repo, then echoes the README file to the stdout.
+    
+  params:
+    - description: The git repo URL to clone from.
+      name: repo-url
+      type: string
+    - description: git revision
+      name: git-revision
+      type: string
+    - description: The git branch name
+      name: git-branch
+      type: string
+    - description: application name on epinio
+      name: app-name
+      type: string
+  tasks:
+    - name: start-feedback
+      when: 
+      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}-cicd
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-push-info-cicd"
+        - name: Message
+          value: "The ci-cd pipeline is starting for #$(params.app-name)!"
+    - name: fetch-source
+      when: 
+      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
+      runAfter:
+        - start-feedback
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-revision)
+      taskRef:
+        kind: Task
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials  
+    - name: epinio-push
+      when: 
+      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-push-cicd
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: app-name
+          value: $(params.app-name)
+    - name: end-feedback
+      when: 
+      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
+      taskRef:
+        kind: Task
+        name: slack-{{ .Release.Name }}-cicd
+      runAfter:
+        - epinio-push
+      params:
+        - name: GitHubInfoSecretName
+          value: "{{ .Release.Name }}-push-info-cicd"
+        - name: Message
+          value: "The ci-cd proccess has finished for #$(params.app-name). Here is your app url: https://$(params.app-name).epinio.beta.stack.io"
+  workspaces:
+    - description: |
+        This workspace contains the cloned repo files, so they can be read by the next task.
+      name: shared-data
+    - description: My git credentials
+      name: git-credentials

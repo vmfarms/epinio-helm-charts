@@ -1,12 +1,12 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-webhook-{{ .Release.Name }}
+  name: create-webhook-{{ .Release.Name }}-cicd
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    {{- include "pr-preview-bind.labels" . | nindent 4 }}
+    {{- include "cicd-bind.labels" . | nindent 4 }}
 spec:
   volumes:
   - name: github-info
@@ -24,7 +24,7 @@ spec:
     default: "github.com"
   - name: WebhookEvents
     description: "List of events the webhook will send notifications for"
-    default: '[\"pull_request\"]'
+    default: '[\"push\"]'
   steps:
   - name: create-webhook
     volumeMounts:
@@ -57,4 +57,28 @@ spec:
       BOTNAME='Stackio Bot'
       JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
       curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "$(cat /var/secret/slackWebhookURL)"
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: create-webhook-{{ .Release.Name }}-cicd
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    app.kubernetes.io/managed-by: epinio
+    app.kubernetes.io/part-of: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/component: application
+spec:
+  taskRef:
+    name: create-webhook-{{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}-cicd
+  params:
+  - name: GitHubRepo
+    value: "sample-blog"
+  - name: GitHubInfoSecretName
+    value: x46e9771d232a57547fc5b8bc9696-push-info-cicd
+  - name: ExternalDomain
+    value: {{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}.epinio.beta.stack.io
+  timeout: 1000s
+  serviceAccountName: {{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}-createwebhook-cicd
 ---

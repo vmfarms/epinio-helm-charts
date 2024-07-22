@@ -1,0 +1,30 @@
+{{- range .Values.epinio.configurations }}
+{{- if (hasSuffix "-push-info" .) }}
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: create-webhook-{{ $.Release.Name }}-cicd
+  labels:
+    {{- range $key, $value := $.Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    app.kubernetes.io/managed-by: epinio
+    app.kubernetes.io/part-of: {{ $.Release.Namespace | quote }}
+    app.kubernetes.io/name: {{ $.Values.epinio.appName | quote }}
+    app.kubernetes.io/component: application
+spec:
+  taskRef:
+    name: create-webhook-{{ trimSuffix "-push-info" . }}-cicd
+  params:
+  - name: GitHubRepo
+    value: {{ $.Values.epinio.appName }}
+  - name: GitHubInfoSecretName
+    value: {{ . }}
+  - name: ExternalDomain
+    value: {{ trimSuffix "-push-info" . }}.epinio.beta.stack.io
+  timeout: 1000s
+  serviceAccountName: {{ trimSuffix "-push-info" . }}-createwebhook-cicd
+---
+{{- end }}
+{{- end }}
+
