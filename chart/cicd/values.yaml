@@ -7,6 +7,7 @@ GithubWebhookToken: ""
 GithubOrganization: ""
 GithubRepo: ""
 GithubUsername: ""
+GitBranch: "main"
 
 epinio:
   serviceName: ""

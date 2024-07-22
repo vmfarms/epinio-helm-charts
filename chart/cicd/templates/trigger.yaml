@@ -33,6 +33,8 @@ spec:
         params:
         - name: git-revision
           value: $(tt.params.git-revision)
+        - name: git-branch
+          value: $(tt.params.git-branch)
         - name: repo-url
           value: $(tt.params.gitrepositoryurl)
         - name: app-name
