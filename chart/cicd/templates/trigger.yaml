@@ -88,7 +88,7 @@ spec:
       spec:
         template:
           spec:
-            serviceAccountName: {{ .Release.Name }}-tt-sa
+            serviceAccountName: {{ .Release.Name }}-tt-sa-cicd
             containers:
               - resources:
                   requests:
