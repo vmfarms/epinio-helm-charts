@@ -8,9 +8,9 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/test-with-tekton/chart/cicd/cicd-0.0.2.tgz
-    version: 0.0.2
-    appVersion: 0.0.2
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/test-with-tekton/chart/cicd/cicd-0.0.3.tgz
+    version: 0.0.3
+    appVersion: 0.0.3
   crossplane-postgresql:
   - apiVersion: v2
     created: "2024-06-04T13:31:13.450331816-03:00"

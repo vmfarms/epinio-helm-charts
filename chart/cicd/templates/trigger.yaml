@@ -11,7 +11,7 @@ spec:
   params:
     - name: git-revision
       description: The git revision
-      default: master
+      default: main
     - name: gitrepositoryurl
       description: The git repository url
     - name: git-branch
@@ -62,11 +62,11 @@ metadata:
 spec:
   params:
     - name: git-revision
-      value: $(body.repository.head.sha)
+      value: $(body.head_commit.id)
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name).git"
     - name: git-branch
-      value: $(body.repository.head.ref)
+      value: $(body.ref)
     - name: git-event
       value: $(header.X-Github-Event)
     - name: app-name
@@ -76,7 +76,7 @@ spec:
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
-  name: {{ .Release.Name }}-el
+  name: {{ .Release.Name }}-el-cicd
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 

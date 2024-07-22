@@ -19,7 +19,7 @@ spec:
       paths:
       - backend:
           service:
-            name: el-{{ .Release.Name }}-el-ci-cd
+            name: el-{{ .Release.Name }}-el-cicd
             port:
               number: 8080
         path: /

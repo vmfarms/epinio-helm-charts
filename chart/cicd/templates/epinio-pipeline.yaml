@@ -6,7 +6,7 @@ metadata:
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
     {{- include "cicd-bind.labels" . | nindent 4 }}
-  name: {{ .Release.Name }}-pipeline
+  name: {{ .Release.Name }}-pipeline-cicd
 spec:
   description: |
     This pipeline clones a git repo, then echoes the README file to the stdout.
@@ -14,9 +14,6 @@ spec:
   params:
     - description: The git repo URL to clone from.
       name: repo-url
-      type: string
-    - description: The branch to observe
-      name: repo-branch
       type: string
     - description: git revision
       name: git-revision
@@ -28,12 +25,12 @@ spec:
     - name: start-feedback
       taskRef:
         kind: Task
-        name: slack-{{ .Release.Name }}
+        name: slack-{{ .Release.Name }}-cicd
       params:
         - name: GitHubInfoSecretName
-          value: "{{ .Release.Name }}-prp-info"
+          value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
-          value: "The ci-cd pipeline is starting for #$(params.app-name) in branch $(params.repo-branch)!"
+          value: "The ci-cd pipeline is starting for #$(params.app-name)!"
     - name: fetch-source
       params:
         - name: url
@@ -53,7 +50,7 @@ spec:
         - fetch-source
       taskRef:
         kind: Task
-        name: {{ .Release.Name }}-epinio-push
+        name: {{ .Release.Name }}-epinio-push-cicd
       workspaces:
         - name: source
           workspace: shared-data
@@ -63,12 +60,12 @@ spec:
     - name: end-feedback
       taskRef:
         kind: Task
-        name: slack-{{ .Release.Name }}
+        name: slack-{{ .Release.Name }}-cicd
       runAfter:
         - epinio-push
       params:
         - name: GitHubInfoSecretName
-          value: "{{ .Release.Name }}-prp-info"
+          value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
           value: "The cicd proccess is finished for PR #$(params.app-name). Here is your app url: https://$(params.app-name).epinio.beta.stack.io"
   workspaces:
@@ -77,4 +74,3 @@ spec:
       name: shared-data
     - description: My git credentials
       name: git-credentials
-      
