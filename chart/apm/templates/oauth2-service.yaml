@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ include "apm.fullname" . }}-oauth2"
+  labels:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- include "apm.epinioLabels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+    app.kubernetes.io/oauth2-proxy: "true"
+spec:
+  ports:
+  - name: http
+    port: 4180
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+    app.kubernetes.io/oauth2-proxy: "true"

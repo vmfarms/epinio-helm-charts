@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ include "apm.fullname" . }}-oauth2"
+  labels:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- include "apm.epinioLabels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+    app.kubernetes.io/oauth2-proxy: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "apm.labels" . | nindent 6 }}
+      {{- if .Values.commonLabels }}
+      {{- toYaml .Values.commonLabels | nindent 6 }}
+      {{- end }}
+      app.kubernetes.io/oauth2-proxy: "true"
+  template:
+    metadata:
+      labels:
+        {{- include "apm.labels" . | nindent 8 }}
+        {{- if .Values.commonLabels }}
+        {{- toYaml .Values.commonLabels | nindent 8 }}
+        {{- end }}
+        app.kubernetes.io/oauth2-proxy: "true"
+    spec:
+      containers:
+      - args:
+        - --provider=keycloak-oidc
+        - --email-domain="*"
+        - --redirect-url=https://{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}/oauth2/callback
+        - --oidc-issuer-url=https://{{ .Values.keycloak.host }}/realms/{{ .Values.keycloak.realm }}
+        - --allowed-group="/{{ .Release.Namespace }}"
+        - --code-challenge-method=S256
+        - --http-address=0.0.0.0:4180
+        env:
+        - name: OAUTH2_PROXY_CLIENT_ID 
+          value: "{{ .Values.keycloak.clientId }}"
+        - name: OAUTH2_PROXY_CLIENT_SECRET 
+          value: "{{ .Values.keycloak.clientSecret }}"
+        - name: OAUTH2_PROXY_COOKIE_SECRET 
+          value: "{{ .Values.keycloak.cookieSecret }}"
+        image: quay.io/oauth2-proxy/oauth2-proxy:latest
+        imagePullPolicy: Always
+        name: oauth2-proxy
+        ports:
+        - containerPort: 4180
+          protocol: TCP

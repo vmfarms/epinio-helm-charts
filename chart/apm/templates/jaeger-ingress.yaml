@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  name: "{{ include "apm.fullname" . }}-jaeger"
+spec:
+  ingressClassName: "{{ default "nginx" .Values.ingress.class }}"
+  rules:
+  - host: "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: "{{ include "apm.fullname" . }}-jaeger-query"
+            port:
+              number: 16686
+  tls:
+  - hosts:
+    - "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}"
+    secretName: "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}-tls"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ include "apm.fullname" . }}-oauth2"
+  labels:
+    {{- include "apm.labels" . | nindent 4 }}
+    {{- include "apm.epinioLabels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+  annotations: 
+    {{ toYaml .Values.ingress.annotations | nindent 4 }}
+spec:
+  ingressClassName: "{{ default "nginx" .Values.ingress.class }}"
+  rules:
+  - host: "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}"
+    http:
+      paths:
+      - path: /oauth2
+        pathType: Prefix
+        backend:
+          service:
+            name: "{{ include "apm.fullname" . }}-oauth2"
+            port:
+              number: 4180
+  tls:
+  - hosts:
+    - "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}"
+    secretName: "{{ include "apm.fullname" . }}-jaeger.{{ .Release.Namespace }}.{{ .Values.ingress.domain }}-tls"
