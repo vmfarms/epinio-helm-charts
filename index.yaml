@@ -1,5 +1,15 @@
 apiVersion: v1
 entries:
+  cicd:
+  - apiVersion: v2
+    created: "2024-06-04T13:31:13.450331816-03:00"
+    description: A Helm chart for deploying tekton hooks
+    digest: c3de745ab82b35bbcbe7a4d6075a6e015f2bc0e511f5d81f065399e8999d8e73
+    name: cicd
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/test-with-tekton/chart/cicd/cicd-0.0.1.tgz
+    version: 0.6.0
   crossplane-postgresql:
   - apiVersion: v2
     created: "2024-06-04T13:31:13.450331816-03:00"
