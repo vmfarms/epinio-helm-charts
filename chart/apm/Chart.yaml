@@ -1,0 +1,5 @@
+apiVersion: v2
+name: apm
+description: The helm chart for epinio apm to be deployed by
+type: application
+version: 0.0.1
