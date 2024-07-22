@@ -9,7 +9,8 @@ entries:
     type: application
     urls:
     - https://github.com/vmfarms/epinio-helm-charts/raw/feat/test-with-tekton/chart/cicd/cicd-0.0.1.tgz
-    version: 0.6.0
+    version: 0.0.1
+    appVersion: 0.0.1
   crossplane-postgresql:
   - apiVersion: v2
     created: "2024-06-04T13:31:13.450331816-03:00"
