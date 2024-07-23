@@ -6,6 +6,13 @@
 # __SUPERCEDED__ by `global.tlsIssuerMail`.
 #
 # Kept for backward compatibility, here and in the templates.
+
+extraEnv: 
+  - name: KUBE_API_QPS
+    value: 500
+  - name: KUBE_API_BURST
+    value: 200
+
 email: "epinio@suse.com"
 image:
   epinio:

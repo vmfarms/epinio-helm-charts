@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: {{ .Release.Name }}-epinio-push-cicd
+  labels:
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    {{- include "cicd-bind.labels" . | nindent 4 }}
+spec:
+  description: Read and display README file.
+  workspaces:
+    - name: source
+  params:
+    - name: app-name
+      type: string
+  steps:
+    - computeResources: {}
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.11.0
+      env:
+      - name: EPINIO_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            key: password
+            name: epinio-auth
+      name: epinio
+      script: |
+        #!/usr/bin/env sh
+
+        epinio login https://epinio.epinio.beta.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio target {{ .Release.Namespace }} && \
+        epinio push --path=$(workspaces.source.path) --name $(params.app-name)
