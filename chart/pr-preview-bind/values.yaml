@@ -8,7 +8,7 @@ GithubWebhookToken: ""
 GithubOrganization: ""
 GithubRepo: ""
 GithubUsername: ""
-
+epinioURL: "https://epinio.platform.beta.sidepro.app"
 
 epinio:
   serviceName: ""

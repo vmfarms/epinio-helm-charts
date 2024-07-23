@@ -22,6 +22,9 @@ spec:
         {{- with .Values.epinio.start }}
         epinio.io/start: {{ . | quote }}
         {{- end }}
+        {{- if and .Values.userConfig.apmAutoinstrument .Values.userConfig.apmAutoinstrumentEnabled }}
+        instrumentation.opentelemetry.io/inject-{{ .Values.userConfig.apmAutoinstrument }}: "true"
+        {{- end }}
       labels:
         {{- include "epinio-application.labels" . | nindent 8 }}
         epinio.io/stage-id: {{ .Values.epinio.stageID | quote }}
