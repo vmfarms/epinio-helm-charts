@@ -92,11 +92,11 @@ spec:
             secretKeyRef:
               name: {{ . }}
               key: redis-password
-        {{- if (contains "standalone" .Values.architecture)  }}
+        {{- if (contains "standalone" $.Values.architecture)  }}
         - name: REDIS_HOSTNAME
           value: "{{ . }}-master"
         {{- end }}
-        {{- if (contains "replication" .Values.architecture)  }}
+        {{- if (contains "replication" $.Values.architecture)  }}
         - name: REDIS_MASTER_HOSTNAME
           value: "{{ . }}-master"
         - name: REDIS_REPLICAS_HOSTNAME
