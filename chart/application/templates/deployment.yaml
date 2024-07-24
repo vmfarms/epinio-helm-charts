@@ -103,7 +103,7 @@ spec:
         - name: REDIS_MASTER_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-master"
         - name: REDIS_REPLICAS_HOSTNAME
-          value: "{{ . }}-replicas"
+          value: "{{ trimSuffix "-replication" . }}-replicas"
         {{- end }}
         {{- if (hasSuffix "-rabbitmq" .)  }}
         - name: RABBITMQ_USERNAME
