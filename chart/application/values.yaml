@@ -34,6 +34,8 @@
 # This is required because an app may have to ingest changes to resources outside of
 # itself.  I.e. an update to a bound configuration
 
+architecture: standalone
+
 image:
   pullPolicy: IfNotPresent
 
