@@ -92,14 +92,18 @@ spec:
             secretKeyRef:
               name: {{ . }}
               key: redis-password
-        - name: REDIS_HOSTNAME
-          value: "{{ . }}-master"
-        - name: REDIS_MASTER_HOSTNAME
-          value: "{{ . }}-master"
-        - name: REDIS_REPLICAS_HOSTNAME
-          value: "{{ . }}-replicas"
         - name: REDIS_PORT
           value: "6379"
+        {{- end }}
+        {{- if (hasSuffix "-redis-standalone" .) }}
+      - name: REDIS_HOSTNAME
+        value: "{{ . }}-master"
+        {{- end }}
+        {{- if (hasSuffix "-redis-replication" .) }}
+      - name: REDIS_MASTER_HOSTNAME
+        value: "{{ . }}-master"
+      - name: REDIS_REPLICAS_HOSTNAME
+        value: "{{ . }}-replicas"
         {{- end }}
         {{- if (hasSuffix "-rabbitmq" .)  }}
         - name: RABBITMQ_USERNAME
