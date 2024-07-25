@@ -8,6 +8,7 @@ GithubOrganization: ""
 GithubRepo: ""
 GithubUsername: ""
 GitBranch: "main"
+epinioURL: "https://epinio.platform.beta.sidepro.app"
 
 epinio:
   serviceName: ""
