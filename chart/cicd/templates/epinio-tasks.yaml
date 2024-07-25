@@ -27,6 +27,6 @@ spec:
       script: |
         #!/usr/bin/env sh
 
-        epinio login https://epinio.epinio.beta.stack.io --user admin --password $EPINIO_PASSWORD && \
+        epinio login {{ .Values.epinioURL }} --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
         epinio push --path=$(workspaces.source.path) --name $(params.app-name)
