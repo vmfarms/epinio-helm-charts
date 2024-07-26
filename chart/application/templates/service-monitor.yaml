@@ -4,16 +4,23 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "epinio-truncate" .Values.epinio.appName }}
+  name: {{ include "epinio-truncate" $.Values.epinio.appName }}
   namespace: workspace
   labels:
-    {{- include "epinio-application.labels" $ | nindent 4 }}
+    {{- range $key, $value := $.Values.labels }}
+    {{ $key }}: {{ $value | quote }} 
+    {{- end }}
+    app.kubernetes.io/managed-by: epinio
+    app.kubernetes.io/part-of: {{ $.Release.Namespace | quote }}
+    app.kubernetes.io/name: {{ $.Values.epinio.appName | quote }}
+    app.kubernetes.io/component: application
   annotations:
     {{- include "epinio-application.annotations" $ | nindent 4 }}
 spec:
   selector:
     matchLabels:
-    {{- include "epinio-application.labels" . | nindent 6 }}
+      app.kubernetes.io/part-of: {{ $.Release.Namespace | quote }}
+      app.kubernetes.io/name: {{ $.Values.epinio.appName | quote }}
   endpoints:
   - port: metrics
 {{- end }}
