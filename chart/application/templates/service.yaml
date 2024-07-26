@@ -14,6 +14,11 @@ spec:
     - port: 8080
       protocol: TCP
       targetPort: {{ include "epinio-app-listening-port" . }}
+      name: web
+    - port: {{ .Values.epinio.metricsPort | default 9394 }}
+      protocol: TCP
+      targetPort: {{ .Values.epinio.metricsPort | default 9394 }}
+      name: metrics
   selector:
     {{- include "epinio-application.selectorLabels" . | nindent 4 }}
   type: ClusterIP

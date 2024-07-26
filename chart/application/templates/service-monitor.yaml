@@ -1,0 +1,21 @@
+{{- with .Values.epinio.configurations }}
+{{- range . }}
+{{- if (hasSuffix "-grafana" .)  }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "epinio-truncate" .Values.epinio.appName }}
+  namespace: workspace
+  labels:
+    {{- include "epinio-application.labels" $ | nindent 4 }}
+  annotations:
+    {{- include "epinio-application.annotations" $ | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+    {{- include "epinio-application.labels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+{{- end }}
+{{- end }}
+{{- end }}
