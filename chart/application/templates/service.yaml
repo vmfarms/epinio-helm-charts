@@ -15,10 +15,12 @@ spec:
       protocol: TCP
       targetPort: {{ include "epinio-app-listening-port" . }}
       name: web
-    - port: {{ .Values.epinio.metricsPort | default 9394 }}
+    {{- if $.Values.userConfig.customMetricsEnabled }}
+    - port: {{ .Values.userConfig.customMetricsPort | default 9394 }}
       protocol: TCP
-      targetPort: {{ .Values.epinio.metricsPort | default 9394 }}
+      targetPort: {{ .Values.userConfig.customMetricsPort | default 9394 }}
       name: metrics
+    {{- end }}
   selector:
     {{- include "epinio-application.selectorLabels" . | nindent 4 }}
   type: ClusterIP
