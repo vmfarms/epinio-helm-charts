@@ -69,7 +69,7 @@ spec:
         {{- if (hasSuffix "-postgresql-replication" .) }}
         - name: POSTGRESQL_MASTER_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-primary-hl"
-        - name: POSTGRESQL_REPLICAS_HOSTNAME
+        - name: POSTGRESQL_REPLICA_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-read-hl"
         - name: DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_MASTER_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
