@@ -60,9 +60,21 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
-        {{- if (hasSuffix "-postgresql" .)  }}
+        {{- if (hasSuffix "-postgresql-standalone" .) }}
         - name: PSQL_HOSTNAME
-          value: "{{ . }}-hl"
+          value: "{{ trimSuffix "-standalone" . }}-hl"
+        - name: DATABASE_URL
+          value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
+        {{- end }}
+        {{- if (hasSuffix "-postgresql-replication" .) }}
+        - name: POSTGRESQL_MASTER_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-primary-hl"
+        - name: POSTGRESQL_REPLICA_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-read-hl"
+        - name: DATABASE_URL
+          value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_MASTER_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
+        {{- end }}
+        {{- if (hasSuffix "-postgresql" .)  }}
         - name: PSQL_USERNAME
           value: postgres
         - name: "PSQL_PORT"
@@ -74,8 +86,6 @@ spec:
               key: postgres-password
         - name: PSQL_DB_NAME
           value: {{ trimSuffix "-postgresql" . }}
-        - name: DATABASE_URL
-          value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-mongodb" .)  }}
         - name: MONGODB_ROOT_PASSWORD
