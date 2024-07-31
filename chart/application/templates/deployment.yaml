@@ -60,9 +60,17 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
-        {{- if (hasSuffix "-postgresql" .)  }}
+        {{- if (hasSuffix "-postgresql-standalone" .) }}
         - name: PSQL_HOSTNAME
-          value: "{{ . }}-hl"
+          value: "{{ trimSuffix "-standalone" . }}-primary-hl"
+        {{- end }}
+        {{- if (hasSuffix "-postgresql-replication" .) }}
+        - name: POSTGRESQL_MASTER_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-primary-hl"
+        - name: POSTGRESQL_REPLICAS_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-read-hl"
+        {{- end }}
+        {{- if (hasSuffix "-postgresql" .)  }}
         - name: PSQL_USERNAME
           value: postgres
         - name: "PSQL_PORT"
