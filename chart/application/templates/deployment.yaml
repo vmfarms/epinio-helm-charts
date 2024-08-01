@@ -128,6 +128,20 @@ spec:
         - name: RABBITMQ_PORT
           value: "5672"
         {{- end }}
+        {{- if (hasSuffix "-mysql-standalone" .) }}
+        - name: MYSQL_HOSTNAME
+          value: "{{ trimSuffix "-standalone" . }}-headless"
+        - name: DATABASE_URL
+          value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
+        {{- end }}
+        {{- if (hasSuffix "-mysql-replication" .) }}
+        - name: MYSQL_MASTER_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-primary-headless"
+        - name: MYSQL_REPLICA_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-secondary-headless"
+        - name: DATABASE_URL
+          value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_MASTER_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
+        {{- end }}
         {{- if (hasSuffix "-mysql" .)  }}
         - name: MYSQL_USERNAME
           value: root
@@ -136,14 +150,10 @@ spec:
             secretKeyRef:
               name: {{ . }}
               key: mysql-root-password
-        - name: MYSQL_HOSTNAME
-          value: "{{ . }}-headless"
         - name: MYSQL_DB_NAME
           value: my_database
         - name: MYSQL_PORT
           value: "3306"
-        - name: MYSQL_DATABASE_URL
-          value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-minio" .)  }}
         - name: AWS_ACCESS_KEY_ID
