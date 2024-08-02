@@ -63,7 +63,7 @@ spec:
         {{- if (hasSuffix "-postgresql-standalone" .) }}
         - name: PSQL_HOSTNAME
           value: "{{ trimSuffix "-standalone" . }}-hl"
-        - name: DATABASE_URL
+        - name: PSQL_DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-postgresql-replication" .) }}
@@ -71,7 +71,7 @@ spec:
           value: "{{ trimSuffix "-replication" . }}-primary-hl"
         - name: PSQL_REPLICA_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-read-hl"
-        - name: DATABASE_URL
+        - name: PSQL_DATABASE_URL
           value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_MASTER_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-postgresql" .)  }}
@@ -131,7 +131,7 @@ spec:
         {{- if (hasSuffix "-mysql-standalone" .) }}
         - name: MYSQL_HOSTNAME
           value: "{{ trimSuffix "-standalone" . }}-headless"
-        - name: DATABASE_URL
+        - name: MYSQL_DATABASE_URL
           value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-mysql-replication" .) }}
@@ -139,7 +139,7 @@ spec:
           value: "{{ trimSuffix "-replication" . }}-primary-headless"
         - name: MYSQL_REPLICA_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-secondary-headless"
-        - name: DATABASE_URL
+        - name: MYSQL_DATABASE_URL
           value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_MASTER_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
         {{- end }}
         {{- if (hasSuffix "-mysql" .)  }}
