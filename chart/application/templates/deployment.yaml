@@ -113,7 +113,7 @@ spec:
         - name: MONGODB_ARBITER_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-arbiter-headless"
         - name: MONGODB_DATABASE_URL
-          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_HOSTNAME):27017/default"
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_MASTER_HOSTNAME):27017/default"
         {{- end }}
         {{- if (hasSuffix "-mongodb" .)  }}
         - name: MONGODB_ROOT_PASSWORD
