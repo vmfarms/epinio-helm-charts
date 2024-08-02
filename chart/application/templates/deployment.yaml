@@ -87,14 +87,26 @@ spec:
         - name: PSQL_DB_NAME
           value: {{ trimSuffix "-postgresql" . }}
         {{- end }}
+        {{- if (hasSuffix "-mongodb-standalone" .) }}
+        - name: MONGODB_HOSTNAME
+          value: "{{ trimSuffix "-standalone" . }}"
+        - name: MONGODB_DATABASE_URL
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_HOSTNAME):27017/default"
+        {{- end }}
+        {{- if (hasSuffix "-mongodb-replication" .) }}
+        - name: MONGODB_MASTER_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-headless"
+        - name: MONGODB_ARBITER_HOSTNAME
+          value: "{{ trimSuffix "-replication" . }}-arbiter-headless"
+        - name: MONGODB_DATABASE_URL
+          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_MASTER_HOSTNAME):27017/default"
+        {{- end }}
         {{- if (hasSuffix "-mongodb" .)  }}
         - name: MONGODB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ . }}
               key: mongodb-passwords
-        - name: MONGODB_URL
-          value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@{{ . }}:27017/default"
         {{- end }}
         {{- if (hasSuffix "-redis" .)  }}
         - name: REDIS_PASSWORD
