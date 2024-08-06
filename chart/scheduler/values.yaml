@@ -1,8 +1,8 @@
 epinio:
-  userConfig:
-    cronSchedule: "*/5 * * * *"
   appName: ""
   username: ""
+userConfig:
+  cronSchedule: "*/5 * * * *"
 
 # Default values for scheduler.
 # This is a YAML-formatted file.
