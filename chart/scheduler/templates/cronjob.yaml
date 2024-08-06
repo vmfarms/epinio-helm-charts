@@ -8,7 +8,7 @@ metadata:
   annotations:
     {{- include "scheduler.annotations" . | nindent 4 }}
 spec:
-  schedule: {{ .Values.epinio.userConfig.cronSchedule }}
+  schedule: "{{ .Values.epinio.userConfig.cronSchedule }}"
   jobTemplate:
     spec:
       template:
@@ -30,8 +30,6 @@ spec:
             image: {{ .Values.epinio.imageURL }}
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             env:
-            - name: PORT
-              value: {{ include "epinio-app-listening-port" . | quote }}
             {{- with .Values.epinio.configurations }}
             {{- range . }}
             {{- if (hasSuffix "-postgresql-standalone" .) }}

@@ -83,10 +83,3 @@ Common annotations
 {{- define "scheduler.annotations" -}}
 epinio.io/created-by: {{ .Values.epinio.username | quote }}
 {{- end }}
-
-{{/*
-Application listening port
-*/}}
-{{- define "epinio-app-listening-port" -}}
-{{ default 8080 (default (dict "appListeningPort" "8080") .Values.userConfig).appListeningPort }}
-{{- end }}
