@@ -8,7 +8,7 @@ metadata:
   annotations:
     {{- include "scheduler.annotations" . | nindent 4 }}
 spec:
-  schedule: "{{ .Values.epinio.userConfig.cronSchedule }}"
+  schedule: "{{ .Values.userConfig.cronSchedule }}"
   jobTemplate:
     spec:
       template:
