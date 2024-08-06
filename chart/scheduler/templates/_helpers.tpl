@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "scheduler.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.nameOverride | trunc 52 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -12,13 +12,13 @@ If release name contains chart name it will be used as a full name.
 */}}
 {{- define "scheduler.fullname" -}}
 {{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- .Values.fullnameOverride | trunc 52 | trimSuffix "-" }}
 {{- else }}
 {{- $name := default .Chart.Name .Values.nameOverride }}
 {{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- .Release.Name | trunc 52 | trimSuffix "-" }}
 {{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- printf "%s-%s" .Release.Name $name | trunc 52 | trimSuffix "-" }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -27,7 +27,7 @@ If release name contains chart name it will be used as a full name.
 Create chart name and version as used by the chart label.
 */}}
 {{- define "scheduler.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 52 | trimSuffix "-" }}
 {{- end }}
 {{/*
 Common labels
@@ -74,7 +74,7 @@ Resource name sanitization and truncation.
 character removed.
 */}}
 {{- define "epinio-truncate" -}}
-{{ print "r" (trunc 21 (include "epinio-name-sanitize" .)) "-" (sha1sum .) }}
+{{ print "r" (trunc 10 (include "epinio-name-sanitize" .)) "-" (sha1sum .) }}
 {{- end }}
 
 {{/*
