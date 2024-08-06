@@ -1,5 +1,6 @@
 epinio:
-  userConfig: {}
+  userConfig:
+    cronSchedule: "*/5 * * * *"
   appName: ""
   username: ""
 
