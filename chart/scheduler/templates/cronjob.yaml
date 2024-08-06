@@ -1,0 +1,178 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "epinio-truncate" .Values.epinio.appName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scheduler.labels" . | nindent 4 }}
+  annotations:
+    {{- include "scheduler.annotations" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.epinio.userConfig.cronSchedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: {{ include "scheduler.serviceAccountName" . }}
+          serviceAccountName: {{ include "scheduler.serviceAccountName" . }}
+          automountServiceAccountToken: true
+          {{- with .Values.epinio.configurations }}
+          volumes:
+          {{- range . }}
+          - name: {{ . }}
+            secret:
+              defaultMode: 420
+              secretName: {{ . }}
+          {{- end }}
+          {{- end }}
+          containers:
+          - name: {{ include "epinio-truncate" .Values.epinio.appName }}
+            image: {{ .Values.epinio.imageURL }}
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            env:
+            - name: PORT
+              value: {{ include "epinio-app-listening-port" . | quote }}
+            {{- with .Values.epinio.configurations }}
+            {{- range . }}
+            {{- if (hasSuffix "-postgresql-standalone" .) }}
+            - name: PSQL_HOSTNAME
+              value: "{{ trimSuffix "-standalone" . }}-hl"
+            - name: PSQL_DATABASE_URL
+              value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
+            {{- end }}
+            {{- if (hasSuffix "-postgresql-replication" .) }}
+            - name: PSQL_MASTER_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-primary-hl"
+            - name: PSQL_REPLICA_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-read-hl"
+            - name: PSQL_DATABASE_URL
+              value: postgresql://$(PSQL_USERNAME):$(PSQL_PASSWORD)@$(PSQL_MASTER_HOSTNAME):$(PSQL_PORT)/$(PSQL_DB_NAME)
+            {{- end }}
+            {{- if (hasSuffix "-postgresql" .)  }}
+            - name: PSQL_USERNAME
+              value: postgres
+            - name: "PSQL_PORT"
+              value: "5432"
+            - name: PSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . | quote }}
+                  key: postgres-password
+            - name: PSQL_DB_NAME
+              value: {{ trimSuffix "-postgresql" . }}
+            {{- end }}
+            {{- if (hasSuffix "-mongodb-standalone" .) }}
+            - name: MONGODB_HOSTNAME
+              value: "{{ trimSuffix "-standalone" . }}"
+            - name: MONGODB_DATABASE_URL
+              value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_HOSTNAME):27017/default"
+            {{- end }}
+            {{- if (hasSuffix "-mongodb-replication" .) }}
+            - name: MONGODB_MASTER_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-headless"
+            - name: MONGODB_ARBITER_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-arbiter-headless"
+            - name: MONGODB_DATABASE_URL
+              value: "mongodb://admin:$(MONGODB_ROOT_PASSWORD)@$(MONGODB_MASTER_HOSTNAME):27017/default"
+            {{- end }}
+            {{- if (hasSuffix "-mongodb" .)  }}
+            - name: MONGODB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: mongodb-passwords
+            {{- end }}
+            {{- if (hasSuffix "-redis" .)  }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: redis-password
+            - name: REDIS_PORT
+              value: "6379"
+            {{- end }}
+            {{- if (hasSuffix "-redis-standalone" .) }}
+            - name: REDIS_HOSTNAME
+              value: "{{ trimSuffix "-standalone" . }}-master"
+            {{- end }}
+            {{- if (hasSuffix "-redis-replication" .) }}
+            - name: REDIS_MASTER_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-master"
+            - name: REDIS_REPLICAS_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-replicas"
+            {{- end }}
+            {{- if (hasSuffix "-rabbitmq" .)  }}
+            - name: RABBITMQ_USERNAME
+              value: user
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: rabbitmq-password
+            - name: RABBITMQ_HOSTNAME
+              value: "{{ . }}-headless"
+            - name: RABBITMQ_PORT
+              value: "5672"
+            {{- end }}
+            {{- if (hasSuffix "-mysql-standalone" .) }}
+            - name: MYSQL_HOSTNAME
+              value: "{{ trimSuffix "-standalone" . }}-headless"
+            - name: MYSQL_DATABASE_URL
+              value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
+            {{- end }}
+            {{- if (hasSuffix "-mysql-replication" .) }}
+            - name: MYSQL_MASTER_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-primary-headless"
+            - name: MYSQL_REPLICA_HOSTNAME
+              value: "{{ trimSuffix "-replication" . }}-secondary-headless"
+            - name: MYSQL_DATABASE_URL
+              value: mysql://$(MYSQL_USERNAME):$(MYSQL_PASSWORD)@$(MYSQL_MASTER_HOSTNAME):$(MYSQL_PORT)/$(MYSQL_DB_NAME)
+            {{- end }}
+            {{- if (hasSuffix "-mysql" .)  }}
+            - name: MYSQL_USERNAME
+              value: root
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: mysql-root-password
+            - name: MYSQL_DB_NAME
+              value: my_database
+            - name: MYSQL_PORT
+              value: "3306"
+            {{- end }}
+            {{- if (hasSuffix "-minio" .)  }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: ACCESS_KEY
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ . }}
+                  key: SECRET_KEY
+            - name: AWS_REGION ## This is here just for AWS SDK
+              value: us-east-1
+            - name: AWS_ENDPOINT_URL_S3
+              value: https://shared-clients-api.minio.beta.stack.io
+            - name: S3_BUCKET_NAME
+              value: "{{ $.Release.Namespace }}-{{ trimSuffix "-minio" . }}"
+            {{- end }}
+            {{- end }}
+            {{- end }}
+            {{- range .Values.epinio.env }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            envFrom:
+            {{- with .Values.epinio.configpaths }}
+            {{- range . }}
+            {{- if (contains "vault" .name) }}
+            - secretRef:
+                name: {{ printf "%s-external-secret" .name | quote }}
+                optional: true
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          restartPolicy: OnFailure
