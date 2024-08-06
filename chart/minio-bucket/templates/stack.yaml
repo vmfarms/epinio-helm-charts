@@ -58,4 +58,4 @@ spec:
     pulumi-s3-python:Name: {{ include "pulumi-stack.serviceName" . }}
     pulumi-s3-python:Namespace: {{ .Release.Namespace }}
     pulumi-s3-python:ReleaseName: {{ .Release.Name }}
-    acl: {{ .Values.ACL }} 
+    pulumi-s3-python:Policy: {{ .Values.Policy }} 

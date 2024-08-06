@@ -5,4 +5,4 @@ epinio:
 # private: only can read/write with valid keys
 # public: anyone can read/write
 # readonly: can be read publicly
-ACL: private 
+Policy: public 
