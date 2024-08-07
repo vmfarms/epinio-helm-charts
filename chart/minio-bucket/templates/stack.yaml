@@ -51,10 +51,11 @@ spec:
         name: pulumi-secrets
         key: MINIO_ENABLE_HTTPS
   stack: "{{ .Release.Namespace }}.{{ include "pulumi-stack.serviceName" . }}.minio.bucket.stack"
-  projectRepo: https://github.com/falpires/pulumi-minio-stack
-  branch: main
+  projectRepo: https://github.com/vmfarms/pulumi-minio-stack
+  branch: feat/bucket-acl
   config:
     aws:region: us-east-1
     pulumi-s3-python:Name: {{ include "pulumi-stack.serviceName" . }}
     pulumi-s3-python:Namespace: {{ .Release.Namespace }}
     pulumi-s3-python:ReleaseName: {{ .Release.Name }}
+    pulumi-s3-python:Policy: {{ .Values.Policy }} 
