@@ -17,7 +17,7 @@ spec:
     {{- if (hasSuffix ".beta.sidepro.app" .domain) }}
     name : {{ $.Values.epinio.tlsIssuer | quote }}
     {{- else }}
-    name: {{ $.Values.epinio.defaultTlsIssuer | quote }}
+    name: {{ $.Values.epinio.dnsTlsIssuer | quote }}
     {{- end }}
     kind: ClusterIssuer
 {{- end }}
