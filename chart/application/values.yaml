@@ -43,6 +43,7 @@ imagePullSecrets: []
 
 epinio:
   tlsIssuer: ~
+  defaultTlsIssuer: dns-prod-beta-stack-io
   ingress: ~
   appName: placeholder
   # namespace: .Release.Namespace

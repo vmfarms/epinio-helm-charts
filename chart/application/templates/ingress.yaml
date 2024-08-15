@@ -14,7 +14,11 @@ spec:
   dnsNames:
   - {{ .domain | quote }}
   issuerRef:
+    {{- if (hasSuffix ".beta.sidepro.app" .domain) }}
     name : {{ $.Values.epinio.tlsIssuer | quote }}
+    {{- else }}
+    name: {{ $.Values.epinio.defaultTlsIssuer | quote }}
+    {{- end }}
     kind: ClusterIssuer
 {{- end }}
 ---
