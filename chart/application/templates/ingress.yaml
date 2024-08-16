@@ -37,6 +37,11 @@ metadata:
     {{ $key }}: {{ $value }}
     {{- end }}
     {{- include "epinio-application.annotations" $ | nindent 4 }}
+    {{- if $.Values.userConfig.basicAuth }}
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: "{{ include "epinio-truncate" $.Values.epinio.appName }}-auth"
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+    {{- end}}
   labels:
     {{- include "epinio-application.labels" $ | nindent 4 }}
 spec:
