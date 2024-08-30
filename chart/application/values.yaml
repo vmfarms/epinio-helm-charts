@@ -43,6 +43,7 @@ imagePullSecrets: []
 
 epinio:
   tlsIssuer: ~
+  dnsTlsIssuer: dns-prod-beta-sidepro-app
   ingress: ~
   appName: placeholder
   # namespace: .Release.Namespace
@@ -73,17 +74,4 @@ tolerations: []
 
 affinity: {}
 
-userConfig:
-  appListeningPort: ~
-  cpu: ~
-  enableAutoscaling: ~
-  enableScaleToZero: ~
-  memory: 256Mi
-  monitoringPath: ~
-  apmAutoinstrument: ~
-  apmAutoinstrumentoEnabled: ~
-  customMetricsEnabled: ~
-  customMetricsPort: ~
-  basicAuth: ~
-  basicAuthHtpasswd: ~
-  
+userConfig: {}
