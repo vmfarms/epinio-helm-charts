@@ -73,4 +73,17 @@ tolerations: []
 
 affinity: {}
 
-userConfig: {}
+userConfig:
+  appListeningPort: ~
+  cpu: ~
+  enableAutoscaling: ~
+  enableScaleToZero: ~
+  memory: 256Mi
+  monitoringPath: ~
+  apmAutoinstrument: ~
+  apmAutoinstrumentoEnabled: ~
+  customMetricsEnabled: ~
+  customMetricsPort: ~
+  basicAuth: ~
+  basicAuthHtpasswd: ~
+  
