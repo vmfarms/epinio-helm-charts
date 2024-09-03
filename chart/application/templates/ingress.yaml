@@ -1,6 +1,6 @@
 {{- range .Values.epinio.routes }}
 {{- if not .secret }}
-{{- if not hasSuffix("platform.beta.sidepro.app" .domain)  }}
+{{- if not (hasSuffix "platform.beta.sidepro.app" .domain)  }}
 ---
 apiVersion: "cert-manager.io/v1"
 kind: Certificate
@@ -61,7 +61,7 @@ spec:
                   number: 8080
             path: {{ .path | quote }}
             pathType: ImplementationSpecific
-{{- if not hasSuffix("platform.beta.sidepro.app" .domain)  }}
+{{- if not (hasSuffix "platform.beta.sidepro.app" .domain)  }}
   tls:
     - hosts:
       - {{ .domain | quote }}
