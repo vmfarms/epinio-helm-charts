@@ -1,6 +1,6 @@
 {{- range .Values.epinio.routes }}
 {{- if not .secret }}
----
+# ---
 # apiVersion: "cert-manager.io/v1"
 # kind: Certificate
 # metadata:
