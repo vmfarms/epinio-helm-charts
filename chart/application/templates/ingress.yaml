@@ -1,4 +1,25 @@
 {{- range .Values.epinio.routes }}
+{{- if not .secret }}
+{{- if not hasSuffix("platform.beta.sidepro.app" .domain)  }}
+---
+apiVersion: "cert-manager.io/v1"
+kind: Certificate
+metadata:
+  name: {{ include "epinio-truncate" (print $.Values.epinio.appName "-" .id) }}
+  labels:
+    {{- include "epinio-application.labels" $ | nindent 4 }}
+  annotations:
+    {{- include "epinio-application.annotations" $ | nindent 4 }}
+spec:
+  secretName: {{ include "epinio-truncate" (print $.Values.epinio.appName "-" .id "-tls") }}
+  dnsNames:
+  - {{ .domain | quote }}
+  issuerRef:
+    name : {{ $.Values.epinio.tlsIssuer | quote }}
+    kind: ClusterIssuer
+{{- end }}
+{{- end }}
+---
 {{ $ingressConfig := $.Values.chartConfig.ingress | fromYaml }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -40,12 +61,14 @@ spec:
                   number: 8080
             path: {{ .path | quote }}
             pathType: ImplementationSpecific
-#   tls:
-#     - hosts:
-#       - {{ .domain | quote }}
-# {{- if .secret }}
-#       secretName: {{ .secret | quote }}
-# {{- else }}
-#       secretName: {{ include "epinio-truncate" (print $.Values.epinio.appName "-" .id "-tls") }}
-# {{- end }}
+{{- if not hasSuffix("platform.beta.sidepro.app" .domain)  }}
+  tls:
+    - hosts:
+      - {{ .domain | quote }}
+{{- if .secret }}
+      secretName: {{ .secret | quote }}
+{{- else }}
+      secretName: {{ include "epinio-truncate" (print $.Values.epinio.appName "-" .id "-tls") }}
+{{- end }}
+{{- end }}
 {{- end }}
