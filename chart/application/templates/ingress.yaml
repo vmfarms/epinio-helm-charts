@@ -1,5 +1,6 @@
 {{- range .Values.epinio.routes }}
 {{- if not .secret }}
+{{- if not (hasSuffix "platform.beta.sidepro.app" .domain)  }}
 ---
 apiVersion: "cert-manager.io/v1"
 kind: Certificate
@@ -16,6 +17,7 @@ spec:
   issuerRef:
     name : {{ $.Values.epinio.tlsIssuer | quote }}
     kind: ClusterIssuer
+{{- end }}
 {{- end }}
 ---
 {{ $ingressConfig := $.Values.chartConfig.ingress | fromYaml }}
@@ -59,6 +61,7 @@ spec:
                   number: 8080
             path: {{ .path | quote }}
             pathType: ImplementationSpecific
+{{- if not (hasSuffix "platform.beta.sidepro.app" .domain)  }}
   tls:
     - hosts:
       - {{ .domain | quote }}
@@ -66,5 +69,6 @@ spec:
       secretName: {{ .secret | quote }}
 {{- else }}
       secretName: {{ include "epinio-truncate" (print $.Values.epinio.appName "-" .id "-tls") }}
+{{- end }}
 {{- end }}
 {{- end }}
