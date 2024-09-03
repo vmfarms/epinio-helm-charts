@@ -17,7 +17,7 @@
 #     name : {{ $.Values.epinio.tlsIssuer | quote }}
 #     kind: ClusterIssuer
 # {{- end }}
----
+# ---
 {{ $ingressConfig := $.Values.chartConfig.ingress | fromYaml }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
