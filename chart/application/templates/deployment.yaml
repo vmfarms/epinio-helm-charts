@@ -110,12 +110,18 @@ spec:
         {{- if (hasSuffix "-redis-standalone" .) }}
         - name: REDIS_HOSTNAME
           value: "{{ trimSuffix "-standalone" . }}-master"
+        - name: REDIS_URL
+          value: "redis://:$(REDIS_PASSWORD)@(REDIS_HOSTNAME):$(REDIS_PORT)/0"
         {{- end }}
         {{- if (hasSuffix "-redis-replication" .) }}
         - name: REDIS_MASTER_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-master"
         - name: REDIS_REPLICAS_HOSTNAME
           value: "{{ trimSuffix "-replication" . }}-replicas"
+        - name: REDIS_MASTER_URL
+          value: "redis://:$(REDIS_PASSWORD)@(REDIS_MASTER_HOSTNAME):$(REDIS_PORT)/0"
+        - name: REDIS_REPLICAS_URL
+          value: "redis://:$(REDIS_PASSWORD)@(REDIS_REPLICAS_HOSTNAME):$(REDIS_PORT)/0"
         {{- end }}
         {{- if (hasSuffix "-rabbitmq" .)  }}
         - name: RABBITMQ_USERNAME
