@@ -18,9 +18,9 @@ spec:
   - name: GitHubInfoSecretName
     description: "The Secret with the GitHub Token"
   - name: GitUrl
-    description: The Git URL
-  # - name: GitHubRepo
-  #   description: "The GitHub repo where the webhook will be created"
+    description: "The Git URL"
+  - name: GitHubRepo
+    description: "The GitHub repo where the webhook will be created"
   - name: GitHubDomain
     description: "The GitHub domain. Override for GitHub Enterprise"
     default: "github.com"
@@ -31,7 +31,7 @@ spec:
   - name: create-webhook
     volumeMounts:
     - name: github-info
-      mountpath: /var/secret
+      mountPath: /var/secret
     image: docker.io/curlimages/curl:7.70.0@sha256:031df77a11e5edded840bc761a845eab6e3c2edee22669fb8ad6d59484b6a1c4 #tag: 7.70.0
     command:
     - sh
@@ -54,7 +54,7 @@ spec:
   - name: send-slack
     volumeMounts:
     - name: github-info
-      mountpath: /var/secret
+      mountPath: /var/secret
     image: docker.io/curlimages/curl:7.70.0@sha256:031df77a11e5edded840bc761a845eab6e3c2edee22669fb8ad6d59484b6a1c4 #tag: 7.70.0
     command:
     - sh
@@ -65,8 +65,8 @@ spec:
       MESSAGE='Webhook for githubRepository set up!'
       BOTNAME='Stackio Bot'
       SLACK_WEBHOOK_URL=$(cat /var/secret/slackWebhookURL)
-      JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
-      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "${}"
+      JSON="{\"text\": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
+      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "${SLACK_WEBHOOK_URL}"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
@@ -84,7 +84,7 @@ spec:
   - name: GitHubRepo
     value: {{ $.Values.appName }}
   - name: GitHubInfoSecretName
-    value: {{ . }}
+    value: {{ .Release.Name }}
   - name: ExternalDomain
     value: {{ .Release.Name }}.platform.beta.sidepro.app
   timeout: 1000s
