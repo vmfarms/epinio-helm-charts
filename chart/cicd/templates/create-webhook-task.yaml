@@ -17,8 +17,6 @@ spec:
     description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
   - name: GitHubInfoSecretName
     description: "The Secret with the GitHub Token"
-  - name: GitUrl
-    description: "The Git URL"
   - name: GitHubRepo
     description: "The GitHub repo where the webhook will be created"
   - name: GitHubDomain
@@ -40,7 +38,6 @@ spec:
     - |
       set -e
       # Github variables for identifying the repo
-      gitURL=$(cat /var/secret/gitUrl)
       githubOrganization=$(cat /var/secret/githubOrganization)
       githubRepository=$(params.GitHubRepo)
       githubToken=$(cat /var/secret/githubWebhookToken)
@@ -82,7 +79,7 @@ spec:
     name: create-webhook-{{ .Release.Name }}-cicd
   params:
   - name: GitHubRepo
-    value: {{ $.Values.GithubRepo }}
+    value: {{ .Values.GithubRepo }}
   - name: GitHubInfoSecretName
     value: {{ .Release.Name }}
   - name: ExternalDomain
