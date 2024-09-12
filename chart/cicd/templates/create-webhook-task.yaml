@@ -16,9 +16,11 @@ spec:
   - name: ExternalDomain
     description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
   - name: GitHubInfoSecretName
-    description: "The GitHub user"
-  - name: GitHubRepo
-    description: "The GitHub repo where the webhook will be created"
+    description: "The Secret with the GitHub Token"
+  - name: GitUrl
+    description: The Git URL
+  # - name: GitHubRepo
+  #   description: "The GitHub repo where the webhook will be created"
   - name: GitHubDomain
     description: "The GitHub domain. Override for GitHub Enterprise"
     default: "github.com"
@@ -37,11 +39,17 @@ spec:
     - -ce
     - |
       set -e
+      # Github variables for identifying the repo
+      gitURL=$(cat /var/secret/gitUrl)
+      githubOrganization=$(cat /var/secret/githubOrganization)
+      githubRepository=$(params.GitHubRepo)
+      githubToken=$(cat /var/secret/githubWebhookToken)
+      githubUsername=$(curl -s -H "Authorization: Bearer $githubToken" https://api.github.com/user | jq -r '.login')
       echo "Create Webhook"
       if [ $(params.GitHubDomain) = "github.com" ];then
-        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $(cat /var/secret/githubUserName):$(cat /var/secret/githubWebhookToken) -L https://api.github.com/repos/$(cat /var/secret/githubOrganization)/$(params.GitHubRepo)/hooks
+        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $githubUsername:$githubToken -L https://api.github.com/repos/$githubOrganization/$githubRepository/hooks
       else
-        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $(cat /var/secret/githubUserName):$(cat /var/secret/githubWebhookToken) -L https://$(params.GitHubDomain)/api/v3/repos/$(cat /var/secret/githubOrganization)/$(params.GitHubRepo)/hooks
+        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $githubUsername:$githubToken -L https://$(params.GitHubDomain)/api/v3/repos/$githubOrganization/$githubRepository/hooks
       fi
   - name: send-slack
     volumeMounts:
@@ -53,32 +61,31 @@ spec:
     args:
     - -ce
     - |
-      MESSAGE='Your webhook is set up correctly!'
+      githubRepository=$(params.GitHubRepo)
+      MESSAGE='Webhook for githubRepository set up!'
       BOTNAME='Stackio Bot'
+      SLACK_WEBHOOK_URL=$(cat /var/secret/slackWebhookURL)
       JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
-      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "$(cat /var/secret/slackWebhookURL)"
+      curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "${}"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: create-webhook-{{ .Release.Name }}-cicd
+  name: create-webhook-{{ $.Release.Name }}-cicd
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    app.kubernetes.io/managed-by: epinio
-    app.kubernetes.io/part-of: {{ .Release.Namespace | quote }}
-    app.kubernetes.io/component: application
+    {{- include "cicd-bind.labels" . | nindent 4 }}
 spec:
   taskRef:
-    name: create-webhook-{{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}-cicd
+    name: create-webhook-{{ .Release.Name }}-cicd
   params:
   - name: GitHubRepo
-    value: "sample-blog"
+    value: {{ $.Values.appName }}
   - name: GitHubInfoSecretName
-    value: x46e9771d232a57547fc5b8bc9696-push-info-cicd
+    value: {{ . }}
   - name: ExternalDomain
-    value: {{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}.epinio.beta.stack.io
+    value: {{ .Release.Name }}.platform.beta.sidepro.app
   timeout: 1000s
-  serviceAccountName: {{ trimSuffix "-push-info" "x46e9771d232a57547fc5b8bc9696" }}-createwebhook-cicd
----
+  serviceAccountName: {{ .Release.Name }}-createwebhook-cicd

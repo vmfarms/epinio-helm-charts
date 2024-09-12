@@ -111,6 +111,11 @@ spec:
                 secretKey: secret
             - name: eventTypes
               value: ["push"]
+        - ref: cel
+          name: "CEL FILTER: Only for the select branch"
+          params:
+          - name: filter
+            value: "body.ref in ['/refs/heads/{{ .Values.gitBranch }}']"
       bindings:
         - ref: {{ .Release.Name }}-tb-cicd
       template:
