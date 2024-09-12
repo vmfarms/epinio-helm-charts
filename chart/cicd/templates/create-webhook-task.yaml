@@ -82,7 +82,7 @@ spec:
     name: create-webhook-{{ .Release.Name }}-cicd
   params:
   - name: GitHubRepo
-    value: {{ $.Values.appName }}
+    value: {{ $.Values.GithubRepo }}
   - name: GitHubInfoSecretName
     value: {{ .Release.Name }}
   - name: ExternalDomain
