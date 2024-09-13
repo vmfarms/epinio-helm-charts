@@ -81,7 +81,7 @@ spec:
   - name: GitHubRepo
     value: {{ .Values.GithubRepo }}
   - name: GitHubInfoSecretName
-    value: {{ .Release.Name }}-whook-secret-cicd
+    value: {{ .Release.Name }}-push-info-cicd
   - name: ExternalDomain
     value: {{ .Release.Name }}.platform.beta.sidepro.app
   timeout: 1000s
