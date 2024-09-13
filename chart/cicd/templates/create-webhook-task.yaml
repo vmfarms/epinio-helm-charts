@@ -43,7 +43,7 @@ spec:
       githubToken=$(cat /var/secret/githubWebhookToken)
       githubUsername=$(curl -s -H "Authorization: Bearer $githubToken" https://api.github.com/user | jq -r '.login')
       if [ $(params.GitHubDomain) = "github.com" ];then
-        echo "Running command: curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}" -H "Authorization: Bearer ${githubToken}" -L https://api.github.com/repos/$githubOrganization/$githubRepository/hooks"
+        echo "Creating webhook for https://api.github.com/repos/${githubOrganization}/${githubRepository}/hooks"
         curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
