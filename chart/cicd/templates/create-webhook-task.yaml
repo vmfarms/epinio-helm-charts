@@ -42,10 +42,11 @@ spec:
       githubRepository=$(params.GitHubRepo)
       githubToken=$(cat /var/secret/githubWebhookToken)
       githubUsername=$(curl -s -H "Authorization: Bearer $githubToken" https://api.github.com/user | jq -r '.login')
-      echo "Create Webhook"
       if [ $(params.GitHubDomain) = "github.com" ];then
+        echo "Creating webhook for https://api.github.com/repos/$githubOrganization/$githubRepository/hooks"
         curl -s -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}" -u $githubUsername:$githubToken -L https://api.github.com/repos/$githubOrganization/$githubRepository/hooks
       else
+        cho "Creating webhook for https://$(params.GitHubDomain)/api/v3/repos/$githubOrganization/$githubRepository/hooks"
         curl -s -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}" -u $githubUsername:$githubToken -L https://$(params.GitHubDomain)/api/v3/repos/$githubOrganization/$githubRepository/hooks
       fi
   - name: send-slack
@@ -59,7 +60,7 @@ spec:
     - -ce
     - |
       githubRepository=$(params.GitHubRepo)
-      MESSAGE='Webhook for githubRepository set up!'
+      MESSAGE='Webhook for $githubRepository set up!'
       BOTNAME='Stackio Bot'
       SLACK_WEBHOOK_URL=$(cat /var/secret/slackWebhookURL)
       JSON="{\"text\": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
