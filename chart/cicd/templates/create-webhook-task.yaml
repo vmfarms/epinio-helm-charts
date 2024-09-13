@@ -44,9 +44,9 @@ spec:
       githubUsername=$(curl -s -H "Authorization: Bearer $githubToken" https://api.github.com/user | jq -r '.login')
       echo "Create Webhook"
       if [ $(params.GitHubDomain) = "github.com" ];then
-        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $githubUsername:$githubToken -L https://api.github.com/repos/$githubOrganization/$githubRepository/hooks
+        curl -s -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}" -u $githubUsername:$githubToken -L https://api.github.com/repos/$githubOrganization/$githubRepository/hooks
       else
-        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"{{ .Release.Name }}\"}}" -X POST -u $githubUsername:$githubToken -L https://$(params.GitHubDomain)/api/v3/repos/$githubOrganization/$githubRepository/hooks
+        curl -s -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}" -u $githubUsername:$githubToken -L https://$(params.GitHubDomain)/api/v3/repos/$githubOrganization/$githubRepository/hooks
       fi
   - name: send-slack
     volumeMounts:
@@ -79,7 +79,7 @@ spec:
     name: create-webhook-{{ .Release.Name }}-cicd
   params:
   - name: GitHubRepo
-    value: {{ .Values.GithubRepo }}
+    value: {{ .Values.GithubRepository }}
   - name: GitHubInfoSecretName
     value: {{ .Release.Name }}-push-info-cicd
   - name: ExternalDomain
