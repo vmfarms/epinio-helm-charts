@@ -60,7 +60,7 @@ spec:
     - -ce
     - |
       githubRepository=$(params.GitHubRepo)
-      MESSAGE="Webhook for $githubRepository set up!"
+      MESSAGE="Webhook for ${githubRepository} set up!"
       BOTNAME='Stackio Bot'
       SLACK_WEBHOOK_URL=$(cat /var/secret/slackWebhookURL)
       JSON="{\"text\": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
