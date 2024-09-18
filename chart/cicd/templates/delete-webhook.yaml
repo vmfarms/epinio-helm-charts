@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-delete-webhook
+  annotations:
+    "helm.sh/hook": post-delete
+    "helm.sh/hook-delete-policy": hook-succeeded
+  labels:
+    {{- include "cicd-bind.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      name: {{ .Release.Name }}-delete-webhook
+      labels:
+        {{- include "cicd-bind.labels" . | nindent 8 }}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: delete-webhook
+        image: ricsanfre/docker-curl-jq:latest
+        env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-push-info-cicd
+              key: githubWebhookToken
+        - name: GITHUB_ORG
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-push-info-cicd
+              key: githubOrganization
+        - name: GITHUB_REPO
+          value: {{ .Values.GithubRepository }}
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+          WEBHOOK_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_ORG/$GITHUB_REPO/hooks" | \
+            jq '.[] | select(.config.url | contains("{{ .Release.Name }}.platform.beta.sidepro.app")) | .id')
+          
+          if [ -n "$WEBHOOK_ID" ]; then
+            curl -X DELETE -H "Authorization: token $GITHUB_TOKEN" \
+              "https://api.github.com/repos/$GITHUB_ORG/$GITHUB_REPO/hooks/$WEBHOOK_ID"
+            echo "Webhook deleted successfully"
+          else
+            echo "No matching webhook found"
+          fi
