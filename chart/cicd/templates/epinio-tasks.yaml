@@ -27,15 +27,9 @@ spec:
       script: |
         #!/usr/bin/env sh
 
-        capture_and_stream() {
-          tmpfile=$(mktemp)
-          "$@" 2>&1 | tee "$tmpfile"
-          output=$(cat "$tmpfile")
-          rm "$tmpfile"
-        }
-
         epinio login {{ .Values.epinioURL }} --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
-        capture_and_stream epinio push --path=$(workspaces.source.path) --name $(params.app-name)
+        epinio push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1 | tee /tmp/epinio_output.log
 
         echo "$output" | tail -n 20 > $(results.output.path)
+        rm /tmp/epinio_output.log
