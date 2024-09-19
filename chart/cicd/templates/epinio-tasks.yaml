@@ -9,6 +9,9 @@ metadata:
     {{- include "cicd-bind.labels" . | nindent 4 }}
 spec:
   description: Read and display README file.
+  results:
+  - name: output
+    description: Last twenty lines of log from epinio push
   workspaces:
     - name: source
   params:
