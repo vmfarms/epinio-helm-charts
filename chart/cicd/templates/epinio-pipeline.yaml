@@ -80,7 +80,7 @@ spec:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
-          value: "The ci-cd proccess has finished for #$(params.app-name). Here is your app url: https://$(params.app-name).platform.beta.sidepro.app"
+          value: "The ci-cd proccess has finished for $(params.app-name) app - This is the git revision: $(params.git-revision).\n Here are the build logs: $(tasks.epinio-push.) \n"
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the next task.
