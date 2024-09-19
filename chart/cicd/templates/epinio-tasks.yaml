@@ -34,5 +34,5 @@ spec:
         epinio target {{ .Release.Namespace }} && \
         epinio push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1 | tee /tmp/epinio_output.log
 
-        echo "$output" | tail -n 20 > $(results.output.path)
+        tail -n 20 /tmp/epinio_output.log > $(results.output.path)
         rm /tmp/epinio_output.log
