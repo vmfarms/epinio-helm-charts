@@ -68,14 +68,13 @@ spec:
       params:
         - name: app-name
           value: $(params.app-name)
+  finally:
     - name: end-feedback
       when: 
       - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       taskRef:
         kind: Task
         name: slack-{{ .Release.Name }}-cicd
-      runAfter:
-        - epinio-push
       params:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-push-info-cicd"

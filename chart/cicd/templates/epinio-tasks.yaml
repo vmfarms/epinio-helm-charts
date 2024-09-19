@@ -32,7 +32,5 @@ spec:
 
         epinio login {{ .Values.epinioURL }} --user admin --password $EPINIO_PASSWORD && \
         epinio target {{ .Release.Namespace }} && \
-        epinio push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1 | tee /tmp/epinio_output.log
-
-        tail -n 20 /tmp/epinio_output.log > $(results.output.path)
-        rm /tmp/epinio_output.log
+        epinio push --path=$(workspaces.source.path) --name $(params.app-name) && \
+        epinio app logs --staging $(params.app-name) > $(results.output.path)
