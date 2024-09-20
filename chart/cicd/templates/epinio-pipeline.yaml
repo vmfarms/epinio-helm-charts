@@ -82,7 +82,7 @@ spec:
 
             📋 View build logs:
             • CLI: `sidepro app logs --build $(params.app-name)`
-            • GUI: Check the Sidepro dashboard
+            • GUI: Select “Last Build Logs” from the ellipses menu under “Applications”
             
   workspaces:
     - description: |
