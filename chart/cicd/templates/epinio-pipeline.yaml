@@ -72,7 +72,7 @@ spec:
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
           value: |
-            CI/CD process completed for $(params.app-name):
+            CI/CD process completed for $(params.app-name)
             Git revision: $(params.git-revision)
             Epinio push status: $(tasks.epinio-push.status)
 
