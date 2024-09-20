@@ -26,8 +26,6 @@ spec:
       type: string
   tasks:
     - name: start-feedback
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       taskRef:
         kind: Task
         name: slack-{{ .Release.Name }}-cicd
@@ -37,8 +35,6 @@ spec:
         - name: Message
           value: "The ci-cd pipeline is starting for #$(params.app-name)!"
     - name: fetch-source
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       runAfter:
         - start-feedback
       params:
@@ -55,8 +51,6 @@ spec:
         - name: basic-auth
           workspace: git-credentials  
     - name: epinio-push
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       runAfter:
         - fetch-source
       taskRef:
@@ -70,8 +64,6 @@ spec:
           value: $(params.app-name)
   finally:
     - name: end-feedback
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       taskRef:
         kind: Task
         name: slack-{{ .Release.Name }}-cicd
@@ -79,7 +71,13 @@ spec:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
-          value: "The ci-cd proccess has finished for $(params.app-name) app - This is the git revision: $(params.git-revision).\nHere are the build logs: $(tasks.epinio-push.results.output) \n"
+          value: |
+            CI/CD process completed for $(params.app-name):
+            Git revision: $(params.git-revision)
+            Epinio push status: $(tasks.epinio-push.status)
+
+            You can view the build logs by running `sidepro app logs --build $(params.app-name)`
+            
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the next task.
