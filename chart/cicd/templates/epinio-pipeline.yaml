@@ -72,11 +72,17 @@ spec:
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
           value: |
-            CI/CD process completed for $(params.app-name)
-            Git revision: $(params.git-revision)
-            Epinio push status: $(tasks.epinio-push.status)
+            🚀 CI/CD process completed for *$(params.app-name)*!
+            
+            📊 Summary:
+            • App: $(params.app-name)
+            • Git revision: `$(params.git-revision)`
+            • Branch: $(params.git-branch)
+            • Push status: $(tasks.epinio-push.status)
 
-            You can view the build logs by running `sidepro app logs --build $(params.app-name)`
+            📋 View build logs:
+            • CLI: `sidepro app logs --build $(params.app-name)`
+            • GUI: Check the Sidepro dashboard
             
   workspaces:
     - description: |
