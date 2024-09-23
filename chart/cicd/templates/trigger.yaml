@@ -111,6 +111,11 @@ spec:
                 secretKey: secret
             - name: eventTypes
               value: ["push"]
+        - ref: 
+            name: cel
+          params:
+            - name: filter
+              value: "body.ref in ['refs/heads/{{ .Values.GitBranch }}']"
       bindings:
         - ref: {{ .Release.Name }}-tb-cicd
       template:

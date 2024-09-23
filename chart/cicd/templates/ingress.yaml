@@ -4,8 +4,6 @@ metadata:
   name: {{ .Release.Name }}-el-ingress-cicd
   annotations:
     external-dns.alpha.kubernetes.io/target: lb-01.stackio-beta.mtl02.stack.io
-    acme.cert-manager.io/http01-edit-in-place: "true"
-    cert-manager.io/cluster-issuer: dns-prod-beta-stack-io
   labels:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
@@ -14,7 +12,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Release.Name }}.epinio.beta.stack.io
+  - host: {{ .Release.Name }}.platform.beta.sidepro.app
     http:
       paths:
       - backend:
@@ -24,7 +22,3 @@ spec:
               number: 8080
         path: /
         pathType: ImplementationSpecific
-  tls:
-  - hosts:
-    - {{ .Release.Name }}.epinio.beta.stack.io
-    secretName: {{ .Release.Name }}.epinio.beta.stack.io

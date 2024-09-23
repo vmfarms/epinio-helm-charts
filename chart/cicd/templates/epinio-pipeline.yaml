@@ -26,8 +26,6 @@ spec:
       type: string
   tasks:
     - name: start-feedback
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       taskRef:
         kind: Task
         name: slack-{{ .Release.Name }}-cicd
@@ -37,8 +35,6 @@ spec:
         - name: Message
           value: "The ci-cd pipeline is starting for #$(params.app-name)!"
     - name: fetch-source
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       runAfter:
         - start-feedback
       params:
@@ -55,8 +51,6 @@ spec:
         - name: basic-auth
           workspace: git-credentials  
     - name: epinio-push
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       runAfter:
         - fetch-source
       taskRef:
@@ -68,19 +62,28 @@ spec:
       params:
         - name: app-name
           value: $(params.app-name)
+  finally:
     - name: end-feedback
-      when: 
-      - cel: "'$(params.git-branch)'.matches('{{ .Values.GitBranch }}')"
       taskRef:
         kind: Task
         name: slack-{{ .Release.Name }}-cicd
-      runAfter:
-        - epinio-push
       params:
         - name: GitHubInfoSecretName
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
-          value: "The ci-cd proccess has finished for #$(params.app-name). Here is your app url: https://$(params.app-name).epinio.beta.stack.io"
+          value: |
+            🚀 CI/CD process completed for *$(params.app-name)*!
+            
+            📊 Summary:
+            • App: $(params.app-name)
+            • Git revision: `$(params.git-revision)`
+            • Branch: $(params.git-branch)
+            • Push status: $(tasks.epinio-push.status)
+
+            📋 View build logs:
+            • CLI: `sidepro app logs --build $(params.app-name)`
+            • GUI: Select “Last Build Logs” from the ellipses menu under “Applications”
+            
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the next task.

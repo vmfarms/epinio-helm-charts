@@ -2,13 +2,13 @@ nameOverride: ""
 fullnameOverride: ""
 annotations: ""
 
-GithubReadToken: ""
-GithubWebhookToken: ""
+GithubToken: ""
 GithubOrganization: ""
-GithubRepo: ""
+GithubRepository: ""
 GithubUsername: ""
 GitBranch: "main"
 epinioURL: "https://epinio.platform.beta.sidepro.app"
+appName: ""
 
 epinio:
   serviceName: ""
