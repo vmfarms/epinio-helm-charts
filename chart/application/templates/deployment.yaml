@@ -201,11 +201,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
           limits:
-            cpu: {{ default "100m" .Values.userConfig.cpu }}
-            memory: {{ default "256Mi" .Values.userConfig.memory }}
+            cpu: {{ default "500m" .Values.userConfig.cpu }}
+            memory: {{ default "512Mi" .Values.userConfig.memory }}
           requests:
-            cpu: {{ default "100m" .Values.userConfig.cpu }}
-            memory: {{ default "256Mi" .Values.userConfig.memory }}
+            cpu: {{ default "500m" .Values.userConfig.cpu }}
+            memory: {{ default "512Mi" .Values.userConfig.memory }}
       {{- if .Values.chartConfig.loggerImage }}
       - name: sidepro-logger
         image: {{ .Values.chartConfig.loggerImage }}
