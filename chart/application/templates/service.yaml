@@ -11,10 +11,17 @@ metadata:
   namespace:  {{ .Release.Namespace | quote }}
 spec:
   ports:
+    {{- if and .Values.userConfig.enableSideproProxy .Values.chartConfig.proxyImage }}
+    - port: 8080
+      protocol: TCP
+      targetPort: 28888
+      name: web
+    {{- else }}
     - port: 8080
       protocol: TCP
       targetPort: {{ include "epinio-app-listening-port" . }}
       name: web
+    {{- end }}
     {{- if $.Values.userConfig.customMetricsEnabled }}
     - port: {{ .Values.userConfig.customMetricsPort | default 9394 }}
       protocol: TCP
