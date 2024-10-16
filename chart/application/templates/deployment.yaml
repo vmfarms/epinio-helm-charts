@@ -226,6 +226,17 @@ spec:
             cpu: "100m"
             memory: "256Mi"
       {{- end }}
+      {{- if and .Values.userConfig.enableSideproProxy .Values.chartConfig.proxyImage }}
+      - name: sidepro-proxy
+        image: {{ .Values.chartConfig.proxyImage }}
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "512Mi"
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
