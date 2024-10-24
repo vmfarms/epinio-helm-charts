@@ -1,0 +1,31 @@
+{{- if and (.Values.userConfig.enableVerticalPodAutoscaling) (ne .Values.userConfig.enableScaleToZero true) (ne .Values.userConfig.enableAutoscaling true) }}
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ include "epinio-truncate" .Values.epinio.appName }}
+  labels:
+    {{- include "epinio-application.labels" . | nindent 4 }}
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: {{ include "epinio-truncate" .Values.epinio.appName }}
+  resourcePolicy:
+    containerPolicies:
+      - containerName: {{ include "epinio-truncate" .Values.epinio.appName }}
+        minAllowed:
+          cpu: {{ default "500m" .Values.userConfig.cpu }}
+          memory: {{ default "512Mi" .Values.userConfig.memory }}
+        maxAllowed:
+          cpu: {{ default "1" .Values.userConfig.verticalPodAutoscalerCpu }}
+          memory: {{ default "1Gi" .Values.userConfig.verticalPodAutoscalerMemory }}
+        controlledResources: ["cpu", "memory"]
+      {{- if .Values.chartConfig.loggerImage }}
+      - containerName: sidepro-logger
+        controlledResources: []
+      {{- end }}
+      {{- if and .Values.userConfig.enableSideproProxy .Values.chartConfig.proxyImage }}
+      - containerName: sidepro-proxy
+        controlledResources: []
+      {{- end }}
+{{- end }}
