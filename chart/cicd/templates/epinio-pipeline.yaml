@@ -62,6 +62,7 @@ spec:
       params:
         - name: app-name
           value: $(params.app-name)
+{{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
   finally:
     - name: end-feedback
       taskRef:
@@ -83,6 +84,7 @@ spec:
             📋 View build logs:
             • CLI: `sidepro app logs --build $(params.app-name)`
             • GUI: Select “Last Build Logs” from the ellipses menu under “Applications”
+{{- end }}
             
   workspaces:
     - description: |

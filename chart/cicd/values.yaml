@@ -9,7 +9,7 @@ GithubUsername: ""
 GitBranch: "main"
 epinioURL: "https://epinio.platform.beta.sidepro.app"
 appName: ""
-SlackWebhookURL: "https://hooks.slack.com/services/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"
+SlackWebhookURL: ""
 
 epinio:
   serviceName: ""
