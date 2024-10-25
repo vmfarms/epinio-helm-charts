@@ -2,10 +2,21 @@ apiVersion: v1
 entries:
   cicd:
   - apiVersion: v2
-    appVersion: 0.0.7
-    created: "2024-09-18T16:58:00.426355239-03:00"
+    appVersion: 0.0.8
+    created: "2024-10-25T14:05:37.807763081-03:00"
     description: A helper to provide CI-CD using tekton.
-    digest: ba7124647509a844eeafa9acad4dd3ce78abf00527b5c611e6dbf95b9697bd85
+    digest: 256c7ed8c47494b48b0d5ae058d0802654e8b7ab4e433ad31db2753d4b013e0e
+    icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
+    name: cicd
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/improve-cicd/chart/cicd/cicd-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v2
+    appVersion: 0.0.7
+    created: "2024-10-25T14:05:37.807487584-03:00"
+    description: A helper to provide CI-CD using tekton.
+    digest: c317fce42fd3a163c1b40e4a2314ce33eff8d8aab48194b21b5b638a592aa6c4
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
     name: cicd
     type: application
@@ -14,7 +25,7 @@ entries:
     version: 0.0.7
   - apiVersion: v2
     appVersion: 0.0.6
-    created: "2024-09-18T16:58:00.426042539-03:00"
+    created: "2024-10-25T14:05:37.807156987-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 06a47cafe5970698fe3ffc3aa45fb6e1ca10693965e159059588164bb2dd6347
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -25,7 +36,7 @@ entries:
     version: 0.0.6
   - apiVersion: v2
     appVersion: 0.0.5
-    created: "2024-09-18T16:58:00.424980939-03:00"
+    created: "2024-10-25T14:05:37.80685109-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: d7d2af121abf57cff149c9d570248af0c055f9ce3e2d19087fc34436928cb204
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -36,7 +47,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
-    created: "2024-09-18T16:58:00.424295939-03:00"
+    created: "2024-10-25T14:05:37.806590293-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: d202d1d2fc89821fa52f5a3fd358c19d140899c9b4bea7e2fa125af43277005d
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -47,7 +58,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2024-09-18T16:58:00.423773739-03:00"
+    created: "2024-10-25T14:05:37.806348195-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 37a6fbcbc415318dfbfada4a5b2de95f91094e61c4edec9dfdde7c5618480144
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -58,7 +69,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2024-09-18T16:58:00.423167239-03:00"
+    created: "2024-10-25T14:05:37.806096998-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 8c18faaa5c65a724ece9535482bc05c0db820034166d60c4aed2838a3dba19b7
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -69,7 +80,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-09-18T16:58:00.422613239-03:00"
+    created: "2024-10-25T14:05:37.805727202-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: ec4f40e19f7598d79aa5d3d2c05464b7a77b7da3fab14b23cc4cb64d1533e57d
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -645,4 +656,4 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.1.tgz
     version: 0.0.1
-generated: "2024-09-18T16:58:00.421559939-03:00"
+generated: "2024-10-25T14:05:37.804127418-03:00"
