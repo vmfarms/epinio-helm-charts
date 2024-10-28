@@ -9,6 +9,7 @@ GithubUsername: ""
 GitBranch: "main"
 epinioURL: "https://epinio.platform.beta.sidepro.app"
 appName: ""
+SlackWebhookURL: ""
 
 epinio:
   serviceName: ""

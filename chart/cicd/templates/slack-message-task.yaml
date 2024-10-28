@@ -1,3 +1,5 @@
+{{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
+
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -35,3 +37,5 @@ spec:
       BOTNAME='Stackio Bot'
       JSON="{"text": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
       curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "$(cat /var/secret/slackWebhookURL)"
+
+{{- end }}

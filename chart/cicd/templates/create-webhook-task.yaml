@@ -67,6 +67,7 @@ spec:
           https://api.github.com/repos/$githubOrganization/$githubRepository/hooks \
           -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"secret\": \"{{ .Release.Name }}\"}}"
       fi
+{{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
   - name: send-slack
     volumeMounts:
     - name: github-info
@@ -84,6 +85,7 @@ spec:
       SLACK_WEBHOOK_URL=$(cat /var/secret/slackWebhookURL)
       JSON="{\"text\": \"${MESSAGE}\", \"username\": \"${BOTNAME}\", \"icon_emoji\": \":robot_face:\"}"
       curl -X POST -H 'Content-Type: application/json' --data "${JSON}" "${SLACK_WEBHOOK_URL}"
+{{- end }}
 ---
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
