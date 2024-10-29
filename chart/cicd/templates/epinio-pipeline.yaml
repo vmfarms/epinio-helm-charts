@@ -25,6 +25,7 @@ spec:
       name: app-name
       type: string
   tasks:
+  {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
     - name: start-feedback
       taskRef:
         kind: Task
@@ -34,9 +35,12 @@ spec:
           value: "{{ .Release.Name }}-push-info-cicd"
         - name: Message
           value: "The ci-cd pipeline is starting for #$(params.app-name)!"
+  {{- end }}
     - name: fetch-source
+      {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
       runAfter:
         - start-feedback
+      {{- end }}
       params:
         - name: url
           value: $(params.repo-url)
@@ -85,7 +89,6 @@ spec:
             • CLI: `sidepro app logs --build $(params.app-name)`
             • GUI: Select “Last Build Logs” from the ellipses menu under “Applications”
 {{- end }}
-            
   workspaces:
     - description: |
         This workspace contains the cloned repo files, so they can be read by the next task.
