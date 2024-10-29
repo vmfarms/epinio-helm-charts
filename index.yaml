@@ -14,7 +14,7 @@ entries:
     version: 0.0.10
   - apiVersion: v2
     appVersion: 0.0.9
-    created: "2024-10-29T13:12:03.748223535-03:00"
+    created: "2024-10-29T13:12:03.748223535-03:00" 
     description: A helper to provide CI-CD using tekton.
     digest: 9b1478fffe73df8e66222a5218ac7ed3917ec21cf7ede22ce831af6fa47af01b
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
