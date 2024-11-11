@@ -689,4 +689,15 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/pr-preview-bind/pr-preview-bind-0.0.1.tgz
     version: 0.0.1
-generated: "2024-10-31T14:22:34.868089716-03:00"
+  xs-server:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-11-11T16:11:00.158476741-03:00"
+    description: A Helm chart for Kubernetes
+    digest: 0cd0b7da65c538025c221f3aff8d108a5b5d59150e0240db3d6f9e207cf9a0b5
+    name: xs-server
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-11-11T16:11:00.157904102-03:00"
