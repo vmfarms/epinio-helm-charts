@@ -11,7 +11,7 @@ metadata:
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
-    {{- include "cicd-bind.labels" . | nindent 4 }}
+    {{- include "xs-server.labels" . | nindent 4 }}
 spec:
   ingressClassName: nginx
   rules:
