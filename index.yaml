@@ -692,7 +692,17 @@ entries:
   xs-server:
   - apiVersion: v2
     appVersion: 0.0.9
-    created: "2024-11-11T16:31:34.916347045-03:00"
+    created: "2024-11-12T08:33:12.237529285-03:00"
+    description: A Helm chart for Kubernetes
+    digest: 33e5f4d004a559ec393972ed4c0eec5d23932711d7ea6d6948a50e54ac4e6603
+    name: xs-server
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.0.9
+    created: "2024-11-12T08:33:12.237107185-03:00"
     description: A Helm chart for Kubernetes
     digest: db5d2d571a9b4578fd3261f40cb1e18151f67831d5aa599951f43e0c260832fa
     name: xs-server
@@ -702,7 +712,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-11-11T16:31:34.916049268-03:00"
+    created: "2024-11-12T08:33:12.236371485-03:00"
     description: A Helm chart for Kubernetes
     digest: 0cd0b7da65c538025c221f3aff8d108a5b5d59150e0240db3d6f9e207cf9a0b5
     name: xs-server
@@ -710,4 +720,4 @@ entries:
     urls:
     - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-11T16:31:34.914875158-03:00"
+generated: "2024-11-12T08:33:12.235102284-03:00"

@@ -64,6 +64,8 @@ readinessProbe:
     path: /
     port: http
 
+storage:
+  size: 5Gi
 
 # Additional volumes on the output Deployment definition.
 volumes: []

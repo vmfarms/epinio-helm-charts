@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "xs-server.fullname" . }}
   labels:
     {{- include "xs-server.labels" . | nindent 4 }}
 spec:
+  serviceName: {{ include "xs-server.fullname" . }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -48,9 +49,15 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          volumeMounts:
+            - name: {{ .Chart.Name }}-data
+              mountPath: /store
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
+        - name: {{ .Chart.Name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Chart.Name }}-data
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -64,3 +71,12 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Chart.Name }}-data
+      spec:
+        accessModes:
+          - {{ .Values.accessMode }}
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}
