@@ -74,3 +74,5 @@ tolerations: []
 affinity: {}
 
 userConfig: {}
+
+chartConfig: {}
