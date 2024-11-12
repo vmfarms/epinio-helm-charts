@@ -79,3 +79,6 @@ tolerations: []
 affinity: {}
 
 epinio: {}
+
+environment: 
+  - XS_START="xs server /store --expose 0.0.0.0:8080"
