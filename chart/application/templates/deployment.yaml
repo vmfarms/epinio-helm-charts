@@ -65,6 +65,14 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
+        {{- if (hasSuffix "-xs-data" .) }}
+        - name: XS_SERVER_HOST
+          value: {{ trimSuffix "-xs-data" . }}
+        - name: XS_SERVER_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ . | quote }}
+              key: port
         {{- if (hasSuffix "-postgresql" .)  }}
         - name: PSQL_HOSTNAME
           value: "{{ . }}-hl"
