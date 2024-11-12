@@ -698,7 +698,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.2.1.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.0.9
@@ -708,7 +708,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.2.0.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.9
@@ -718,7 +718,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.11.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.11.tgz
     version: 0.1.11
   - apiVersion: v2
     appVersion: 0.0.9
@@ -728,7 +728,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.10.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.10.tgz
     version: 0.1.10
   - apiVersion: v2
     appVersion: 0.0.9
@@ -738,7 +738,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.9.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.9.tgz
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.0.9
@@ -748,7 +748,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.8.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.8.tgz
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.0.9
@@ -758,7 +758,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.7.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.7.tgz
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.0.9
@@ -768,7 +768,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.6.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.6.tgz
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.0.9
@@ -778,7 +778,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.5.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.5.tgz
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.0.9
@@ -788,7 +788,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.4.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.0.9
@@ -798,7 +798,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.3.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.0.9
@@ -808,7 +808,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.2.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.0.9
@@ -818,7 +818,7 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.1.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
@@ -828,6 +828,6 @@ entries:
     name: xs-server
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/xs-server/chart/xs-server/xs-server-0.1.0.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.0.tgz
     version: 0.1.0
 generated: "2024-11-12T16:40:06.996781857-03:00"
