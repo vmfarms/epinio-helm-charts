@@ -73,6 +73,7 @@ spec:
             secretKeyRef:
               name: {{ . | quote }}
               key: port
+        {{- end }}
         {{- if (hasSuffix "-postgresql" .)  }}
         - name: PSQL_HOSTNAME
           value: "{{ . }}-hl"

@@ -80,5 +80,7 @@ affinity: {}
 
 epinio: {}
 
+extraDeploy: {}
+
 environment: 
   XS_START: "xs serve /store --expose 0.0.0.0:8080"
