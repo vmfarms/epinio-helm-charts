@@ -1,3 +1,4 @@
-{{- if .Values.extraDeploy }}
-{{ .Values.extraDeploy }}
+{{- range .Values.extraDeploy }}
+---
+{{ include "xs-server.tplvalues.render" (dict "value" . "context" $) }}
 {{- end }}
