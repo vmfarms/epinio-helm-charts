@@ -76,12 +76,12 @@ Epinio Service Name
 Generate a random username.
 */}}
 {{- define "xs-server.randomUsername" -}}
-{{- randAlphaNum 8 | b64enc -}}
+{{- randAlphaNum 8 -}}
 {{- end }}
 
 {{/*
 Generate a random password.
 */}}
 {{- define "xs-server.randomPassword" -}}
-{{- randAlphaNum 16 | b64enc -}}
+{{- randAlphaNum 16 -}}
 {{- end }}
