@@ -18,10 +18,10 @@ spec:
     metadata:
       annotations:
         reqsizer.jatalocks.github.io/optimize: {{ .Values.userConfig.vpaEnabled | default "true" | quote }}
-        sidepro.cloud/max-cpu: {{ .Values.userConfig.vpaMaxCPU | default "2000" | quote }}
-        sidepro.cloud/min-cpu: {{ .Values.userConfig.vpaMinCPU | default "500" | quote }}
-        sidepro.cloud/max-memory: {{ .Values.userConfig.vpaMaxMemory | default "4096" | quote }}
-        sidepro.cloud/min-memory: {{ .Values.userConfig.vpaMinMemory | default "512" | quote }}
+        sidepro.cloud/max-cpu: {{ .Values.userConfig.vpaMaxCPU | default "2" | quote }}
+        sidepro.cloud/min-cpu: {{ .Values.userConfig.cpu | default "500m" | quote }}
+        sidepro.cloud/max-memory: {{ .Values.userConfig.vpaMaxMemory | default "4Gi" | quote }}
+        sidepro.cloud/min-memory: {{ .Values.userConfig.memory | default "512Mi" | quote }}
         app.kubernetes.io/name: {{ .Values.epinio.appName | quote }}
         {{- include "epinio-application.annotations" . | nindent 8 }}
         {{- with .Values.epinio.start }}
@@ -215,11 +215,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
           limits:
-            cpu: {{ default "500m" .Values.userConfig.cpu }}
-            memory: {{ default "512Mi" .Values.userConfig.memory }}
+            cpu: {{ default "2" .Values.userConfig.cpu }}
+            memory: {{ default "4Gi" .Values.userConfig.memory }}
           requests:
-            cpu: {{ default "500m" .Values.userConfig.cpu }}
-            memory: {{ default "512Mi" .Values.userConfig.memory }}
+            cpu: {{ default "2" .Values.userConfig.cpu }}
+            memory: {{ default "4Gi" .Values.userConfig.memory }}
       {{- if .Values.chartConfig.loggerImage }}
       - name: sidepro-logger
         image: {{ .Values.chartConfig.loggerImage }}
