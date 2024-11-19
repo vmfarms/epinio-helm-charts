@@ -1,5 +1,3 @@
-
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -80,7 +78,7 @@ spec:
       {{- end }}
   volumeClaimTemplates:
     - metadata:
-        name: {{ printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-" }}
+        name: {{ lower (printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-") }}
       spec:
         accessModes:
           - ReadWriteOnce
