@@ -87,6 +87,13 @@ Generate a random password.
 {{- end }}
 
 {{/*
+Generate a random UID or string.
+*/}}
+{{- define "xs-server.randomUID" -}}
+{{- randAlphaNum 12 -}}
+{{- end }}
+
+{{/*
 Renders a value that contains template perhaps with scope if the scope is present.
 Usage:
 {{ include "xs-server.tplvalues.render" ( dict "value" .Values.path.to.the.Value "context" $ ) }}
@@ -105,3 +112,4 @@ Usage:
     {{- $value }}
 {{- end }}
 {{- end -}}
+

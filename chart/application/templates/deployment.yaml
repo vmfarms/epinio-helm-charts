@@ -65,7 +65,7 @@ spec:
           value: {{ include "epinio-app-listening-port" . | quote }}
         {{- with .Values.epinio.configurations }}
         {{- range . }}
-        {{- if (hasSuffix "-xs-data" .) }}
+        {{- if (contains "-xs-data" .) }}
         - name: XS_SERVER_HOST
           value: {{ trimSuffix "-xs-data" . }}
         - name: XS_SERVER_PORT
