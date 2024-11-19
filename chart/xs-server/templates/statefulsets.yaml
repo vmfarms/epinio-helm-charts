@@ -55,12 +55,12 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumeMounts:
-            - name: {{ .Chart.Name }}-data
+            - name: {{ lower (printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-") }}
               mountPath: /store
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
-        - name: {{ .Chart.Name }}-data
+        - name: {{ lower (printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-") }}
           persistentVolumeClaim:
             claimName: {{ lower (printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-") }}
       {{- end }}
