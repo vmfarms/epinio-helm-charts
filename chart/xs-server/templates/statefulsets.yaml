@@ -62,7 +62,7 @@ spec:
         {{- toYaml . | nindent 8 }}
         - name: {{ .Chart.Name }}-data
           persistentVolumeClaim:
-            claimName: {{ .Chart.Name }}-data
+            claimName: {{ lower (printf "%s-xs-data-%s" .Chart.Name (include "xs-server.randomUID" .) | trunc 63 | trimSuffix "-") }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
