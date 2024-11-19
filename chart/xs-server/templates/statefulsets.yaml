@@ -81,6 +81,7 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: {{ lower (printf "%s-xs-data-%s" .Chart.Name $randomUID) | quote }}
+      spec:
         accessModes:
           - ReadWriteOnce
         resources:
