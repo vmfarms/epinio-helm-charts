@@ -23,8 +23,6 @@ spec:
       kind: PipelineRun
       metadata:
         generateName: cicd-{{ .Release.Name }}-
-      labels:
-        sidepro.cloud/app-name: {{ .Values.appName }}
       spec:
         pipelineRef:
           name: {{ .Release.Name }}-pipeline-cicd

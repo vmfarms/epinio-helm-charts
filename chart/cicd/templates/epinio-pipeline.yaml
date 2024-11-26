@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   labels:
+    sidepro.cloud/app-name: {{ .Values.appName }}
     {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value | quote }} 
     {{- end }}
