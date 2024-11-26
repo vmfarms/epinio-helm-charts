@@ -23,6 +23,8 @@ spec:
       kind: PipelineRun
       metadata:
         generateName: cicd-{{ .Release.Name }}-
+      labels:
+        sidepro.cloud/app-name: {{ .Values.appName }}
       spec:
         pipelineRef:
           name: {{ .Release.Name }}-pipeline-cicd
@@ -72,7 +74,7 @@ spec:
     - name: git-event
       value: $(header.X-Github-Event)
     - name: app-name
-      value: $(body.repository.name)
+      value: {{ .Values.appName }}
 
 ---
 apiVersion: triggers.tekton.dev/v1beta1
