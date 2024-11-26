@@ -211,6 +211,13 @@ spec:
         {{- end }}
         {{- end }}
         {{- end }}
+        {{- with .Values.sidepro.secrets }}
+        {{- range . }}
+        - secretRef:
+            name: {{ . }}
+            optional: true
+        {{- end }}
+        {{- end }}
         image: {{ .Values.epinio.imageURL }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
