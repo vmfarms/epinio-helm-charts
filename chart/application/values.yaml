@@ -76,3 +76,6 @@ affinity: {}
 userConfig: {}
 
 chartConfig: {}
+
+sidepro:
+  secrets: []
