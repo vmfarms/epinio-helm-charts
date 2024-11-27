@@ -199,6 +199,981 @@ entries:
     urls:
     - https://github.com/falpires/epinio-helm-charts/raw/main/chart/postgresql/crossplane-postgresql-0.1.0.tgz
     version: 0.1.0
+  custom-application:
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.298964013-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 198a80b94d0bb5322f6bde8dbe555a7311c194cd081957d6a3fb687a4e8ece49
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.65.tgz
+    version: 0.0.65
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.29836552-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 749dbaeec955b006772cc3b8d8db8363eee200df743b269124fe91792e10a3a3
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.64.tgz
+    version: 0.0.64
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.297750826-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 9c1c790dd110a594eac20629796959feea68638ba71583ce8dfbd46ce83096bb
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.63.tgz
+    version: 0.0.63
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.297012534-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 0860af121765f92f4819c2f1d840f5d769ee3b6a18910541650882efe6395878
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.62.tgz
+    version: 0.0.62
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.295167155-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 6016f4c38c210c80575094121abbbce85f9a9c04efc600341e86ec2bd7ad37db
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.62-beta.1.tgz
+    version: 0.0.62-beta.1
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.294472262-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 859383cfbdd85cf5d1229d63cb9ea181a323822aa71b77266f4ee7cb02f07a98
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.61.tgz
+    version: 0.0.61
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.293688571-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 051d74935c57192fa87eea2c3f551903e0c62acbc68d2eb91e1de8a29ce05ca7
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.60.tgz
+    version: 0.0.60
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.289893113-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 8a2e7e74df482211a88cd63fa0f19a1b5b1de564daa6edd03fb0793cc28d4397
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.59.tgz
+    version: 0.0.59
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.288661526-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 16eb86b48c26933ac132045f8aa3f79e48d96dd5909eb4b28b07b6001489a350
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.58.tgz
+    version: 0.0.58
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.287942834-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 64efa37b7cd9cfdc69ba9ca083de674d3838016e625eaa7215d7fdf3142e3a0d
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.57.tgz
+    version: 0.0.57
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.287300641-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 5918d92e083e030bea5e15051f7922df41f4607a3f3e4367d94ed5057449db19
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.56.tgz
+    version: 0.0.56
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.284764869-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 3c435f72a41f879fb99e2133a1ae26a4636e787e51dcbfa440738cabbc9bc576
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.55.tgz
+    version: 0.0.55
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.284296474-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 2199075db06940583a611143c3e5a49cc108e6112630ca6c59c39196c66a9a46
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.54.tgz
+    version: 0.0.54
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.28374558-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 0dd7376bc1947868fbaf4fc0bf0986c47a444b5a5421f9877112475c88b700af
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.53.tgz
+    version: 0.0.53
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.283251286-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: e95a6345c2526aae4690a72fb7211190751419f2315cca9549649400da02eaaa
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.52.tgz
+    version: 0.0.52
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.282340796-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 6d2b456a608924388ae90670b31b5ed1e5e8f428e3b69f3004fafe15db44005f
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.51.tgz
+    version: 0.0.51
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.281880501-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 161e867df5d29722348246766d1c19b4ba11e2a7fa998757e4f48b9314ba8ac0
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.50.tgz
+    version: 0.0.50
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.280454016-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: a2ede1c21661b613d9d886396845e53c23d96d889218dc42aa1314a0d77de431
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.48.tgz
+    version: 0.0.48
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.280012621-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: dd82af06809fde9c78b5d1b755d0445e24dd324e988a5f8c7fdfd15aa4c36cae
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.47.tgz
+    version: 0.0.47
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.279556726-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 60dbd52d7eb6fd0c1cd1657bb8facc580d82c380170dc6f14d9eefdb96a86429
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.46.tgz
+    version: 0.0.46
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.279070231-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 07c2dabc99ddbac3038b7a91e3f9d716dabae41ab9a5c7f27a0c717d4c5a7ffa
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.45.tgz
+    version: 0.0.45
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.278606737-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 1c3502714df0573cd544459b7a0a6424263ee77566f022e80a5fe60f29e2cc1a
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.44.tgz
+    version: 0.0.44
+  - apiVersion: v2
+    appVersion: 0.0.43
+    created: "2024-11-27T13:08:50.278125042-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: c71eff634942ce7a6c5309cf844cdeb598d0ef7a356ec84261e5d668cfe22909
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.43.tgz
+    version: 0.0.43
+  - apiVersion: v2
+    appVersion: 0.0.42
+    created: "2024-11-27T13:08:50.277631647-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 9bc02cebb88289fa107cc467983333cee68b8e33733291cde7b56b66e267fbc4
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.42.tgz
+    version: 0.0.42
+  - apiVersion: v2
+    appVersion: 0.0.41
+    created: "2024-11-27T13:08:50.276815256-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: ed2ffa77cc398636881c0d950a89c4cbcc01af39e84cc84c57794ca97cda0f53
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.41.tgz
+    version: 0.0.41
+  - apiVersion: v2
+    appVersion: 0.0.40
+    created: "2024-11-27T13:08:50.276086364-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: fb2cd92daa6d1766f24caddbb1485890d13fce4871e56aad1d4ca30def8b2c49
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.40.tgz
+    version: 0.0.40
+  - apiVersion: v2
+    appVersion: 0.0.39
+    created: "2024-11-27T13:08:50.273293195-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 42d2e8d479769e3cf810774bff3ffb731cbfdb833ab96bb69afd9623d35adced
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.39.tgz
+    version: 0.0.39
+  - apiVersion: v2
+    appVersion: 0.0.38
+    created: "2024-11-27T13:08:50.2728264-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: e87b611b84e1cdcce574bec2abaf201e1a1fbf5da7c6b71734a583b8535cdc80
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.38.tgz
+    version: 0.0.38
+  - apiVersion: v2
+    appVersion: 0.0.37
+    created: "2024-11-27T13:08:50.272326906-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: e1ae0be1e9f0dbbcd59cb6242be425134bf9646b6566f56a9a08cb8d5445aed6
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.37.tgz
+    version: 0.0.37
+  - apiVersion: v2
+    appVersion: 0.0.36
+    created: "2024-11-27T13:08:50.271842611-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 47fd398cb5493274bde8a9496b4dbe1128482a6065c4b01842e88b831cffa7d8
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.36.tgz
+    version: 0.0.36
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.271357316-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 9d674d9afd1bc2c4c3d50f63cad23db9d301f761758e475dc9f6dc4e95e97571
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.35.tgz
+    version: 0.0.35
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.270882621-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 2e5e1552c1e0b372e9fc4723d08bf69644e6f23081f397e95b332b5ee06d2c2f
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.34.tgz
+    version: 0.0.34
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.270189629-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 73d382f0eef3d3f38e743e7b85e8121e1ecae662e6ef82e28d084b6f8ac3f969
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.33.tgz
+    version: 0.0.33
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.269479237-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 8164540e34c98fd7aebffc70adf9da7089c7d58d72a8231d5df07dbb1e1a230c
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.32.tgz
+    version: 0.0.32
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.269056841-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 54c34a17d809bdf6c811d50277d0c5d50fc860417956aa430187c9ff6fe0ddd2
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.31.tgz
+    version: 0.0.31
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.268577847-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 016a0846ca02ca4f9285da4f8a0cb8a3355136502e4b3def452ec1312a0f0bee
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.30.tgz
+    version: 0.0.30
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.267579258-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: ef66f5a6a7624559e38124838c9f06aacd258797858fbfd8b27c7dcfbfe73298
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.29.tgz
+    version: 0.0.29
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.267098263-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: b1d1bee5a07d9e231c12122f83cee4f3fc11329f48152f365c352c2b3af27e91
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.28.tgz
+    version: 0.0.28
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.266532869-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 684265830fdbd1273a784708962c0c91ac1958b4e95c67438616c4c0a8fdbffd
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.27.tgz
+    version: 0.0.27
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.266096074-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 1177bea5d7d337aa58f92e4b8e9ac17f06745c951a990047004518d2e02dd00e
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.26.tgz
+    version: 0.0.26
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.265654679-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 7180f4236d0f2c1837f9a919b763c5874c9053abd8ee7dda94b31f18a55d6934
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.25.tgz
+    version: 0.0.25
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.265233783-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: f39a242e91f1f57b5572c81cab5a185c4aa0760046595863ff137728e8056295
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.24.tgz
+    version: 0.0.24
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.264736389-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: cebbd798cc22669921a5e8989be0ba6206db90f56849a33382e9870e821da92f
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.23.tgz
+    version: 0.0.23
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.264289794-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 4a6383e59cbe2bf21061fc42aba3c9a844f64cb6817bf3f5b23b0bf9d0f9ddbf
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.22.tgz
+    version: 0.0.22
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.263880598-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 3a71ce88f28f7e6c1423d50f044970ca8679fd9d956a8d516413eb2fd2ac39a2
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.21.tgz
+    version: 0.0.21
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.263496602-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: a654b747297dffd95d8685ee4e24aca1deaf3c858d3275ab6bbda7084cc9c4ac
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.20.tgz
+    version: 0.0.20
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.262607312-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 081ccded19d2611c35976c876b4c131be87a059df6da55c6c9ae9e23d26f4c2b
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.19.tgz
+    version: 0.0.19
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.262145317-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 4cab868cfdde24fe7b8d0fe439989a0b9a6b7b42486b82c33c3e94917a6e7c1e
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.261545624-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 849ca1d004f143253012c16669d48fd7d05ac164228419fd788d696ecc86684f
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.17.tgz
+    version: 0.0.17
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.260900131-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: a912682bfd62719fcb973222c8928fff32ec57f7d3ed1471ae52f848d3af0824
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.16.tgz
+    version: 0.0.16
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.260307637-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: a3271334ea0069c3be657278a96e44531491cfcf2edf36cf4a9a5916845730ed
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.15.tgz
+    version: 0.0.15
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.259797443-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: e46c23a2adf8151febea860769113498277b450028827002670643bb480ebcbe
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.14.tgz
+    version: 0.0.14
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.25919215-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 80150a95f8786320e8d90d4b8ea2a6b1063bc659b51ae150d83aedc1d7789ac8
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.13.tgz
+    version: 0.0.13
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.257835265-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 6ca2001220cc5e81caa130bdfaa6e99e4133e62a2ccf1184c554b23ffccf6cee
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.12.tgz
+    version: 0.0.12
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.257299371-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: de040e18277d7f910111368e7ba634a0db744917ef2d1352d05b6caa8cf5946b
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.11.tgz
+    version: 0.0.11
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.256804276-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 2dbfb969910782ec64e15da52bb495e1c6829d406e70c782b7401f7c0d2833c0
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
+    created: "2024-11-27T13:08:50.308961003-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 770287bf6202898795eb625687d023e5a229877e4101f85b037bf12d699fae80
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    name: custom-application
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.9.tgz
+    version: 0.0.9
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.308255011-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: d718ae20e32da496e1939d5c48a28fd8795429836a82226d1a81b3ba7bbc56fe
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.8.tgz
+    version: 0.0.8
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.306873726-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: cadd0615d38a2d475eb4eea92d8253b676baebcd53a63ccca593a55703571501
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.7.tgz
+    version: 0.0.7
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.292933379-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: a2b98179155ee6677ed135cb41d80a0f4032a03b8a4c8c992a986ed3a690cb58
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.6.tgz
+    version: 0.0.6
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.281459905-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 4a791c4bc4b1a3e5965846f6ad8b70638fc05f00aecce241a057a8f9b2394c6b
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.5.tgz
+    version: 0.0.5
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.275440471-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 217a1e2a48b87cd82c72ff815d7a549f86fec3560522432435f572d8d8b004f3
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.4.tgz
+    version: 0.0.4
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.268148651-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: b00b35e47495a95a61f1bbf8c33d5a67a2889c047633b4df867269985794f513
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.263061507-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: 4cd9d8b4476e47a21d521ff968f99b1fffc4619d1175931483e983f66f692337
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.2.tgz
+    version: 0.0.2
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2024-11-27T13:08:50.256248882-03:00"
+    description: The helm chart for epinio applications to be deployed by
+    digest: f6c70650a1c559689fe354b78d04ed3360b4ea3f7be591f15722340ebd0c16a4
+    home: https://github.com/epinio/epinio
+    icon: https://raw.githubusercontent.com/epinio/helm-charts/main/assets/epinio.png
+    keywords:
+    - epinio
+    - paas
+    maintainers:
+    - email: team@epinio.io
+      name: SUSE
+    name: custom-application
+    sources:
+    - https://github.com/epinio/helm-charts
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/application/custom-application-0.0.1.tgz
+    version: 0.0.1
   minio-bucket:
   - apiVersion: v2
     appVersion: 1.0.6
@@ -932,4 +1907,4 @@ entries:
     urls:
     - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-26T12:54:49.897188329-03:00"
+generated: "2024-11-27T13:08:50.255364292-03:00"
