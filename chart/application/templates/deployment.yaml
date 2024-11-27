@@ -211,8 +211,8 @@ spec:
         {{- end }}
         {{- end }}
         {{- end }}
-        {{- with .Values.sidepro.secrets }}
-        {{- range . }}
+        {{- with .Values.sidepro }}
+        {{- range .secrets }}
         - secretRef:
             name: {{ . }}
             optional: true
