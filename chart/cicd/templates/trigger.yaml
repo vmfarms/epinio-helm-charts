@@ -16,12 +16,15 @@ spec:
       description: The git repository url
     - name: git-branch
       description: Branch of git that it is running on
+      default: main
     - name: app-name
       description: name of the app
     - name: pr-number
       description: number of the pr
+      default: "9999"
     - name: pr-action
       description: action of the pr
+      default: push
 
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
