@@ -25,6 +25,9 @@ spec:
     - description: application name on epinio
       name: app-name
       type: string
+    - description: number of the pr
+      name: pr-number
+      type: string
   tasks:
   {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
     - name: start-feedback
@@ -54,8 +57,10 @@ spec:
         - name: output
           workspace: shared-data
         - name: basic-auth
-          workspace: git-credentials  
+          workspace: git-credentials
     - name: epinio-push
+      when:
+        - cel: '''$(params.pr-action)'' not in [''opened'',''reopened'',''synchronize'',''labeled'']'
       runAfter:
         - fetch-source
       taskRef:
@@ -65,6 +70,36 @@ spec:
         - name: source
           workspace: shared-data
       params:
+        - name: app-name
+          value: $(params.app-name)
+    - name: epinio-push-pr
+      when:
+        - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      runAfter:
+        - fetch-source
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-push-pr
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
+        - name: app-name
+          value: $(params.app-name)
+    - name: epinio-delete
+      when:
+        - cel: '''$(params.pr-action)'' in [''closed'']'
+      taskRef:
+        kind: Task
+        name: {{ .Release.Name }}-epinio-del
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: pr-number
+          value: $(params.pr-number)
         - name: app-name
           value: $(params.app-name)
 {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
