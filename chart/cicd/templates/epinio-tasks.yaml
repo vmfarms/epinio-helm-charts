@@ -27,7 +27,7 @@ spec:
       script: |
         #!/usr/bin/env bash
 
-        sidepro login --user admin --password $EPINIO_PASSWORD && \
+        sidepro login --username admin --password $EPINIO_PASSWORD && \
         sidepro namespace update {{ .Release.Namespace }} && \
         sidepro push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1 
 ---
@@ -62,7 +62,7 @@ spec:
       script: |
         #!/usr/bin/env bash
 
-        sidepro login --user admin --password $EPINIO_PASSWORD && \
+        sidepro login --username admin --password $EPINIO_PASSWORD && \
         sidepro namespace update {{ .Release.Namespace }} && \
         sidepro push --path=$(workspaces.source.path) --name $(params.app-name)-pr-$(params.pr-number)
 
@@ -98,6 +98,6 @@ spec:
       script: |
         #!/usr/bin/env bash
 
-        sidepro login --user admin --password $EPINIO_PASSWORD && \
+        sidepro login --username admin --password $EPINIO_PASSWORD && \
         sidepro namespace update {{ .Release.Namespace }} && \
         sidepro app delete $(params.app-name)-pr-$(params.pr-number)
