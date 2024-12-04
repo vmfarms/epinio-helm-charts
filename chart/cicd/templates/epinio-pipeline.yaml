@@ -59,7 +59,7 @@ spec:
           workspace: git-credentials
     - name: epinio-push
       when:
-        - cel: '''$(params.pr-action)'' not in [''opened'',''reopened'',''synchronize'',''labeled'']'
+        - cel: '!(''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled''])'
       runAfter:
         - fetch-source
       taskRef:
