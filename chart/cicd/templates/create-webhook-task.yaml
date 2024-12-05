@@ -24,7 +24,7 @@ spec:
     default: "github.com"
   - name: WebhookEvents
     description: "List of events the webhook will send notifications for"
-    default: '[\"push\"]'
+    default: '[\"push\", \"pull_request\"]'
   steps:
   - name: create-webhook
     volumeMounts:

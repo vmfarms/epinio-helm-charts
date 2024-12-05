@@ -16,8 +16,16 @@ spec:
       description: The git repository url
     - name: git-branch
       description: Branch of git that it is running on
+      default: main
     - name: app-name
       description: name of the app
+    - name: pr-number
+      description: number of the pr
+      default: "9999"
+    - name: pr-action
+      description: action of the pr
+      default: push
+
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -39,6 +47,10 @@ spec:
           value: $(tt.params.gitrepositoryurl)
         - name: app-name
           value: $(tt.params.app-name)
+        - name: pr-number
+          value: $(tt.params.pr-number)
+        - name: pr-action
+          value: $(tt.params.pr-action)
         workspaces:
         - name: shared-data
           volumeClaimTemplate:
@@ -68,11 +80,15 @@ spec:
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name).git"
     - name: git-branch
-      value: $(body.ref)
+      value: $(body.pull_request.head.ref)
     - name: git-event
       value: $(header.X-Github-Event)
     - name: app-name
       value: {{ .Values.appName }}
+    - name: pr-number
+      value: $(body.number)
+    - name: pr-action
+      value: $(body.action)
 
 ---
 apiVersion: triggers.tekton.dev/v1beta1
@@ -110,12 +126,12 @@ spec:
                 secretName: {{ .Release.Name }}-whook-secret-cicd
                 secretKey: secret
             - name: eventTypes
-              value: ["push"]
+              value: ["push", "pull_request"]
         - ref: 
             name: cel
           params:
             - name: filter
-              value: "body.ref in ['refs/heads/{{ .Values.GitBranch }}']"
+              value: (header.match('X-GitHub-Event', 'pull_request') && body.pull_request.labels.exists(v, v.name == "pr-preview")) || (body.ref in ['refs/heads/{{ .Values.GitBranch }}'])
       bindings:
         - ref: {{ .Release.Name }}-tb-cicd
       template:
