@@ -10,7 +10,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.2.0.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.10
@@ -21,7 +21,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.1.1.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.0.10
@@ -32,7 +32,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.1.0.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.1.0.tgz
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.0.10
@@ -43,7 +43,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.11.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.11.tgz
     version: 0.0.11
   - apiVersion: v2
     appVersion: 0.0.10
@@ -54,7 +54,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.10.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.10.tgz
     version: 0.0.10
   - apiVersion: v2
     appVersion: 0.0.9
@@ -65,7 +65,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.9.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.9.tgz
     version: 0.0.9
   - apiVersion: v2
     appVersion: 0.0.8
@@ -76,7 +76,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.8.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.8.tgz
     version: 0.0.8
   - apiVersion: v2
     appVersion: 0.0.7
@@ -87,7 +87,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.7.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.7.tgz
     version: 0.0.7
   - apiVersion: v2
     appVersion: 0.0.6
@@ -98,7 +98,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.6.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.6.tgz
     version: 0.0.6
   - apiVersion: v2
     appVersion: 0.0.5
@@ -109,7 +109,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.5.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.5.tgz
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
@@ -120,7 +120,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.4.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.4.tgz
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
@@ -131,7 +131,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.3.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.3.tgz
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
@@ -142,7 +142,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.2.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.2.tgz
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
@@ -153,7 +153,7 @@ entries:
     name: cicd
     type: application
     urls:
-    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/pull-with-pr/chart/cicd/cicd-0.0.1.tgz
+    - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/cicd/cicd-0.0.1.tgz
     version: 0.0.1
   crossplane-postgresql:
   - apiVersion: v2
