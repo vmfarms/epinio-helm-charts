@@ -40,6 +40,8 @@ spec:
           value: "The ci-cd pipeline is starting for #$(params.app-name)!"
   {{- end }}
     - name: fetch-source
+      when:
+        - cel: '(''$(params.pr-action)'' in [''push''])'
       {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
       runAfter:
         - start-feedback
@@ -49,6 +51,26 @@ spec:
           value: $(params.repo-url)
         - name: revision
           value: $(params.git-revision)
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: basic-auth
+          workspace: git-credentials
+    - name: fetch-source-pr
+      when:
+        - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
+      {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
+      runAfter:
+        - start-feedback
+      {{- end }}
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.git-branch)
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -75,7 +97,7 @@ spec:
       when:
         - cel: '''$(params.pr-action)'' in [''opened'',''reopened'',''synchronize'',''labeled'']'
       runAfter:
-        - fetch-source
+        - fetch-source-pr
       taskRef:
         kind: Task
         name: {{ .Release.Name }}-epinio-push-pr
