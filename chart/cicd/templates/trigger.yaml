@@ -80,7 +80,7 @@ spec:
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name).git"
     - name: git-branch
-      value: $(body.ref)
+      value: $(body.head.ref)
     - name: git-event
       value: $(header.X-Github-Event)
     - name: app-name
