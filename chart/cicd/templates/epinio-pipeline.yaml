@@ -109,6 +109,8 @@ spec:
           value: $(params.pr-number)
         - name: app-name
           value: $(params.app-name)
+        - name: repo-url
+          value: $(params.repo-url)
     - name: epinio-delete
       when:
         - cel: '''$(params.pr-action)'' in [''closed'']'
