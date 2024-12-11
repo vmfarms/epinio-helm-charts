@@ -105,7 +105,7 @@ spec:
             env_json=$(echo "$env" | base64 -d)
             name=$(echo "$env_json" | jq -r '.name')
             value=$(echo "$env_json" | jq -r '.value')
-            cmd="$cmd --env $name,$value"
+            cmd="$cmd --env $name=$value"
         done
 
         echo "executing $cmd"
