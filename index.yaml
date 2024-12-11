@@ -3,7 +3,18 @@ entries:
   cicd:
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.622824709-03:00"
+    created: "2024-12-11T15:27:07.921107959-03:00"
+    description: A helper to provide CI-CD using tekton.
+    digest: 2a67aeb7cf4d9ac734bf7f66b53e789ef83200f4952562578409011546567066
+    icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
+    name: cicd
+    type: application
+    urls:
+    - https://github.com/vmfarms/epinio-helm-charts/raw/feat/improve-pr-preview/chart/cicd/cicd-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 0.0.10
+    created: "2024-12-11T15:27:07.920813959-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: b42852b7990b9d07caf65557af1930d0c25e69aefc8dbf367db906a55d179aa1
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -14,7 +25,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.622541909-03:00"
+    created: "2024-12-11T15:27:07.920237059-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: ccfb965088a80e521c7e785b432e124a4ac938d05e2c74d3fc26b25167b7c0d0
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -25,7 +36,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.620566209-03:00"
+    created: "2024-12-11T15:27:07.919585459-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 6c7e145938d59cb1fe48c08b9544bd0cc1c2ef347eb22f636cff19ac7616d42f
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -36,7 +47,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.618043609-03:00"
+    created: "2024-12-11T15:27:07.918923159-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 0ceb93d97ece388723d7b5e0919b7113b9454a8ead1300338b538c82aa8d5f99
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -47,7 +58,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.609878609-03:00"
+    created: "2024-12-11T15:27:07.911548859-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: c0cc8b5db2194232feb5522f608247a584bf84c57c474d395a3344e18be39a63
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -58,7 +69,7 @@ entries:
     version: 0.0.11
   - apiVersion: v2
     appVersion: 0.0.10
-    created: "2024-12-11T08:39:32.607670909-03:00"
+    created: "2024-12-11T15:27:07.910818459-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: dd8d88755000a9f0b341fe5768bce095cd4206b8ae25f2da0f3da6a68c9060c9
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -69,7 +80,7 @@ entries:
     version: 0.0.10
   - apiVersion: v2
     appVersion: 0.0.9
-    created: "2024-12-11T08:39:32.616392509-03:00"
+    created: "2024-12-11T15:27:07.918230759-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 9b1478fffe73df8e66222a5218ac7ed3917ec21cf7ede22ce831af6fa47af01b
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -80,7 +91,7 @@ entries:
     version: 0.0.9
   - apiVersion: v2
     appVersion: 0.0.8
-    created: "2024-12-11T08:39:32.615785209-03:00"
+    created: "2024-12-11T15:27:07.917714359-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 256c7ed8c47494b48b0d5ae058d0802654e8b7ab4e433ad31db2753d4b013e0e
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -91,7 +102,7 @@ entries:
     version: 0.0.8
   - apiVersion: v2
     appVersion: 0.0.7
-    created: "2024-12-11T08:39:32.615061809-03:00"
+    created: "2024-12-11T15:27:07.917146759-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: c317fce42fd3a163c1b40e4a2314ce33eff8d8aab48194b21b5b638a592aa6c4
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -102,7 +113,7 @@ entries:
     version: 0.0.7
   - apiVersion: v2
     appVersion: 0.0.6
-    created: "2024-12-11T08:39:32.614168809-03:00"
+    created: "2024-12-11T15:27:07.916061959-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 06a47cafe5970698fe3ffc3aa45fb6e1ca10693965e159059588164bb2dd6347
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -113,7 +124,7 @@ entries:
     version: 0.0.6
   - apiVersion: v2
     appVersion: 0.0.5
-    created: "2024-12-11T08:39:32.612173309-03:00"
+    created: "2024-12-11T15:27:07.915500659-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: d7d2af121abf57cff149c9d570248af0c055f9ce3e2d19087fc34436928cb204
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -124,7 +135,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
-    created: "2024-12-11T08:39:32.611610409-03:00"
+    created: "2024-12-11T15:27:07.914744659-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: d202d1d2fc89821fa52f5a3fd358c19d140899c9b4bea7e2fa125af43277005d
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -135,7 +146,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2024-12-11T08:39:32.611028709-03:00"
+    created: "2024-12-11T15:27:07.912994859-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 37a6fbcbc415318dfbfada4a5b2de95f91094e61c4edec9dfdde7c5618480144
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -146,7 +157,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2024-12-11T08:39:32.610469609-03:00"
+    created: "2024-12-11T15:27:07.912120059-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: 8c18faaa5c65a724ece9535482bc05c0db820034166d60c4aed2838a3dba19b7
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -157,7 +168,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-12-11T08:39:32.605760909-03:00"
+    created: "2024-12-11T15:27:07.910102759-03:00"
     description: A helper to provide CI-CD using tekton.
     digest: ec4f40e19f7598d79aa5d3d2c05464b7a77b7da3fab14b23cc4cb64d1533e57d
     icon: https://images.squarespace-cdn.com/content/v1/5cafa5e792441be86e7ad9ac/1583268187688-QVAEP2CYJ245MHG1CABX/stack-io-full-logo-light.png
@@ -1957,4 +1968,4 @@ entries:
     urls:
     - https://github.com/vmfarms/epinio-helm-charts/raw/main/chart/xs-server/xs-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-11T08:39:32.604858609-03:00"
+generated: "2024-12-11T15:27:07.909176559-03:00"
