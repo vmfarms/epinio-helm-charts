@@ -55,6 +55,8 @@ spec:
     - computeResources: {}
       image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0
       env:
+      - name: EPINIO_HOST
+        value: {{ .Values.epinioURL }}
       - name: EPINIO_PASSWORD
         valueFrom: 
           secretKeyRef:
@@ -100,7 +102,7 @@ spec:
         # Iterate over envs and append to cmd
         for env in "${envs[@]}"; do
             # Decode the base64-encoded JSON object and extract 'name' and 'value'
-            env_json=$(echo "$env" | base64 --decode)
+            env_json=$(echo "$env" | base64 -d)
             name=$(echo "$env_json" | jq -r '.name')
             value=$(echo "$env_json" | jq -r '.value')
             cmd="$cmd --env $name,$value"
