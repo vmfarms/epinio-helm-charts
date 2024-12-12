@@ -107,7 +107,7 @@ spec:
         repo_url=$(params.repo-url)
         pr_labels="$(params.pr-labels)"
 
-        starting_comment="\# Updating PR Preview environment.\nNote: Environment variables, secrets and services will not be bound by default.\nThese can be added by adding the following GitHub labels to the PR: \`pr-preview:envs\`, \`pr-preview:secrets\`, \`pr-preview:services.\`"
+        starting_comment="<h1>Updating PR Preview environment.</h1>\nNote: Environment variables, secrets and services will not be bound by default.\nThese can be added by adding the following GitHub labels to the PR: \`pr-preview:envs\`, \`pr-preview:secrets\`, \`pr-preview:services.\`"
 
         add_github_pr_comment "$repo_url" "$pr_number" "$starting_comment" "$GH_TOKEN"
 
