@@ -53,6 +53,8 @@ spec:
       type: string
     - name: repo-url
       type: string
+    - name: labels
+      type: array
   steps:
     - computeResources: {}
       image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0
@@ -72,8 +74,7 @@ spec:
       name: epinio
       script: |
         #!/usr/bin/env bash
-
-        # Function to add a comment to a GitHub PR
+        
         add_github_pr_comment() {
             local repo_url="$1"
             local pr_number="$2"
@@ -83,28 +84,40 @@ spec:
             local repo_name="${repo_url#*github.com/}"
             repo_name="${repo_name%.git}"
 
+            local api_url="https://api.github.com/repos/$repo_name/issues/$pr_number/comments"
 
-            local api_url="https://api.github.com/repos/$repo_url/pulls/$pr_number/comments"
+            local escaped_comment=$(echo $comment | jq -R .)
+
+            local body="{\"body\": $escaped_comment}"
+
 
             curl -s -X POST "$api_url" \
                 -H "Authorization: token $github_token" \
                 -H "Content-Type: application/json" \
-                -d "{\"body\": \"$comment\"}"
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                -H "Accept: application/vnd.github+json" \
+                -d "$body" > /dev/null 2>&1
         }
 
         app_path=$(workspaces.source.path)
 
         app_name=$(params.app-name)
         pr_number=$(params.pr-number)
-        app_name=$app_name-pr-$pr_number"
+        app_name=$app_name-pr-$pr_number
+        repo_url=$(params.repo-url)
+        pr_labels=$(params.pr-labels)
 
-        add_github_pr_comment "$repo_url" "$pr_number" "Creating PR Preview environment.\nPR Preview environment will not copy environment variables, secrets or bind services by default\nYou can control which to copy from the original app by adding the following labels: pr-preview:envs|pr-preview:secrets|pr-preview:services." "$GH_TOKEN"
+        echo $pr_labels
+
+        starting_comment="Creating PR Preview environment.\\nPR Preview environment will not copy environment variables, secrets or bind services by default.\\nYou can control which to copy from the original app by adding the following labels: \`pr-preview:envs | pr-preview:secrets | pr-preview:services.\`"
+
+        add_github_pr_comment "$repo_url" "$pr_number" "$starting_comment" "$GH_TOKEN"
 
         sidepro login --username admin --password $EPINIO_PASSWORD
 
         sidepro namespace update demo
 
-        cmd="sidepro push --path $app_path --name $app_name
+        cmd="sidepro push --path $app_path --name $app_name"
 
         app_info=$(sidepro app show samples -o json)
         deployment_name=$(echo $app_info | jq -r '.deployment.name | ltrimstr("r")')
@@ -136,7 +149,7 @@ spec:
         echo "executing $cmd"
         eval $cmd
 
-        add_github_pr_comment "$repo_url" "$pr_number" "Deployment for PR \#$pr_number completed successfully.\n You can view its url by running `sidepro app list`." "$GH_TOKEN"
+        add_github_pr_comment "$repo_url" "$pr_number" "Deployment for PR \#$pr_number completed successfully.\\n You can view its url by running \`sidepro app show $app_name\`." "$GH_TOKEN"
 
         for serviceName in "${serviceNames[@]}"; do
             sidepro service bind $serviceName $app_name

@@ -25,6 +25,9 @@ spec:
     - name: pr-action
       description: action of the pr
       default: push
+    - name: pr-labels
+      description: labels of the pr
+      default: []
 
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
@@ -51,6 +54,8 @@ spec:
           value: $(tt.params.pr-number)
         - name: pr-action
           value: $(tt.params.pr-action)
+        - name: pr-labels
+          value: $(tt.params.pr-labels)
         workspaces:
         - name: shared-data
           volumeClaimTemplate:
@@ -89,6 +94,8 @@ spec:
       value: $(body.number)
     - name: pr-action
       value: $(body.action)
+    - name: pr-labels
+      value: $(body.pull_request.labels)
 
 ---
 apiVersion: triggers.tekton.dev/v1beta1
