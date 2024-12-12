@@ -142,7 +142,7 @@ spec:
             - name: overlays
               value:
                 - key: pr-labels
-                  expression: body.pull_request.labels.map(v => v.name)
+                  expression: body.pull_request.labels.map(v => v.name).join(" ")
       bindings:
         - ref: {{ .Release.Name }}-tb-cicd
       template:
