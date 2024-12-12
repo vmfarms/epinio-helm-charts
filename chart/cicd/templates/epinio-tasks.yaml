@@ -53,7 +53,7 @@ spec:
       type: string
     - name: repo-url
       type: string
-    - name: labels
+    - name: pr-labels
       type: array
   steps:
     - computeResources: {}
@@ -74,7 +74,7 @@ spec:
       name: epinio
       script: |
         #!/usr/bin/env bash
-        
+
         add_github_pr_comment() {
             local repo_url="$1"
             local pr_number="$2"
