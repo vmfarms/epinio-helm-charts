@@ -113,7 +113,7 @@ spec:
 
         sidepro login --username admin --password $EPINIO_PASSWORD
 
-        sidepro namespace update {{ .Release.namespace }}
+        sidepro namespace update {{ .Release.Namespace }}
 
         cmd="sidepro push --path $app_path --name $app_name"
 
