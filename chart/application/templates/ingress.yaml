@@ -40,6 +40,8 @@ metadata:
     nginx.ingress.kubernetes.io/auth-secret: "{{ include "epinio-truncate" $.Values.epinio.appName }}-auth"
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
     {{- end}}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      set $platform_appname {{ $.Values.epinio.appName }};
   labels:
     {{- include "epinio-application.labels" $ | nindent 4 }}
 spec:
