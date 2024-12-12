@@ -27,7 +27,7 @@ spec:
       default: push
     - name: pr-labels
       description: labels of the pr
-      default: []
+      default: ""
 
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1

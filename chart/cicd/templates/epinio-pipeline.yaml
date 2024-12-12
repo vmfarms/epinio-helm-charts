@@ -29,7 +29,7 @@ spec:
       type: string
     - description: labels of the pr
       name: pr-labels
-      type: array
+      type: string
   tasks:
   {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
     - name: start-feedback
