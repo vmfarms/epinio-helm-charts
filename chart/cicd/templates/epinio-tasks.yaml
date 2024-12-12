@@ -80,7 +80,7 @@ spec:
             local comment="$3"
             local github_token="$4"
             
-            local repo_name="${repo_url#*github.com/}"  # Remove everything up to 'github.com/'
+            local repo_name="${repo_url#*github.com/}"
             repo_name="${repo_name%.git}"
 
 
@@ -98,7 +98,7 @@ spec:
         pr_number=$(params.pr-number)
         app_name=$app_name-pr-$pr_number"
 
-        add_github_pr_comment "$repo_url" "$pr_number" "Creating PR Preview environment.\nPR Preview environment will not copy environment variables, secrets or bind services by default\nYou can control which to copy from the original app by adding the following labels: `pr-preview:envs|pr-preview:secrets|pr-preview:services`." "$GH_TOKEN"
+        add_github_pr_comment "$repo_url" "$pr_number" "Creating PR Preview environment.\nPR Preview environment will not copy environment variables, secrets or bind services by default\nYou can control which to copy from the original app by adding the following labels: pr-preview:envs|pr-preview:secrets|pr-preview:services." "$GH_TOKEN"
 
         sidepro login --username admin --password $EPINIO_PASSWORD
 
