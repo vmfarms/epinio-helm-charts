@@ -79,6 +79,10 @@ spec:
             local pr_number="$2"
             local comment="$3"
             local github_token="$4"
+            
+            local repo_name="${repo_url#*github.com/}"  # Remove everything up to 'github.com/'
+            repo_name="${repo_name%.git}"
+
 
             local api_url="https://api.github.com/repos/$repo_url/pulls/$pr_number/comments"
 
