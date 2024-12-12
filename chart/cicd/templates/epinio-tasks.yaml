@@ -54,7 +54,7 @@ spec:
     - name: repo-url
       type: string
     - name: pr-labels
-      type: string
+      type: array
   steps:
     - computeResources: {}
       image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0

@@ -27,7 +27,7 @@ spec:
       default: push
     - name: pr-labels
       description: labels of the pr
-      default: ""
+      default: []
 
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
@@ -95,7 +95,7 @@ spec:
     - name: pr-action
       value: $(body.action)
     - name: pr-labels
-      value: $(body.pull_request.labels)
+      value: $(extensions.pr-labels)
 
 ---
 apiVersion: triggers.tekton.dev/v1beta1
@@ -139,6 +139,10 @@ spec:
           params:
             - name: filter
               value: (header.match('X-GitHub-Event', 'pull_request') && body.pull_request.labels.exists(v, v.name == "pr-preview")) || (body.ref in ['refs/heads/{{ .Values.GitBranch }}'])
+            - name: overlays
+              value:
+                - key: pr-labels
+                  expression: body.pull_request.labels.map(v => v.name)
       bindings:
         - ref: {{ .Release.Name }}-tb-cicd
       template:
