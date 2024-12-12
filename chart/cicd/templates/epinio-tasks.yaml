@@ -163,7 +163,7 @@ spec:
           for serviceName in "${serviceNames[@]}"; do
               sidepro service bind $serviceName $app_name
           done
-          add_github_pr_comment "$repo_url" "$pr_number" "Services successfully bound to $app_name.\nServices: ${serviceNames}" "$GH_TOKEN"
+          add_github_pr_comment "$repo_url" "$pr_number" "Services successfully bound to $app_name.\nServices: ${serviceNames[@]}" "$GH_TOKEN"
         fi
 
         # Iterate over secrets and call the API for each
@@ -173,7 +173,7 @@ spec:
               api_call="$EPINIO_HOST/api/v1/namespaces/{{ .Release.Namespace }}/secrets/$secret/bind/$app_name"
               curl -s -X POST "$api_call" -u admin:$EPINIO_PASSWORD
           done
-          add_github_pr_comment "$repo_url" "$pr_number" "Secrets successfully bound to $app_name.\nSecrets: ${secrets}" "$GH_TOKEN"
+          add_github_pr_comment "$repo_url" "$pr_number" "Secrets successfully bound to $app_name.\nSecrets: ${secrets[@]}" "$GH_TOKEN"
         fi
 
 ---
