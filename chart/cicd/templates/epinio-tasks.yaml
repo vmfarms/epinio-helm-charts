@@ -101,9 +101,9 @@ spec:
 
         app_path=$(workspaces.source.path)
 
-        app_name=$(params.app-name)
+        original_app_name=$(params.app-name)
         pr_number=$(params.pr-number)
-        app_name=$app_name-pr-$pr_number
+        app_name=$original_app_name-pr-$pr_number
         repo_url=$(params.repo-url)
         pr_labels="$(params.pr-labels)"
 
@@ -117,7 +117,7 @@ spec:
 
         cmd="sidepro push --path $app_path --name $app_name"
 
-        app_info=$(sidepro app show samples -o json)
+        app_info=$(sidepro app show $original_app_name -o json)
         deployment_name=$(echo $app_info | jq -r '.deployment.name | ltrimstr("r")')
 
         # Fetch and sanitize helm values
@@ -128,12 +128,18 @@ spec:
         envs=($(echo "$helm_values" | jq -r '.epinio.env // empty | .[] | @base64'))
         secrets=($(echo "$helm_values" | jq -r '.sidepro.secrets // empty | .[]'))
 
+        echo "configPaths=$configPaths"
+        echo "envs=$envs"
+        echo "secrets=$secrets"
+
         serviceNames=()  # Initialize an array to hold service names
 
         for configPath in "${configPaths[@]}"; do
             service_name=$(helm get values -o json "$configPath" | jq -r '.epinio.serviceName // empty')
             serviceNames+=("$service_name")  # Add the service name to the array
         done
+
+        echo "services=$serviceNames"
 
         if [[ "$pr_labels" == *"pr-preview:envs"* ]]; then
           echo "Iterating through envs"
@@ -157,7 +163,7 @@ spec:
           for serviceName in "${serviceNames[@]}"; do
               sidepro service bind $serviceName $app_name
           done
-          add_github_pr_comment "$repo_url" "$pr_number" "Services successfully bound to $app_name.\nServices: ${serviceNames[@]}" "$GH_TOKEN"
+          add_github_pr_comment "$repo_url" "$pr_number" "Services successfully bound to $app_name.\nServices: ${serviceNames}" "$GH_TOKEN"
         fi
 
         # Iterate over secrets and call the API for each
@@ -167,7 +173,7 @@ spec:
               api_call="$EPINIO_HOST/api/v1/namespaces/{{ .Release.Namespace }}/secrets/$secret/bind/$app_name"
               curl -s -X POST "$api_call" -u admin:$EPINIO_PASSWORD
           done
-          add_github_pr_comment "$repo_url" "$pr_number" "Secrets successfully bound to $app_name.\nSecrets: ${secrets[@]}" "$GH_TOKEN"
+          add_github_pr_comment "$repo_url" "$pr_number" "Secrets successfully bound to $app_name.\nSecrets: ${secrets}" "$GH_TOKEN"
         fi
 
 ---
