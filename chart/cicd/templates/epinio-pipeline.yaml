@@ -27,6 +27,9 @@ spec:
     - description: number of the pr
       name: pr-number
       type: string
+    - description: labels of the pr
+      name: pr-labels
+      type: string
   tasks:
   {{- if and .Values.SlackWebhookURL (ne .Values.SlackWebhookURL "") }}
     - name: start-feedback
@@ -109,6 +112,10 @@ spec:
           value: $(params.pr-number)
         - name: app-name
           value: $(params.app-name)
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: pr-labels
+          value: $(params.pr-labels)
     - name: epinio-delete
       when:
         - cel: '''$(params.pr-action)'' in [''closed'']'

@@ -16,7 +16,7 @@ spec:
       type: string
   steps:
     - computeResources: {}
-      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.13.0
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
@@ -27,9 +27,11 @@ spec:
       script: |
         #!/usr/bin/env bash
 
-        sidepro login --username admin --password $EPINIO_PASSWORD && \
-        sidepro namespace update {{ .Release.Namespace }} && \
-        sidepro push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1 
+        sidepro login --username admin --password $EPINIO_PASSWORD 
+
+        sidepro namespace update {{ .Release.Namespace }} 
+
+        sidepro push --path=$(workspaces.source.path) --name $(params.app-name) 2>&1
 ---
 apiVersion: tekton.dev/v1
 kind: Task
@@ -49,10 +51,21 @@ spec:
       type: string
     - name: app-name
       type: string
+    - name: repo-url
+      type: string
+    - name: pr-labels
+      type: string
   steps:
     - computeResources: {}
-      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.13.0
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0
       env:
+      - name: EPINIO_HOST
+        value: {{ .Values.epinioURL }}
+      - name: GH_TOKEN
+        valueFrom:
+          secretKeyRef:
+            key: githubWebhookToken
+            name: {{ .Release.Name }}-push-info-cicd
       - name: EPINIO_PASSWORD
         valueFrom: 
           secretKeyRef:
@@ -62,9 +75,106 @@ spec:
       script: |
         #!/usr/bin/env bash
 
-        sidepro login --username admin --password $EPINIO_PASSWORD && \
-        sidepro namespace update {{ .Release.Namespace }} && \
-        sidepro push --path=$(workspaces.source.path) --name $(params.app-name)-pr-$(params.pr-number)
+        add_github_pr_comment() {
+            local repo_url="$1"
+            local pr_number="$2"
+            local comment="$3"
+            local github_token="$4"
+            
+            local repo_name="${repo_url#*github.com/}"
+            repo_name="${repo_name%.git}"
+
+            local api_url="https://api.github.com/repos/$repo_name/issues/$pr_number/comments"
+
+            local escaped_comment=$(echo -e $comment | jq -Rs .)
+
+            local body="{\"body\": $escaped_comment}"
+
+
+            curl -s -X POST "$api_url" \
+                -H "Authorization: token $github_token" \
+                -H "Content-Type: application/json" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                -H "Accept: application/vnd.github+json" \
+                -d "$body"
+        }
+
+        app_path=$(workspaces.source.path)
+
+        original_app_name=$(params.app-name)
+        pr_number=$(params.pr-number)
+        app_name=$original_app_name-pr-$pr_number
+        repo_url=$(params.repo-url)
+        pr_labels="$(params.pr-labels)"
+
+        starting_comment="<h1>Updating PR Preview environment.</h1>\nNote: Environment variables, secrets and services will not be bound by default.\nThese can be added by adding the following GitHub labels to the PR: \`pr-preview:envs\`, \`pr-preview:secrets\`, \`pr-preview:services.\`"
+
+        add_github_pr_comment "$repo_url" "$pr_number" "$starting_comment" "$GH_TOKEN"
+
+        sidepro login --username admin --password $EPINIO_PASSWORD
+
+        sidepro namespace update {{ .Release.Namespace }}
+
+        cmd="sidepro push --path $app_path --name $app_name"
+
+        app_info=$(sidepro app show $original_app_name -o json)
+        deployment_name=$(echo $app_info | jq -r '.deployment.name | ltrimstr("r")')
+
+        # Fetch and sanitize helm values
+        helm_values=$(helm get values -o json "$deployment_name" | tr -d '\r' | sed 's/[[:cntrl:]]//g')
+
+        # Extract configPaths, env, and secrets using jq
+        configPaths=($(echo "$helm_values" | jq -r '.epinio.configpaths // empty | .[].name' | sed 's/-.*//' | sort -u))
+        envs=($(echo "$helm_values" | jq -r '.epinio.env // empty | .[] | @base64'))
+        secrets=($(echo "$helm_values" | jq -r '.sidepro.secrets // empty | .[]'))
+
+        echo "configPaths=$configPaths"
+        echo "envs=$envs"
+        echo "secrets=$secrets"
+
+        serviceNames=()  # Initialize an array to hold service names
+
+        for configPath in "${configPaths[@]}"; do
+            service_name=$(helm get values -o json "$configPath" | jq -r '.epinio.serviceName // empty')
+            serviceNames+=("$service_name")  # Add the service name to the array
+        done
+
+        echo "services=$serviceNames"
+
+        if [[ "$pr_labels" == *"pr-preview:envs"* ]]; then
+          echo "Iterating through envs"
+          # Iterate over envs and append to cmd
+          for env in "${envs[@]}"; do
+              # Decode the base64-encoded JSON object and extract 'name' and 'value'
+              env_json=$(echo "$env" | base64 -d)
+              name=$(echo "$env_json" | jq -r '.name')
+              value=$(echo "$env_json" | jq -r '.value')
+              cmd="$cmd --env $name=$value"
+          done
+        fi
+
+        echo "executing $cmd"
+        eval $cmd
+
+        add_github_pr_comment "$repo_url" "$pr_number" "Deployment for PR \#$pr_number completed successfully.\n Here is the app url: https://${app_name}-{{ .Release.Namespace }}.platform.beta.sidepro.app\nYou can view more details by running \`sidepro app show $app_name\`." "$GH_TOKEN"
+
+        if [[ "$pr_labels" == *"pr-preview:services"* ]]; then
+          echo "Iterating through services."
+          for serviceName in "${serviceNames[@]}"; do
+              sidepro service bind $serviceName $app_name
+          done
+          add_github_pr_comment "$repo_url" "$pr_number" "Services successfully bound to $app_name.\nServices: ${serviceNames[*]}" "$GH_TOKEN"
+        fi
+
+        # Iterate over secrets and call the API for each
+        if [[ "$pr_labels" == *"pr-preview:secrets"* ]]; then
+          echo "Iterating through secrets"
+          for secret in "${secrets[@]}"; do
+              api_call="$EPINIO_HOST/api/v1/namespaces/{{ .Release.Namespace }}/secrets/$secret/bind/$app_name"
+              curl -s -X POST "$api_call" -u admin:$EPINIO_PASSWORD
+          done
+          add_github_pr_comment "$repo_url" "$pr_number" "Secrets successfully bound to $app_name.\nSecrets: ${secrets[*]}" "$GH_TOKEN"
+        fi
 
 ---
 apiVersion: tekton.dev/v1
@@ -87,7 +197,7 @@ spec:
       type: string
   steps:
     - computeResources: {}
-      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.13.0
+      image: harbor.beta.stack.io/epinio/epinio-tekton:v1.15.0
       env:
       - name: EPINIO_PASSWORD
         valueFrom: 
